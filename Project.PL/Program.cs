@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Project.DAL.Context;
+using Project.DAL.Entities;
+
 namespace Project.PL
 {
     public class Program
@@ -7,7 +12,32 @@ namespace Project.PL
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            #region Connection To DB
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConn"));
+            });
+            #endregion
+
             builder.Services.AddControllersWithViews();
+
+            #region Identity
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
+            {
+                #region Password
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 6;
+                #endregion
+
+                #region SignIn
+                options.SignIn.RequireConfirmedAccount = false;
+                #endregion
+
+            }).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+            #endregion
 
             var app = builder.Build();
 
@@ -24,7 +54,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=SignUp}/{id?}");
 
             app.Run();
         }

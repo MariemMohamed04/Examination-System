@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/lib//bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Style.css" rel="stylesheet" type="text/css" media="all" />
+    @RenderSection("Scripts", required: false)
+</head>
+<body>
+    <div class="authLayout d-flex justify-content-center align-items-center vh-100">
+        <div class="container">
+            <div class="row gx-4">
+                <div class="col-lg-6 d-flex flex-column align-items-center">
+                    <img src="~/img/logo2.png" alt="iti-logo">
+                    <h1 class="text-uppercase w-50 fw-bolder text-warning text-center">examination <span>system</span></h1>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-center">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
