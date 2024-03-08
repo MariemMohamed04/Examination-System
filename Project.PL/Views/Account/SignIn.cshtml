@@ -7,7 +7,7 @@
 
 <form action="SignIn" class="row gx-3 w-75 bg-white border rounded-5 p-3">
     <div class="col-12 ">
-        <h4 class="text-center fw-bold">Sign In Form</h4>
+        <h4 class="text-center fw-bold">Login Form</h4>
     </div>
     <div class="col-12">
         <input asp-for="@Model.Email" type="email" name="email" class="form-control text email" placeholder="Email Address" required="">
@@ -20,12 +20,12 @@
         <label class="form-check-label text-capitalize">Remember Me</label>
     </div>
     <div class="col-12 text-center mb-3">
-        <button type="submit" class="btn w-100 text-white fw-bold">Sign In</button>
+        <button type="submit" class="btn w-100 text-white fw-bold">Login</button>
     </div>
     <div class="row justify-content-between">
-        <div class="col-6">
+@*         <div class="col-6">
             <p>Don't have an Account? <a asp-action="SignUp">Sign Up Now!</a></p>
-        </div>
+        </div> *@
         <div class="col-6 mt-3">
             <p>
                 <a asp-action="ForgetPassword" asp-controller="Account">Forgot Password?</a>
