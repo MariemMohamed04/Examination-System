@@ -12,23 +12,40 @@ namespace Project.DAL.Context
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"server=. ;Database=ExaminationSystemDB ; Integrated Security =true ; TrustServerCertificate=True ;");
+            base.OnConfiguring(optionsBuilder);
         }
 
-        //public DbSet<Admin> Admins { get; set; }
-        //public DbSet<Branch> Branches { get; set; }
-        //public DbSet<Course> Courses { get; set; }
-        //public DbSet<Department> Departments { get; set; }
-        //public DbSet<Exam> Exams { get; set; }
-        //public DbSet<Instructor> Instructors { get; set; }
-        //public DbSet<Question> Questions { get; set; }
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<Topic> Topics { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CourseStudent>().HasKey(c => new { c.StudentId, c.CourseId });
+            modelBuilder.Entity<ExamStudent>().HasKey(c => new { c.StudentId, c.ExamId });
+            modelBuilder.Entity<StudentExamQuestion>().HasKey(c => new { c.StudentId, c.ExamId, c.QuestionId });
+
+
+            base.OnModelCreating(modelBuilder);
+
+        }
+
+
+        public DbSet<Choice> Choices { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<ExamStudent> ExamStudents { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<StudentExamQuestion> StudentExamQuestions { get; set; }
+        public DbSet<Branch> Branchs { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseStudent> CourseStudents { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<Topic> Topics { get; set; }
+
+
     }
 }

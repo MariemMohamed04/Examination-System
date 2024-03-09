@@ -3,18 +3,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.DAL.Entities
 {
-    public class Topic
+    public class CourseStudent
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int TopicId { get; set; }
 
-        public string TopicName { get; set; }
+        public int? CrsGrade {  get; set; }
 
 
-
+        [ForeignKey("Student")]
+        public int StudentId { get; set; }
+        [ForeignKey("Course")]
         public int CourseId { get; set; }
 
+
+
+        public Student Student { get; set; }
         public Course Course { get; set; }
+
 
     }
 }
