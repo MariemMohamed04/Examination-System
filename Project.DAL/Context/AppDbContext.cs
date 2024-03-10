@@ -12,13 +12,14 @@ namespace Project.DAL.Context
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        public AppDbContext(DbContextOptions options) : base(options)
         {
-            optionsBuilder.UseSqlServer(@"server=. ;Database=ExaminationSystemDB ; Integrated Security =true ; TrustServerCertificate=True ;");
-            base.OnConfiguring(optionsBuilder);
+
+
         }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -20,7 +20,7 @@ namespace Project.PL
             #endregion
 
             builder.Services.AddControllersWithViews();
-
+          
             #region Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
             {
