@@ -8,5 +8,6 @@ namespace Project.BLL.Interfaces
 {
     public interface ICourseRepo
     {
+       
     }
 }
