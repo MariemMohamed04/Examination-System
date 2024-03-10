@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
+using Project.BLL.Repositories;
 using Project.DAL.Context;
 using Project.DAL.Entities;
 
@@ -38,6 +40,10 @@ namespace Project.PL
 
             }).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
             #endregion
+
+            builder.Services.AddScoped<IinstructorRepo, instructorRepo>();
+            builder.Services.AddScoped<IstudentRepo, StudentRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
