@@ -22,7 +22,7 @@ namespace Project.DAL.Entities
         //Navigation Props
         public Course Course { get; set; }
         public List<ExamStudent> ExamStudents { get; set; }
-        public List<Question> Questions { get;}
+        public List<ExamQuestion> ExamQuestions { get;}
 
     }
 }

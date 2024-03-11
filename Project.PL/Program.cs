@@ -17,6 +17,8 @@ namespace Project.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConn"));
             });
+
+
             #endregion
 
             builder.Services.AddControllersWithViews();

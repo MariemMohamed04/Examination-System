@@ -20,7 +20,7 @@ namespace Project.DAL.Entities
         public int BrandId { get; set; }
         public int CourseId { get; set; }
 
-        public List<Course> Courses { get; set; }
+        public List<CourseInstructor> CourseInstructor { get; set; }
         public Branch Branch { get; set; }
 
 

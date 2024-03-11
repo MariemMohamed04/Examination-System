@@ -11,15 +11,14 @@ namespace Project.DAL.Entities
         public string QuestionType {  get; set; }
         public string QuestionText { get; set; }
         public string QuestionAnswer { get; set; }
-        public string QType { get; set; }
-        public string QDegree { get; set; }
+        public int QDegree { get; set; }
 
         public int CourseId { get; set; }
         public int ExamId { get; set; }
 
-        public Exam Exam { get; set; }
+        public List<ExamQuestion> ExamQuestions { get; set; }
         public List<Choice> Choices { get; set; }
-        public List<Course> Courses { get; set; }
+        public List<CourseQuestion> CourseQuestions { get; set; }
 
 
     }

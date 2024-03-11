@@ -18,7 +18,7 @@ namespace Project.DAL.Context
 
 
         }
-   
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +26,10 @@ namespace Project.DAL.Context
             modelBuilder.Entity<CourseStudent>().HasKey(c => new { c.StudentId, c.CourseId });
             modelBuilder.Entity<ExamStudent>().HasKey(c => new { c.StudentId, c.ExamId });
             modelBuilder.Entity<StudentExamQuestion>().HasKey(c => new { c.StudentId, c.ExamId, c.QuestionId });
+            modelBuilder.Entity<CourseDepartment>().HasKey(c => new { c.CourseId, c.DepartmentId });
+            modelBuilder.Entity<ExamQuestion>().HasKey(c => new { c.ExamId, c.QuestionId });
+            modelBuilder.Entity<CourseInstructor>().HasKey(c => new { c.CourseId, c.InstructorId });
+            modelBuilder.Entity<CourseQuestion>().HasKey(c => new { c.CourseId, c.QuestionId });
 
 
             base.OnModelCreating(modelBuilder);
