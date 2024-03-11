@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.DAL.Entities
 {
-    public class Branch
+    public class Branch : BaseEntity
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BrandId { get; set; }

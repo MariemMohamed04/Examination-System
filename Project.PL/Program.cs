@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
+using Project.BLL.Repositories;
 using Project.DAL.Context;
 using Project.DAL.Entities;
+using Project.PL.Mapper;
 
 namespace Project.PL
 {
@@ -40,6 +43,12 @@ namespace Project.PL
 
             }).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
             #endregion
+
+            builder.Services.AddScoped<IBranchRepo, BranchRepo>();
+            builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
 
             var app = builder.Build();
 

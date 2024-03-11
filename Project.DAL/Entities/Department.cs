@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.DAL.Entities
 {
-    public class Department
+    public class Department : BaseEntity
     {
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
