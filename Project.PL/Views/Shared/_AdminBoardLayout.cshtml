@@ -11,7 +11,7 @@
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/admin.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             <div class="p-3">
                 <div class="d-flex align-items-center mb-3" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                     <a href="index.html" class="brand-link mb-3">
-                        <img src="./images/logo2.png" alt="AdminLTE Logo" class="brand-image">
+                        <img src="~/img/logo2.png" alt="AdminLTE Logo" class="brand-image">
                         <h6 class="font-weight-bold text-warning d-inline-block">Examination System</h6>
                     </a>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="mb-3 " style="border-bottom: 1px solid rgba(255, 255, 255, 0.121);">
                         <div class="user-panel mt-3 pb-3 d-flex align-items-center">
                             <div class="image">
-                                <img src="./images/avatar3.png" class="img-circle elevation-2 mr-3" alt="User Image">
+                                <img src="~/img/avatar3.png" class="img-circle elevation-2 mr-3" alt="User Image">
                             </div>
                             <div class="info">
                                 <a href="#" class="d-block text-white">Alexander Pierce</a>
@@ -56,12 +56,6 @@
                             <li>
                                 <a asp-area="" asp-controller="Branch" asp-action="Create">Add Branch</a>
                             </li>
-                            <li>
-                                <a asp-area="" asp-controller="Branch" asp-action="Update">Edit Branch</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Branch" asp-action="Delete">Delete Branch</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -72,12 +66,6 @@
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="Department" asp-action="Create">Add Department</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Department" asp-action="Update">Edit Department</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Department" asp-action="Delete">Delete Department</a>
                             </li>
                         </ul>
                     </li>
@@ -90,12 +78,6 @@
                             <li>
                                 <a href="#">Add Course</a>
                             </li>
-                            <li>
-                                <a href="#">Edit Course</a>
-                            </li>
-                            <li>
-                                <a href="#">Delete Course</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -106,12 +88,6 @@
                             </li>
                             <li>
                                 <a href="#">Add Topic</a>
-                            </li>
-                            <li>
-                                <a href="#">Edit Topic</a>
-                            </li>
-                            <li>
-                                <a href="#">Delete Topic</a>
                             </li>
                         </ul>
                     </li>
@@ -124,12 +100,6 @@
                             <li>
                                 <a href="./Pages/StudAdd.html">Add Student</a>
                             </li>
-                            <li>
-                                <a href="#">Edit Student</a>
-                            </li>
-                            <li>
-                                <a href="#">Delete Student</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -140,12 +110,6 @@
                             </li>
                             <li>
                                 <a href="./Pages/InstAdd.html">Add Instructor</a>
-                            </li>
-                            <li>
-                                <a href="./Pages/InstEdit.html">Edit Instructor</a>
-                            </li>
-                            <li>
-                                <a href="./Pages/InstDelete.html">Delete Instructor</a>
                             </li>
                         </ul>
                     </li>
@@ -160,7 +124,7 @@
 
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
-            @RenderBody
+            @RenderBody()
         </div>
 
     </div>
@@ -170,6 +134,11 @@
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/main.js"></script>
 </body>
+<footer class="footer mt-auto py-3">
+    <div class="container text-center">
+        <span class="text-white text-uppercase">© 2024 ITI Examination System</span>
+    </div>
+</footer>
 
 </html>
 

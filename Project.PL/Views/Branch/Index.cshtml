@@ -1,5 +1,5 @@
-﻿@using Project.PL.ViewModel
-@model IEnumerable<BranchViewModel>
+﻿@model IEnumerable<Project.PL.ViewModel.BranchViewModel>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
@@ -36,10 +36,10 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10%">
-                                        #
+                                        @Html.DisplayNameFor(M => M.BranchId)
                                     </th>
-                                    <th style="width: 20%">
                                         @Html.DisplayNameFor(M => M.BranchName)
+                                    <th style="width: 20%">
                                     </th>
                                     <th style="width: 30%">
                                         @Html.DisplayNameFor(M => M.BranchLoc)
@@ -58,7 +58,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            #
+                                            @Html.DisplayNameFor(m => item.BranchId)
                                         </td>
                                         <td>
                                             @Html.DisplayNameFor(m => item.BranchName)
@@ -71,17 +71,17 @@
                                         <td class="project-state">
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.BrandId">
+                                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.BranchId">
                                                 <i class="fas fa-folder">
                                                 </i>
                                                 View
                                             </a>
-                                            <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.BrandId">
+                                            <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.BranchId">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.BrandId">
+                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.BranchId">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete

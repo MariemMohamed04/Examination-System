@@ -19,8 +19,9 @@ namespace Project.PL.Controllers
 
         public IActionResult Index()
         {
-            var branch = _unitOfWork.BranchRepo.GetAll();
-            return View(branch);
+            var branches = _unitOfWork.BranchRepo.GetAll();
+            var branchViewModels = _mapper.Map<IEnumerable<BranchViewModel>>(branches);
+            return View(branchViewModels);
         }
 
         [HttpGet]
@@ -37,7 +38,7 @@ namespace Project.PL.Controllers
                 try
                 {
                     var branch = _mapper.Map<Branch>(branchVM);
-                    var dublicatedId = _unitOfWork.BranchRepo.GetById(branch.BrandId);
+                    var dublicatedId = _unitOfWork.BranchRepo.GetById(branch.BranchId);
                     if (dublicatedId != null)
                     {
                         ModelState.AddModelError("BranchId", "BranchId already exists.");
@@ -102,7 +103,7 @@ namespace Project.PL.Controllers
         [HttpPost]
         public IActionResult Update(int id, BranchViewModel branchVM)
         {
-            if (id != branchVM.BrandId)
+            if (id != branchVM.BranchId)
             {
                 return NotFound();
             }
