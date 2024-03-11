@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project.BLL\Project.BLL.csproj" />
-    <ProjectReference Include="..\Project.DAL\Project.DAL.csproj" />
   </ItemGroup>
 
 </Project>
