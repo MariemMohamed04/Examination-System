@@ -6,7 +6,7 @@ namespace Project.DAL.Entities
     public class Branch : BaseEntity
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int BrandId { get; set; }
+        public int BranchId { get; set; }
 
         public string BranchName { get; set; }
 
