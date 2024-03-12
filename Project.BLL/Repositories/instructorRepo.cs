@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Project.BLL.Repositories
 {
-    public class instructorRepo : GenericRepo<Instructor>, IinstructorRepo
+    public class InstructorRepo : GenericRepo<Instructor>, IInstructorRepo
     {
         private readonly AppDbContext _context;
 
-        public instructorRepo(AppDbContext context) : base(context)
+        public InstructorRepo(AppDbContext context) : base(context)
         {
             _context = context;
         }

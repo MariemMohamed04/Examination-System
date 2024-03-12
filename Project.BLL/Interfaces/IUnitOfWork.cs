@@ -10,5 +10,8 @@ namespace Project.BLL.Interfaces
     {
         public IBranchRepo BranchRepo { get; set; }
         public IDepartmentRepo DepartmentRepo { get; set; }
+
+        public IStudentRepo StudentRepo { get; set; }
+        public IInstructorRepo InstructorRepo { get; set; }
     }
 }

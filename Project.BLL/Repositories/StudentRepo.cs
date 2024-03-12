@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.BLL.Repositories
 {
-    public class StudentRepo : GenericRepo<Student>, IstudentRepo
+    public class StudentRepo : GenericRepo<Student>, IStudentRepo
     {
         private readonly AppDbContext _context;
 
