@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.DAL.Context;
 
@@ -11,9 +12,11 @@ using Project.DAL.Context;
 namespace Project.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240312220410_fixBranch")]
+    partial class fixBranch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,7 +239,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("BranchId");
 
-                    b.ToTable("Branchs", (string)null);
+                    b.ToTable("Branchs");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Choice", b =>
@@ -257,7 +260,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Choices", (string)null);
+                    b.ToTable("Choices");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Course", b =>
@@ -279,7 +282,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseDepartment", b =>
@@ -294,7 +297,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("CourseDepartments", (string)null);
+                    b.ToTable("CourseDepartments");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseInstructor", b =>
@@ -309,7 +312,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("CourseInstructors", (string)null);
+                    b.ToTable("CourseInstructors");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseQuestion", b =>
@@ -324,7 +327,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("CourseQuestions", (string)null);
+                    b.ToTable("CourseQuestions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseStudent", b =>
@@ -342,7 +345,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("CourseStudents", (string)null);
+                    b.ToTable("CourseStudents");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Department", b =>
@@ -368,7 +371,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Exam", b =>
@@ -398,7 +401,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Exams", (string)null);
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.ExamQuestion", b =>
@@ -413,7 +416,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("ExamQuestions", (string)null);
+                    b.ToTable("ExamQuestions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.ExamStudent", b =>
@@ -431,7 +434,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("ExamStudents", (string)null);
+                    b.ToTable("ExamStudents");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Instructor", b =>
@@ -467,7 +470,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("Instructors", (string)null);
+                    b.ToTable("Instructors");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Question", b =>
@@ -495,7 +498,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("QuestionId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Student", b =>
@@ -536,7 +539,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.StudentExamQuestion", b =>
@@ -559,7 +562,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("StudentExamQuestions", (string)null);
+                    b.ToTable("StudentExamQuestions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Topic", b =>
@@ -577,7 +580,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Topics", (string)null);
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

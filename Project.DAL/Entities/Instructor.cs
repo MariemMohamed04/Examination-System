@@ -21,7 +21,7 @@ namespace Project.DAL.Entities
        // public int CourseId { get; set; }
 
         public List<CourseInstructor> CourseInstructor { get; set; }
-        public Branch? Branch { get; set; }
+        public Branch Branch { get; set; }
 
 
     }

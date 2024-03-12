@@ -13,10 +13,10 @@ namespace Project.DAL.Entities
         public string BranchLoc {  get; set; }
 
 
-        public int InstructorId { get; set; }
+/*        public int InstructorId { get; set; }
         public int StudentId { get; set; }
         public int DepartmentId { get; set; }
-
+*/
 
         public List<Instructor> Instructors { get; set;}
         public List<Student> Students { get;set;}

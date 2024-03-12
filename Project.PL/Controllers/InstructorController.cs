@@ -3,6 +3,8 @@ using Project.BLL.Interfaces;
 using Project.DAL.Entities;
 using Project.PL.ViewModel;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Project.PL.Controllers
 {
@@ -48,16 +50,17 @@ namespace Project.PL.Controllers
                     TempData["Message"] = "instructor Created Successfully!!";
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch (DbUpdateException ex)
                 {
-                    throw new Exception(ex.Message);
+                    var innerException = ex.InnerException;
+                    Debug.WriteLine(innerException); 
                 }
             }
             return View(instructorVM);
         }
 
              public IActionResult Details(int? id)
-        {
+             {
             try
             {
                 if (id is null)

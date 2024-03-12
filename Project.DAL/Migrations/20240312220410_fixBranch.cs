@@ -5,44 +5,44 @@
 namespace Project.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class BrandID : Migration
+    public partial class fixBranch : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-          /*  migrationBuilder.DropColumn(
-                name: "BrandId",
-                table: "Instructors");
-*/
-          /*  migrationBuilder.DropColumn(
-                name: "CourseId",
-                table: "Instructors");*/
-/*
             migrationBuilder.DropColumn(
-                name: "CourseId",
-                table: "Departments");*/
+                name: "DepartmentId",
+                table: "Branchs");
+
+            migrationBuilder.DropColumn(
+                name: "InstructorId",
+                table: "Branchs");
+
+            migrationBuilder.DropColumn(
+                name: "StudentId",
+                table: "Branchs");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-      /*      migrationBuilder.AddColumn<int>(
-                name: "BrandId",
-                table: "Instructors",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);*/
-
             migrationBuilder.AddColumn<int>(
-                name: "CourseId",
-                table: "Instructors",
+                name: "DepartmentId",
+                table: "Branchs",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
-                name: "CourseId",
-                table: "Departments",
+                name: "InstructorId",
+                table: "Branchs",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "StudentId",
+                table: "Branchs",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
