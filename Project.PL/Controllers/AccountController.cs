@@ -111,6 +111,12 @@ namespace Project.PL.Controllers
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                     var resetPasswordLink = Url.Action("ResetPassword", "Account", new { Email = model.Email, Token = token }, Request.Scheme);
+
+                    var email = new EmailMessage
+                    {
+                        Title = "Reset Email",
+                        
+                    };
                 }
             }
 
