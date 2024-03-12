@@ -9,7 +9,7 @@ namespace Project.BLL.Interfaces
 {
     public interface IDepartmentRepo : IGenericRepo<Department>
     {
-        IEnumerable<Department> GetDepartmentsByBranchName(string Name);
+        IEnumerable<Department> GetDepartmentsByBranch(int branchId);
         IEnumerable<Department> SearchByName(string Name);
     }
 }
