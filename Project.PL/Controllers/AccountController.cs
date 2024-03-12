@@ -22,6 +22,7 @@ namespace Project.PL.Controllers
             return View(new AuthViewModel());
         }
 
+        #region Sign Up
         [HttpPost]
         public async Task<IActionResult> SignUp(AuthViewModel authViewModel)
         {
@@ -46,7 +47,8 @@ namespace Project.PL.Controllers
                 }
             }
             return View(authViewModel);
-        }
+        } 
+        #endregion
 
         #region SignIn
         public IActionResult SignIn()
@@ -79,6 +81,14 @@ namespace Project.PL.Controllers
                 }
             }
             return View(signInViewModel);
+        }
+        #endregion
+
+        #region SignOut
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(SignIn));
         }
         #endregion
     }

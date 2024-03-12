@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@inject SignInManager<ApplicationUser> signInManager
+
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -114,11 +116,12 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="footer">
-
-                    <a href="#" class="text-white"><i class="fa-solid fa-right-from-bracket pr-3"></i>Logout</a>
-                </div>
-
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <div class="footer">
+                        <a asp-area="" asp-controller="Account" asp-action="SignOut" class="text-white"><i class="fa-solid fa-right-from-bracket pr-3"></i>Logout</a>
+                    </div>
+                }
             </div>
         </nav>
 
