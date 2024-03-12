@@ -10,6 +10,6 @@
         public string Gender { get; set; }
         public int Salary { get; set; }
         public int UserId { get; set; }
-        public int BrandId { get; set; }
+        public int BranchId { get; set; }
     }
 }

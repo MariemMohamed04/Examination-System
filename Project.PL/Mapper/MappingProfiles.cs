@@ -10,6 +10,11 @@ namespace Project.PL.Mapper
         {
                 CreateMap<BranchViewModel, Branch>().ReverseMap();
                 CreateMap<DepartmentViewModel, Department>().ReverseMap();
+                CreateMap<InstructorViewModel, Instructor>().ReverseMap();
+                CreateMap<StudentViewModel, Student>().ReverseMap();
+
+
+
         }
     }
 }
