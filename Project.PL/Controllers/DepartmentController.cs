@@ -17,6 +17,7 @@ namespace Project.PL.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public IActionResult Index(string SearchValue = "")
         {
             IEnumerable<Department> departments;
@@ -33,5 +34,13 @@ namespace Project.PL.Controllers
             }
             return View(mappedDepartments);
         }
+
+        public IActionResult Create()
+        {
+            ViewBag.Branches = _unitOfWork.BranchRepo.GetAll();
+            return View(new DepartmentViewModel());
+        }
+
+
     }
 }

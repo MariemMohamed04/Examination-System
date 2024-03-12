@@ -91,13 +91,15 @@ namespace Project.PL.Controllers
             }
 
             var branch = _unitOfWork.BranchRepo.GetById(id);
+            var branchViewModel = _mapper.Map<BranchViewModel>(branch);
+
 
             if (branch is null)
             {
                 return NotFound();
             }
 
-            return View(branch);
+            return View(branchViewModel);
         }
 
         [HttpPost]
