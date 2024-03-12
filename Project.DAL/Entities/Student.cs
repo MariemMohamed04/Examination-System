@@ -23,7 +23,7 @@ namespace Project.DAL.Entities
         public int DepartmentId { get; set; }
 
         //Navigation Prop
-        public List<CourseStudent> StudentCourses { get; set; }
+        public List<CourseStudent> StudentCourses { get; set; } 
         public List<ExamStudent> ExamStudents { get; set; }
 
         public  Department Department { get; set; }

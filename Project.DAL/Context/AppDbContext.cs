@@ -31,7 +31,6 @@ namespace Project.DAL.Context
             modelBuilder.Entity<CourseInstructor>().HasKey(c => new { c.CourseId, c.InstructorId });
             modelBuilder.Entity<CourseQuestion>().HasKey(c => new { c.CourseId, c.QuestionId });
 
-
             base.OnModelCreating(modelBuilder);
 
         }
