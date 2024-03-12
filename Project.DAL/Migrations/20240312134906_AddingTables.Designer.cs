@@ -12,8 +12,8 @@ using Project.DAL.Context;
 namespace Project.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240312114252_AddingEmailTable")]
-    partial class AddingEmailTable
+    [Migration("20240312134906_AddingTables")]
+    partial class AddingTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,7 +310,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("CourseDepartment");
+                    b.ToTable("CourseDepartments");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseInstructor", b =>
@@ -325,7 +325,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("CourseInstructor");
+                    b.ToTable("CourseInstructors");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseQuestion", b =>
@@ -340,7 +340,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("CourseQuestion");
+                    b.ToTable("CourseQuestions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.CourseStudent", b =>
@@ -435,7 +435,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("ExamQuestion");
+                    b.ToTable("ExamQuestions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.ExamStudent", b =>
