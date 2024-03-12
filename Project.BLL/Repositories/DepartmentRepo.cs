@@ -18,11 +18,9 @@ namespace Project.BLL.Repositories
             _context = context;
         }
 
-        public IEnumerable<Department> GetDepartmentsByBranchName(string Name)
+        public IEnumerable<Department> GetDepartmentsByBranch(int branchId)
         {
-            return _context.Departments
-                .Where(d => string.Equals(d.Branch.BranchName, Name, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            return _context.Departments.Where(e => e.BranchId == branchId).ToList();
         }
 
         public IEnumerable<Department> SearchByName(string Name)

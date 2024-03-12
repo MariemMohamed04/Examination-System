@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DepartmentViewModel>
+﻿@model IEnumerable<Project.PL.ViewModel.InstructorViewModel>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
@@ -6,30 +7,19 @@
 
 <div id="content" class="p-4 p-md-5 pt-5">
     <div class="content-wrapper">
-        <!-- Content Header (Page header) ------>
+        <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
-                            <li class="breadcrumb-item active">Departments</li>
+                            <li class="breadcrumb-item active">Instructors</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
-        <form class="my-3" asp-action="Index" asp-controller="Departemt">
-            <div class="row">
-                <div class="col-sm-8">
-                    <input placeholder="Search By Name" name="SearchValue" class="form-control" />
-                </div>
-                <div class="col-sm-4">
-                    <input type="submit" value="Search" class="btn btn-success btn-block" />
-                </div>
-            </div>
-        </form>
 
         <!-- Main content -->
         <section class="content mb-3">
@@ -37,7 +27,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Departments</h3>
+                    <h3 class="card-title">Instructors</h3>
                 </div>
                 <div class="card-body p-0">
                     @if (Model?.Count() > 0)
@@ -46,14 +36,33 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10%">
-                                        @Html.DisplayNameFor(M => M.DepartmentId)
+                                        @Html.DisplayNameFor(M => M.InstructorId)
                                     </th>
                                     <th style="width: 20%">
-                                        @Html.DisplayNameFor(M => M.DeptName)
+                                        @Html.DisplayNameFor(M => M.Name)
                                     </th>
                                     <th style="width: 30%">
-                                        @Html.DisplayNameFor(M => M.DeptLoc)
+                                        @Html.DisplayNameFor(M => M.Age)
                                     </th>
+                                    <th style="width: 30%">
+                                        @Html.DisplayNameFor(M => M.City)
+                                    </th>
+                                    <th style="width: 30%">
+                                        @Html.DisplayNameFor(M => M.Street)
+                                    </th>
+                                    <th style="width: 30%">
+                                        @Html.DisplayNameFor(M => M.Gender)
+                                    </th>
+                                    <th style="width: 30%">
+                                        @Html.DisplayNameFor(M => M.Salary)
+                                    </th>
+                                    <th style="width: 30%">
+                                        @Html.DisplayNameFor(M => M.UserId)
+                                    </th>
+                                    <th style="width: 30%">
+                                        @Html.DisplayNameFor(M => M.BranchId)
+                                    </th>
+
                                     <th>
 
                                     </th>
@@ -68,30 +77,49 @@
                                 {
                                     <tr>
                                         <td>
-                                            @item.DepartmentId
+                                            @item.InstructorId
                                         </td>
                                         <td>
-                                            @item.DeptName
+                                            @item.Name
                                         </td>
                                         <td>
-                                            @item.DeptLoc
+                                            @item.Age
                                         </td>
+                                        <td>
+                                            @item.City
+                                        </td>
+                                        <td>
+                                            @item.Street
+                                        </td>
+                                        <td>
+                                            @item.Gender
+                                        </td>
+                                        <td>
+                                            @item.Salary
+                                        </td>
+                                        <td>
+                                            @item.UserId
+                                        </td>
+                                        <td>
+                                            @item.BranchId
+                                        </td>
+
                                         <td class="project_progress">
                                         </td>
                                         <td class="project-state">
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.DepartmentId">
+                                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.InstructorId">
                                                 <i class="fas fa-folder">
                                                 </i>
                                                 View
                                             </a>
-                                            <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.DepartmentId">
+                                            <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.InstructorId">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.DepartmentId">
+                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.InstructorId">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
@@ -105,7 +133,7 @@
                     else
                     {
                         <div class="alert alert-warning">
-                            <h4>No Departments Found!!</h4>
+                            <h4>No Instructors Found!!</h4>
                         </div>
                     }
                 </div>
@@ -115,11 +143,14 @@
         </section>
         <div class="row">
             <div class="col-12">
-                <a asp-action="Create" class="btn btn-success float-right">Create new Department</a>
+                <a asp-action="Create" class="btn btn-success float-right">Create new Instructor</a>
             </div>
         </div>
         <!-- /.content -->
     </div>
 </div>
+
+
+
 
 

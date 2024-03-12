@@ -2,60 +2,82 @@
 using Project.DAL.Entities;
 using Project.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using AutoMapper;
+using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
     public class StudentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public StudentController(IUnitOfWork unitOfWork)
+        public StudentController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var student = _unitOfWork.StudentRepo.GetAll();
-            return View(student);
+            var students = _unitOfWork.StudentRepo.GetAll();
+            var studentVM = _mapper.Map<IEnumerable<StudentViewModel>>(students);
+            return View(studentVM);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Student());
+            return View(new StudentViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(Student student)
+        public IActionResult Create(StudentViewModel studentVM)
         {
             if (ModelState.IsValid)
             {
-                var dublicatedId = _unitOfWork.StudentRepo.GetById(student.StudentId);
-                if (dublicatedId != null)
+                try
                 {
-                    ModelState.AddModelError("StudentId", "student already exists.");
-                    return View(student);
+                    var student = _mapper.Map<Student>(studentVM);
+                    var dublicatedId = _unitOfWork.StudentRepo.GetById(student.StudentId);
+                    if (dublicatedId != null)
+                    {
+                        ModelState.AddModelError("StudentId", "student already exists.");
+                        return View(student);
+                    }
+                    _unitOfWork.StudentRepo.Add(student);
+                    TempData["Message"] = "student Created Successfully!!";
+                    return RedirectToAction("Index");
                 }
-                _unitOfWork.StudentRepo.Add(student);
-                return RedirectToAction("Index");
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            return View(student);
+            return View(studentVM);
         }
 
         public IActionResult Details(int? id)
         {
-            if (id is null)
+            try
             {
-                return NotFound();
-            }
+                if (id is null)
+                {
+                    return NotFound();
+                }
 
-            var student = _unitOfWork.StudentRepo.GetById(id);
-            if (student is null)
-            {
-                return NotFound();
+                var student = _unitOfWork.StudentRepo.GetById(id);
+                if (student is null)
+                {
+                    return NotFound();
+                }
+                var studentVM = _mapper.Map<StudentViewModel>(student);
+                return View(studentVM);
             }
-            return View(student);
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -67,17 +89,18 @@ namespace Project.PL.Controllers
             }
 
             var student = _unitOfWork.StudentRepo.GetById(id);
+            var studentVM = _mapper.Map<StudentViewModel>(student);
             if (student is null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(studentVM);
         }
 
         [HttpPost]
-        public IActionResult Update(Student student, int id)
+        public IActionResult Update( int id, StudentViewModel studentVM)
         {
-            if (id != student.StudentId)
+            if (id != studentVM.StudentId)
             {
                 return NotFound();
             }
@@ -86,6 +109,7 @@ namespace Project.PL.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var student = _mapper.Map<Student>(studentVM);
                     _unitOfWork.StudentRepo.Update(student);
                     return RedirectToAction("Index");
                 }
@@ -95,7 +119,7 @@ namespace Project.PL.Controllers
 
                 throw new Exception(ex.Message);
             }
-            return View(student);
+            return View(studentVM);
         }
 
         public IActionResult Delete(int? id)
@@ -110,6 +134,7 @@ namespace Project.PL.Controllers
             {
                 return NotFound();
             }
+            var studentVM = _mapper.Map<StudentViewModel>(student);
             _unitOfWork.StudentRepo.Delete(student);
             return RedirectToAction("Index");
         }

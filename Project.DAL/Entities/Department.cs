@@ -17,7 +17,7 @@ namespace Project.DAL.Entities
 
         public int BranchId { get; set; }
         public int InstructorId { get; set; }
-        public int CourseId { get; set; }
+       // public int CourseId { get; set; }
 
         public List<CourseDepartment> CourseDepartments { get; set; }
         public List<Student> Students { get; set; }
