@@ -1,5 +1,4 @@
-﻿@using Project.PL.ViewModel
-@model IEnumerable<DepartmentViewModel>
+﻿@model IEnumerable<DepartmentViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
@@ -69,13 +68,13 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayNameFor(m => item.DepartmentId)
+                                            @item.DepartmentId
                                         </td>
                                         <td>
-                                            @Html.DisplayNameFor(m => item.DeptName)
+                                            @item.DeptName
                                         </td>
                                         <td>
-                                            @Html.DisplayNameFor(m => item.DeptLoc)
+                                            @item.DeptLoc
                                         </td>
                                         <td class="project_progress">
                                         </td>
