@@ -11,15 +11,19 @@ namespace Project.BLL.Repositories
     {
         public IBranchRepo BranchRepo { get; set; }
         public IDepartmentRepo DepartmentRepo { get; set; }
-        public IStudentRepo StudentRepo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IInstructorRepo InstructorRepo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IStudentRepo StudentRepo { get; set; }
+        public IInstructorRepo InstructorRepo { get; set; }
+        public ICourseRepo CourseRepo { get; set; }
+        public ITopicRepo TopicRepo { get; set; }
 
-        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo)
+        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo)
         {
             BranchRepo = branchRepo;
             DepartmentRepo = departmentRepo;
             InstructorRepo = instructorRepo;
             StudentRepo = studentRepo;
+            CourseRepo = courseRepo;
+            TopicRepo = topicRepo;
         }
     }
 }
