@@ -1,0 +1,56 @@
+﻿@using Project.PL.ViewModel
+@model InstructorViewModel
+
+<div class="card-body p-0">
+    <div class="card card-primary">
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="@Model.InstructorId">Instructor ID</label>
+                <input type="text" asp-for="@Model.InstructorId" class="form-control">
+                <span asp-validation-for="@Model.InstructorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Name">Instructor Name</label>
+                <input type="text" asp-for="@Model.Name" class="form-control">
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Age">Age</label>
+                <textarea asp-for="@Model.Age" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.City">City</label>
+                <textarea asp-for="@Model.City" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Street">Street</label>
+                <textarea asp-for="@Model.Street" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Gender">Gender</label>
+                <textarea asp-for="@Model.Gender" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Salary">Salary</label>
+                <textarea asp-for="@Model.Salary" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.UserId">User ID</label>
+                <textarea asp-for="@Model.UserId" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.BrandId">Branch ID</label>
+                <textarea asp-for="@Model.BrandId" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.BrandId" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+

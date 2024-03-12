@@ -1,60 +1,82 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.BLL.Interfaces;
 using Project.DAL.Entities;
+using Project.PL.ViewModel;
+using AutoMapper;
 
 namespace Project.PL.Controllers
 {
     public class InstructorController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public InstructorController(IUnitOfWork unitOfWork)
+        public InstructorController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var instructor = _unitOfWork.InstructorRepo.GetAll();
-            return View(instructor);
+            var instructors = _unitOfWork.InstructorRepo.GetAll();
+            var instructorViewModels = _mapper.Map<IEnumerable<InstructorViewModel>>(instructors);
+            return View(instructorViewModels);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Instructor());
+            return View(new InstructorViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(Instructor instructor)
+        public IActionResult Create(InstructorViewModel instructorVM)
         {
             if (ModelState.IsValid)
             {
-                var dublicatedId = _unitOfWork.InstructorRepo.GetById(instructor.InstructorId);
-                if (dublicatedId != null)
+                try
                 {
-                    ModelState.AddModelError("InstructorId", "instructor already exists.");
-                    return View(instructor);
+                    var instructor = _mapper.Map<Instructor>(instructorVM);
+                    var dublicatedId = _unitOfWork.InstructorRepo.GetById(instructor.InstructorId);
+                    if (dublicatedId != null)
+                    {
+                        ModelState.AddModelError("InstructorId", "instructor already exists.");
+                        return View(instructor);
+                    }
+                    _unitOfWork.InstructorRepo.Add(instructor);
+                    TempData["Message"] = "instructor Created Successfully!!";
+                    return RedirectToAction("Index");
                 }
-                _unitOfWork.InstructorRepo.Add(instructor);
-                return RedirectToAction("Index");
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            return View(instructor);
+            return View(instructorVM);
         }
 
-        public IActionResult Details(int? id)
+             public IActionResult Details(int? id)
         {
-            if (id is null)
+            try
             {
-                return NotFound();
-            }
+                if (id is null)
+                {
+                    return NotFound();
+                }
 
-            var instructor = _unitOfWork.InstructorRepo.GetById(id);
-            if (instructor is null)
-            {
-                return NotFound();
+                var instructor = _unitOfWork.InstructorRepo.GetById(id);
+                if (instructor is null)
+                {
+                    return NotFound();
+                }
+                var InstructorVM = _mapper.Map<InstructorViewModel>(instructor);
+                return View(InstructorVM);
             }
-            return View(instructor);
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -66,17 +88,18 @@ namespace Project.PL.Controllers
             }
 
             var instructor = _unitOfWork.InstructorRepo.GetById(id);
+            var instructorViewModel = _mapper.Map<InstructorViewModel>(instructor);
             if (instructor is null)
             {
                 return NotFound();
             }
-            return View(instructor);
+            return View(instructorViewModel);
         }
 
         [HttpPost]
-        public IActionResult Update(Instructor instructor, int id)
+        public IActionResult Update( int id, InstructorViewModel instructorVM)
         {
-            if (id != instructor.InstructorId)
+            if (id != instructorVM.InstructorId)
             {
                 return NotFound();
             }
@@ -85,6 +108,7 @@ namespace Project.PL.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var instructor = _mapper.Map<Instructor>(instructorVM);
                     _unitOfWork.InstructorRepo.Update(instructor);
                     return RedirectToAction("Index");
                 }
@@ -94,7 +118,7 @@ namespace Project.PL.Controllers
 
                 throw new Exception(ex.Message);
             }
-            return View(instructor);
+            return View(instructorVM);
         }
 
         public IActionResult Delete(int? id)
@@ -109,6 +133,7 @@ namespace Project.PL.Controllers
             {
                 return NotFound();
             }
+            var instructorVM = _mapper.Map<InstructorViewModel>(instructor);
             _unitOfWork.InstructorRepo.Delete(instructor);
             return RedirectToAction("Index");
         }

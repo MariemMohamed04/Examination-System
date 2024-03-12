@@ -71,7 +71,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Branch}/{action=Create}/{id?}");
+                pattern: "{controller=Instructor}/{action=Create}/{id?}");
 
             app.Run();
         }
