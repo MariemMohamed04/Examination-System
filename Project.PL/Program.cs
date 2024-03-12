@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
+using Project.BLL.Repositories;
 using Project.DAL.Context;
 using Project.DAL.Entities;
 
@@ -20,6 +22,10 @@ namespace Project.PL
             #endregion
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+            builder.Services.AddScoped<ITopicRepo, TopicRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+           
           
             #region Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
