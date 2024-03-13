@@ -16,7 +16,7 @@ namespace Project.PL.Controllers
 
             public IActionResult Index()
             {
-                var courses=unitOfWork.CourseRepo.GetAll();
+            var courses = unitOfWork.CourseRepo.GetAll();
 
                 return View(courses);
             }
@@ -42,13 +42,13 @@ namespace Project.PL.Controllers
         }
 
 
-        public IActionResult Details(int? id) 
+        public IActionResult Details(int id) 
         {
             if (id == null)
             {
                 return BadRequest();
             }
-            var course = unitOfWork.CourseRepo.GetById(id.Value);
+            var course = unitOfWork.CourseRepo.GetById(id);
             if (course == null)
             {
                 return NotFound();

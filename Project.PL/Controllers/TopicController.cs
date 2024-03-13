@@ -24,7 +24,7 @@ namespace Project.PL.Controllers
         public IActionResult Create()
         {
 
-            return View(new Course());
+            return View(new Topic());
         }
 
         [HttpPost]

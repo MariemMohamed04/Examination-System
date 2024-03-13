@@ -13,11 +13,11 @@ namespace Project.DAL.Entities
         public int QuestionId { get; set; }
         public int InstructorId { get; set; }
 
-        public List<Question> Questions { get; set; }
-        public List<Instructor> Instructor{ get; set; }
-        public List<CourseStudent> StudentCourses { get; set; }
-        public List<Department> Departments { get; set; }
-        public List<Exam> Exams { get; set; }
+        public List<Question>? Questions { get; set; }
+        public List<Instructor>? Instructor{ get; set; }
+        public List<CourseStudent>? StudentCourses { get; set; }
+        public List<Department>? Departments { get; set; }
+        public List<Exam>? Exams { get; set; }
 
     }
 }
