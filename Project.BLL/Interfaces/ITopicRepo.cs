@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Project.BLL.Interfaces
 {
+
     public interface ITopicRepo: IGenericRepo<Topic>
+
     {
     }
 }

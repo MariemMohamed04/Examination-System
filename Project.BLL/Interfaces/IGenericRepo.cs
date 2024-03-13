@@ -9,6 +9,7 @@ namespace Project.BLL.Interfaces
 {
     public interface IGenericRepo<T> where T : BaseEntity
     {
+
         IEnumerable<T> GetAll();
         T GetById(int? id);
         int Add(T entity);

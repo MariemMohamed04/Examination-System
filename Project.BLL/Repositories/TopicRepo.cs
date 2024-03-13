@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 namespace Project.BLL.Repositories
 {
 
+
     public class TopicRepo : GenericRepo<Topic>, ITopicRepo
-        {
+    {
+
         private readonly AppDbContext _context;
         public TopicRepo(AppDbContext context) : base(context)
         {
             _context = context;
         }
-        }
+
+    }
+
 }

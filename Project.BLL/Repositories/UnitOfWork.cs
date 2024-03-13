@@ -9,13 +9,20 @@ namespace Project.BLL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public ICourseRepo CourseRepo { get; }
-        public ITopicRepo TopicRepo { get; }
 
+        public IBranchRepo BranchRepo { get; set; }
+        public IDepartmentRepo DepartmentRepo { get; set; }
+        public IStudentRepo StudentRepo { get; set; }
+        public IInstructorRepo InstructorRepo { get; set; }
+        public ICourseRepo CourseRepo { get; set; }
+        public ITopicRepo TopicRepo { get; set; }
 
-
-        public UnitOfWork(ICourseRepo courseRepo, ITopicRepo topicRepo)
+        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo)
         {
+            BranchRepo = branchRepo;
+            DepartmentRepo = departmentRepo;
+            InstructorRepo = instructorRepo;
+            StudentRepo = studentRepo;
             CourseRepo = courseRepo;
             TopicRepo = topicRepo;
         }

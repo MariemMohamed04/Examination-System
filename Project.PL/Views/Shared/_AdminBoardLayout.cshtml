@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Project.DAL.Entities
+@inject SignInManager<ApplicationUser> signInManager
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-3">
+                <div class="d-flex align-items-center mb-3" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <a href="index.html" class="brand-link mb-3">
+                        <img src="~/img/logo2.png" alt="AdminLTE Logo" class="brand-image">
+                        <h6 class="font-weight-bold text-warning d-inline-block">Examination System</h6>
+                    </a>
+                </div>
+                <div class="">
+                    <div class="mb-3 " style="border-bottom: 1px solid rgba(255, 255, 255, 0.121);">
+                        <div class="user-panel mt-3 pb-3 d-flex align-items-center">
+                            <div class="image">
+                                <img src="~/img/avatar3.png" class="img-circle elevation-2 mr-3" alt="User Image">
+                            </div>
+                            <div class="info">
+                                <a href="#" class="d-block text-white">Alexander Pierce</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-unstyled components mb-5 mt-3">
+                    <li>
+                        <a href="index.html"><i class="fa-solid fa-house pr-3"></i>Home</a>
+                    </li>
+                    <li>
+                        <a href="#branchSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-building pr-3"></i>Branch</a>
+                        <ul class="collapse list-unstyled" id="branchSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="Branch" asp-action="Index">All Branches</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Branch" asp-action="Create">Add Branch</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#departmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-days pr-3"></i>Department</a>
+                        <ul class="collapse list-unstyled" id="departmentSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="Department" asp-action="Index">All Departments</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Department" asp-action="Create">Add Department</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-book pr-3"></i>Course</a>
+                        <ul class="collapse list-unstyled" id="courseSubmenu">
+                            <li>
+                                <a href="#">All Courses</a>
+                            </li>
+                            <li>
+                                <a href="#">Add Course</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#topicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-note-sticky pr-3"></i>Topic</a>
+                        <ul class="collapse list-unstyled" id="topicSubmenu">
+                            <li>
+                                <a href="#">All Topics</a>
+                            </li>
+                            <li>
+                                <a href="#">Add Topic</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#StudentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-pen pr-3"></i>Student</a>
+                        <ul class="collapse list-unstyled" id="StudentSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="Student" asp-action="Index">All Student</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Student" asp-action="Create">Add Student</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#InstructorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Instructor</a>
+                        <ul class="collapse list-unstyled" id="InstructorSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="Instructor" asp-action="Index">All Instructor</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Instructor" asp-action="Create">Add Instructor</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <div class="footer">
+                        <a asp-area="" asp-controller="Account" asp-action="SignOut" class="text-white"><i class="fa-solid fa-right-from-bracket pr-3"></i>Logout</a>
+                    </div>
+                }
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+<footer class="footer mt-auto py-3">
+    <div class="container text-center">
+        <span class="text-white text-uppercase">© 2024 ITI Examination System</span>
+    </div>
+</footer>
+
+</html>
+
