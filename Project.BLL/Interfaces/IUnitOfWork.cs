@@ -19,6 +19,5 @@ namespace Project.BLL.Interfaces
         public IInstructorRepo InstructorRepo { get; set; }
 
 
-
     }
 }

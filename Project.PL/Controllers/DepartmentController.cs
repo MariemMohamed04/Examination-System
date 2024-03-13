@@ -83,6 +83,24 @@ namespace Project.PL.Controllers
             ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll();
             return View(departmentVM);
         }
+        public IActionResult Details(int? id)
+        {
+            try
+            {
+                if (id is null)
+                    return NotFound();
+                var department = _unitOfWork.DepartmentRepo.GetById(id);
+                if (department is null)
+                    return NotFound();
+
+                var departmentVM = _mapper.Map<DepartmentViewModel>(department);
+                return View(departmentVM);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public IActionResult Update(int? id)
         {
@@ -126,24 +144,6 @@ namespace Project.PL.Controllers
             return View(departmentVM);
         }
 
-        public IActionResult Details(int? id)
-        {
-            try
-            {
-                if (id is null)
-                    return NotFound();
-                var department = _unitOfWork.DepartmentRepo.GetById(id);
-                if (department is null)
-                    return NotFound();
-
-                var departmentVM = _mapper.Map<DepartmentViewModel>(department);
-                return View(departmentVM);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
 
         public IActionResult Delete(int? id)
         {

@@ -1,4 +1,6 @@
-﻿using Project.BLL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
+using Project.DAL.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace Project.BLL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
+
         public ICrsDeptRepo CrsDeptRepo { get; set; }
         public IBranchRepo BranchRepo { get; set; }
         public IDepartmentRepo DepartmentRepo { get; set; }
@@ -27,5 +30,6 @@ namespace Project.BLL.Repositories
             CourseRepo = courseRepo;
             TopicRepo = topicRepo;
         }
+
     }
 }

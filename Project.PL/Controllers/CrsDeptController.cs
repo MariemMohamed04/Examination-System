@@ -54,6 +54,19 @@ namespace Project.PL.Controllers
             return View(crsDeptVM);
         }
 
+        public IActionResult Details(int crsId, int deptId)
+        {
+            var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId);
+            if (crsDept == null)
+            {
+                return NotFound();
+            }
+
+            var crsDeptVM = _mapper.Map<CrsDeptViewModel>(crsDept);
+
+            return View(crsDeptVM);
+        }
+
         [HttpGet]
         public IActionResult Update(int crsId, int deptId)
         {
@@ -71,44 +84,40 @@ namespace Project.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int crsId, int deptId, CrsDeptViewModel crsDeptVM)
+        public IActionResult Update(CrsDeptViewModel crsDeptVM)
         {
-            if (crsId != crsDeptVM.CourseId || deptId != crsDeptVM.DepartmentId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId); // Use the composite key
-                    if (crsDept == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // Update the properties of crsDept
-                    crsDept.CourseId = crsDeptVM.CourseId;
-                    crsDept.DepartmentId = crsDeptVM.DepartmentId;
-
+                    var crsDept = _mapper.Map<CourseDepartment>(crsDeptVM);
                     _unitOfWork.CrsDeptRepo.Update(crsDept);
                     TempData["Message"] = "CourseDepartment Updated Successfully!!";
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw new Exception(ex.Message);
+                    throw;
                 }
             }
 
             ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
             ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
-
             return View(crsDeptVM);
         }
 
+        public IActionResult Delete(int crsId, int deptId)
+        {
+            var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId);
+            if (crsDept == null)
+            {
+                return NotFound();
+            }
 
+            var crsDeptVM = _mapper.Map<CrsDeptViewModel>(crsDept);
+            _unitOfWork.CrsDeptRepo.Delete(crsDept);
+            return RedirectToAction("Index");
+        }
 
     }
 }
