@@ -3,11 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.DAL.Entities
 {
-    public class Course : BaseEntity
+
+    public class Course: BaseEntity
+
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CourseId { get; set; }
         public string CrsName { get; set; }
+        public int ExamId { get; set; }
 
 
        /* public int ExamId { get; set; }
