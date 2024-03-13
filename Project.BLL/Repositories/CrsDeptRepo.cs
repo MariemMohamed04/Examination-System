@@ -32,7 +32,7 @@ namespace Project.BLL.Repositories
             return _context.Set<CourseDepartment>().ToList();
         }
 
-        public CourseDepartment GetById(params object[] keyValues)
+        public CourseDepartment GetByIds(params object[] keyValues)
         {
             return _context.Set<CourseDepartment>().Find(keyValues);
         }

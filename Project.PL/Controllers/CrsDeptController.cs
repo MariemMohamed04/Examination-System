@@ -57,7 +57,7 @@ namespace Project.PL.Controllers
         [HttpGet]
         public IActionResult Update(int crsId, int deptId)
         {
-            var crsDept = _unitOfWork.CrsDeptRepo.GetById(crsId, deptId);
+            var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId);
             if (crsDept == null)
             {
                 return NotFound();
@@ -70,11 +70,10 @@ namespace Project.PL.Controllers
             return View(crsDeptVM);
         }
 
-
         [HttpPost]
-        public IActionResult Update(int id, CrsDeptViewModel crsDeptVM)
+        public IActionResult Update(int crsId, int deptId, CrsDeptViewModel crsDeptVM)
         {
-            if (id != crsDeptVM.Id)
+            if (crsId != crsDeptVM.CourseId || deptId != crsDeptVM.DepartmentId)
             {
                 return NotFound();
             }
@@ -83,12 +82,13 @@ namespace Project.PL.Controllers
             {
                 try
                 {
-                    var crsDept = _unitOfWork.CrsDeptRepo.GetById(id);
+                    var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId); // Use the composite key
                     if (crsDept == null)
                     {
                         return NotFound();
                     }
 
+                    // Update the properties of crsDept
                     crsDept.CourseId = crsDeptVM.CourseId;
                     crsDept.DepartmentId = crsDeptVM.DepartmentId;
 
@@ -107,6 +107,7 @@ namespace Project.PL.Controllers
 
             return View(crsDeptVM);
         }
+
 
 
     }

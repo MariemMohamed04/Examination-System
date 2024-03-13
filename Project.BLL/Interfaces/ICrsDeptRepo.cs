@@ -11,7 +11,7 @@ namespace Project.BLL.Interfaces
     public interface ICrsDeptRepo : IGenericRepo<CourseDepartment>
     {
         IEnumerable<CourseDepartment> AddCourseDepartment(int crsId, int deptId);
-        CourseDepartment GetById(params object[] keyValues);
+        CourseDepartment GetByIds(params object[] keyValues);
 
     }
 }
