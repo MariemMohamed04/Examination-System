@@ -34,7 +34,7 @@ namespace Project.BLL.Repositories
 
         public CourseDepartment GetById(params object[] keyValues)
         {
-            return _context.Set<T>().Find(keyValues);
+            return _context.Set<CourseDepartment>().Find(keyValues);
         }
     }
 }
