@@ -9,8 +9,9 @@ namespace Project.BLL.Interfaces
 {
     public interface IGenericRepo<T> where T : BaseEntity
     {
-        T GetById(int? id);
+
         IEnumerable<T> GetAll();
+        T GetById(int? id);
         int Add(T entity);
         int Update(T entity);
         int Delete(T entity);

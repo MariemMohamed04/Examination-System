@@ -12,7 +12,6 @@ namespace Project.DAL.Context
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public AppDbContext(DbContextOptions options) : base(options)
         {
 

@@ -9,6 +9,7 @@ namespace Project.BLL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
+
         public IBranchRepo BranchRepo { get; set; }
         public IDepartmentRepo DepartmentRepo { get; set; }
         public IStudentRepo StudentRepo { get; set; }

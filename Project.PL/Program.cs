@@ -25,7 +25,11 @@ namespace Project.PL
             #endregion
 
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+            builder.Services.AddScoped<ITopicRepo, TopicRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+           
+          
             #region Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
             {
