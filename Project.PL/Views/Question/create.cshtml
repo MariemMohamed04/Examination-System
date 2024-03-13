@@ -1,0 +1,30 @@
+﻿@model Project.PL.ViewModel.QuestionViewModel
+
+<h2>Create Question</h2>
+
+@using (Html.BeginForm("Create", "Question", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.QuestionId, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.QuestionId, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.QuestionId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.QuestionText, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.QuestionText, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.QuestionAnswer, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.QuestionAnswer, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.QuestionAnswer, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a href="@Url.Action("Index", "Question")" class="btn btn-secondary">Back to List</a>
+    </div>
+}

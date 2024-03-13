@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Project.PL.ViewModel.QuestionViewModel>
+
+<h2>Questions</h2>
+
+@using (Html.BeginForm("Index", "Question", FormMethod.Get))
+{
+    <div class="form-group">
+        <div class="input-group">
+            @Html.TextBox("searchValue", null, new { @class = "form-control", placeholder = "Search by text" })
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+                <th>Options</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model)
+            {
+                <tr>
+                    <td>@question.QuestionId</td>
+                    <td>@question.QuestionText</td>
+                    <td>@question.QuestionAnswer</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Question", new { id = question.QuestionId })" class="btn btn-info">Details</a>
+                        <a href="@Url.Action("Update", "Question", new { id = question.QuestionId })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "Question", new { id = question.QuestionId })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No questions found.</p>
+}
+
+<a href="@Url.Action("Create", "Question")" class="btn btn-success">Create New Question</a>

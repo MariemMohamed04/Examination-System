@@ -9,15 +9,10 @@ using System.Threading.Tasks;
 
 namespace Project.BLL.Repositories
 {
-    public class QuestionRepo : GenericRepo<Question>, IQuestionRepo
+    public class ExamRepo : GenericRepo<Exam>,IExamRepo
     {
-        public QuestionRepo(AppDbContext context) : base(context)
+        public ExamRepo(AppDbContext context) : base(context)
         {
-        }
-
-        public IEnumerable<Question> SearchByName(string Name)
-        {
-            throw new NotImplementedException();
         }
     }
 }
