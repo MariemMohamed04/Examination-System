@@ -53,5 +53,61 @@ namespace Project.PL.Controllers
             ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
             return View(crsDeptVM);
         }
+
+        [HttpGet]
+        public IActionResult Update(int crsId, int deptId)
+        {
+            var crsDept = _unitOfWork.CrsDeptRepo.GetById(crsId, deptId);
+            if (crsDept == null)
+            {
+                return NotFound();
+            }
+
+            var crsDeptVM = _mapper.Map<CrsDeptViewModel>(crsDept);
+            ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
+            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
+
+            return View(crsDeptVM);
+        }
+
+
+        [HttpPost]
+        public IActionResult Update(int id, CrsDeptViewModel crsDeptVM)
+        {
+            if (id != crsDeptVM.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var crsDept = _unitOfWork.CrsDeptRepo.GetById(id);
+                    if (crsDept == null)
+                    {
+                        return NotFound();
+                    }
+
+                    crsDept.CourseId = crsDeptVM.CourseId;
+                    crsDept.DepartmentId = crsDeptVM.DepartmentId;
+
+                    _unitOfWork.CrsDeptRepo.Update(crsDept);
+                    TempData["Message"] = "CourseDepartment Updated Successfully!!";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
+            ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
+            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
+
+            return View(crsDeptVM);
+        }
+
+
     }
 }

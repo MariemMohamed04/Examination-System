@@ -49,7 +49,8 @@ namespace Project.PL
             builder.Services.AddScoped<IInstructorRepo, InstructorRepo>();
             builder.Services.AddScoped<IStudentRepo, StudentRepo>();
             builder.Services.AddScoped<ICourseRepo, CourseRepo>();
-            builder.Services.AddScoped<ITopicRepo,  TopicRepo>();
+            builder.Services.AddScoped<ITopicRepo, TopicRepo>();
+            builder.Services.AddScoped<ICrsDeptRepo, CrsDeptRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
@@ -71,7 +72,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Instructor}/{action=Create}/{id?}");
+                pattern: "{controller=CrsDept}/{action=Create}/{id?}");
 
             app.Run();
         }
