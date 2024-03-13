@@ -1,0 +1,24 @@
+﻿@model BranchViewModel
+
+<div class="card-body p-0">
+    <div class="card card-primary">
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="@Model.BranchId">Branch ID</label>
+                <input type="text" asp-for="@Model.BranchId" class="form-control">
+                <span asp-validation-for="@Model.BranchId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.BranchName">Branch Name</label>
+                <input type="text" asp-for="@Model.BranchName" class="form-control">
+                <span asp-validation-for="@Model.BranchName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.BranchLoc">Branch Location</label>
+                <textarea asp-for="@Model.BranchLoc" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.BranchLoc" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
