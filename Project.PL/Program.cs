@@ -54,6 +54,7 @@ namespace Project.PL
             builder.Services.AddScoped<IStudentRepo, StudentRepo>();
             builder.Services.AddScoped<ICourseRepo, CourseRepo>();
             builder.Services.AddScoped<ITopicRepo,  TopicRepo>();
+            builder.Services.AddScoped<ICrsInstRepo, CrsInstRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));

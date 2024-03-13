@@ -117,6 +117,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#CrsInstructorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-days pr-3"></i>Course Instructor</a>
+                        <ul class="collapse list-unstyled" id="CrsInstructorSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="CrsInst" asp-action="Index">All Course Instructor</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="CrsInst" asp-action="Create">Add Course Instructor</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 @if (signInManager.IsSignedIn(User))
                 {
