@@ -67,44 +67,44 @@ namespace Project.PL.Controllers
             return View(crsDeptVM);
         }
 
-        [HttpGet]
-        public IActionResult Update(int crsId, int deptId)
-        {
-            var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId);
-            if (crsDept == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet]
+        //public IActionResult Update(int crsId, int deptId)
+        //{
+        //    var crsDept = _unitOfWork.CrsDeptRepo.GetByIds(crsId, deptId);
+        //    if (crsDept == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var crsDeptVM = _mapper.Map<CrsDeptViewModel>(crsDept);
-            ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
-            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
+        //    var crsDeptVM = _mapper.Map<CrsDeptViewModel>(crsDept);
+        //    ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
+        //    ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
 
-            return View(crsDeptVM);
-        }
+        //    return View(crsDeptVM);
+        //}
 
-        [HttpPost]
-        public IActionResult Update(CrsDeptViewModel crsDeptVM)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var crsDept = _mapper.Map<CourseDepartment>(crsDeptVM);
-                    _unitOfWork.CrsDeptRepo.Update(crsDept);
-                    TempData["Message"] = "CourseDepartment Updated Successfully!!";
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
+        //[HttpPost]
+        //public IActionResult Update(CrsDeptViewModel crsDeptVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var crsDept = _mapper.Map<CourseDepartment>(crsDeptVM);
+        //            _unitOfWork.CrsDeptRepo.Update(crsDept);
+        //            TempData["Message"] = "CourseDepartment Updated Successfully!!";
+        //            return RedirectToAction("Index");
+        //        }
+        //        catch (Exception)
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
-            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
-            return View(crsDeptVM);
-        }
+        //    ViewBag.Courses = _unitOfWork.CourseRepo.GetAll();
+        //    ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll();
+        //    return View(crsDeptVM);
+        //}
 
         public IActionResult Delete(int crsId, int deptId)
         {

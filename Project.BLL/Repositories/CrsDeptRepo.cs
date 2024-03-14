@@ -18,19 +18,19 @@ namespace Project.BLL.Repositories
             _context = context;
         }
 
-        public IEnumerable<CourseDepartment> AddCourseDepartment(int crsId, int deptId)
-        {
-            var courseDepartment = new CourseDepartment
-            {
-                CourseId = crsId,
-                DepartmentId = deptId
-            };
+        //public IEnumerable<CourseDepartment> AddCourseDepartment(int crsId, int deptId)
+        //{
+        //    var courseDepartment = new CourseDepartment
+        //    {
+        //        CourseId = crsId,
+        //        DepartmentId = deptId
+        //    };
 
-            _context.Set<CourseDepartment>().Add(courseDepartment);
-            _context.SaveChanges();
+        //    _context.Set<CourseDepartment>().Add(courseDepartment);
+        //    _context.SaveChanges();
 
-            return _context.Set<CourseDepartment>().ToList();
-        }
+        //    return _context.Set<CourseDepartment>().ToList();
+        //}
 
         public CourseDepartment GetByIds(params object[] keyValues)
         {
