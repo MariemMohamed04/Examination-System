@@ -27,7 +27,7 @@ namespace Project.PL
             builder.Services.AddControllersWithViews();
                     
             #region Identity
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
+            builder.Services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
             {
                 #region Password
                 options.Password.RequireDigit = true;
@@ -72,7 +72,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=User}/{action=Index}/{id?}");
+                pattern: "{controller=Role}/{action=Index}/{id?}");
 
             app.Run();
         }
