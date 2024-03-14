@@ -12,9 +12,6 @@ namespace Project.DAL.Entities
         public int TopicId { get; set; }
 
         public string TopicName { get; set; }
-
-
-
         public int CourseId { get; set; }
 
         public Course Course { get; set; }

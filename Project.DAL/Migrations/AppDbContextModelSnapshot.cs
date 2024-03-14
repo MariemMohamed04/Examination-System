@@ -271,12 +271,6 @@ namespace Project.DAL.Migrations
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstructorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseId");
 
                     b.ToTable("Courses", (string)null);
@@ -391,9 +385,6 @@ namespace Project.DAL.Migrations
                     b.Property<int>("NumOfQuestions")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
                     b.HasKey("ExamId");
 
                     b.HasIndex("CourseId");
@@ -475,12 +466,6 @@ namespace Project.DAL.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
                     b.Property<int>("QDegree")
                         .HasColumnType("int");
 
@@ -506,10 +491,7 @@ namespace Project.DAL.Migrations
                     b.Property<string>("Age")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BrandId")
+                    b.Property<int>("BranchId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -785,7 +767,9 @@ namespace Project.DAL.Migrations
                 {
                     b.HasOne("Project.DAL.Entities.Branch", "Branch")
                         .WithMany("Students")
-                        .HasForeignKey("BranchId");
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Project.DAL.Entities.Department", "Department")
                         .WithMany("Students")
@@ -828,7 +812,7 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Topic", b =>
                 {
                     b.HasOne("Project.DAL.Entities.Course", "Course")
-                        .WithMany()
+                        .WithMany("Topics")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -856,6 +840,8 @@ namespace Project.DAL.Migrations
                     b.Navigation("Exams");
 
                     b.Navigation("StudentCourses");
+
+                    b.Navigation("Topics");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Department", b =>

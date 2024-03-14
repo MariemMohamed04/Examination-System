@@ -1,0 +1,36 @@
+﻿@model TopicViewModel
+@{
+    var Courses = new SelectList(ViewBag.Courses, "CourseId", "CrsName");
+    
+}
+
+<div class="card-body p-0">
+    <div class="card card-primary">
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="@Model.TopicId">Topic ID</label>
+                <input type="text" asp-for="@Model.TopicId" class="form-control">
+                <span asp-validation-for="@Model.TopicId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TopicName">Topic Name</label>
+                <input type="text" asp-for="@Model.TopicName" class="form-control">
+                <span asp-validation-for="@Model.TopicName" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="@Model.CourseId">course</label>
+                <select asp-for="@Model.CourseId" asp-items="Courses" class="form-control">
+                    <option>--- Select Course ---</option>
+                </select>
+                <span asp-validation-for="@Model.CourseId" class="text-danger"></span>
+            </div>            
+           
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

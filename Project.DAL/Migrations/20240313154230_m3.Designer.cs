@@ -12,8 +12,8 @@ using Project.DAL.Context;
 namespace Project.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240312180633_m1")]
-    partial class m1
+    [Migration("20240313154230_m3")]
+    partial class m3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -232,21 +232,10 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("BranchLoc")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BranchName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InstructorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
 
                     b.HasKey("BranchId");
 
@@ -259,7 +248,6 @@ namespace Project.DAL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ChoiceTxt")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IsCorrect")
@@ -281,16 +269,9 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CrsName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InstructorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("CourseId");
@@ -369,15 +350,10 @@ namespace Project.DAL.Migrations
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DeptLoc")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeptName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("InstructorId")
@@ -401,7 +377,6 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Date")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Duration")
@@ -411,9 +386,6 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NumOfQuestions")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("ExamId");
@@ -467,29 +439,19 @@ namespace Project.DAL.Migrations
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -507,25 +469,16 @@ namespace Project.DAL.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
                     b.Property<int>("QDegree")
                         .HasColumnType("int");
 
                     b.Property<string>("QuestionAnswer")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionText")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuestionId");
@@ -539,32 +492,24 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Age")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -591,7 +536,6 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StudentAnswer")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StudentId", "ExamId", "QuestionId");
@@ -612,7 +556,6 @@ namespace Project.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TopicName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TopicId");
@@ -872,7 +815,7 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Topic", b =>
                 {
                     b.HasOne("Project.DAL.Entities.Course", "Course")
-                        .WithMany()
+                        .WithMany("Topics")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -900,6 +843,8 @@ namespace Project.DAL.Migrations
                     b.Navigation("Exams");
 
                     b.Navigation("StudentCourses");
+
+                    b.Navigation("Topics");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Department", b =>

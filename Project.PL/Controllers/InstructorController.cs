@@ -39,6 +39,7 @@ namespace Project.PL.Controllers
             {
                 try
                 {
+                
                     var instructor = _mapper.Map<Instructor>(instructorVM);
                     var dublicatedId = _unitOfWork.InstructorRepo.GetById(instructor.InstructorId);
                     if (dublicatedId != null)

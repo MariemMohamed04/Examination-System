@@ -1,102 +1,159 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.BLL.Interfaces;
 using Project.DAL.Entities;
+using Project.PL.ViewModel;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Project.PL.Controllers
 {
     public class CourseController : Controller
     {
         
-            private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-            public CourseController(IUnitOfWork _unitOfWork)
-            {
-                unitOfWork = _unitOfWork;
-            }
+        public CourseController(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
-            public IActionResult Index()
-            {
-            var courses = unitOfWork.CourseRepo.GetAll();
+        public IActionResult Index()
+        {
+           var  courses = _unitOfWork.CourseRepo.GetAll();
+           var CourseViewModels = _mapper.Map<IEnumerable<CourseViewModel>>(courses);
+            return View(CourseViewModels);
+        }
+       
 
-                return View(courses);
-            }
 
         [HttpGet]
         public IActionResult Create()
         {
-
-            return View(new Course());
+            ViewBag.Topics = _unitOfWork.TopicRepo.GetAll();
+            return View(new CourseViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(Course course)
+        public IActionResult Create(CourseViewModel courseVM )
         {
             if (ModelState.IsValid)
             {
+                try
+                {
+                    var course = _mapper.Map<Course>(courseVM);
+                    var dublicatedId = _unitOfWork.CourseRepo.GetById(course.CourseId);
+                    if (dublicatedId != null)
+                    {
+                        ModelState.AddModelError("CourseId", "Course already exists.");
+                        return View(course);
+                    }
+                    _unitOfWork.CourseRepo.Add(course);
 
-                unitOfWork.CourseRepo.Add(course);
-                return RedirectToAction("Index");
+
+                 //var  addedCourese = _unitOfWork.CourseRepo.GetById(course.CourseId);
+                 //   foreach (var id in topicsToAdd)
+                 //   {
+                 //       var topic = _unitOfWork.TopicRepo.GetById(id);
+
+                 //       addedCourese.Topics.Add(topic);
+                 //   }
+
+
+                    TempData["Message"] = "course Created Successfully!!";
+
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException ex)
+                {
+                    var innerException = ex.InnerException;
+                    Debug.WriteLine(innerException);
+                }
             }
-            else
-                return View(course);
+            return View(courseVM);
         }
 
-
-        public IActionResult Details(int id) 
+        public IActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return BadRequest();
+                if (id is null)
+                {
+                    return NotFound();
+                }
+
+                var course = _unitOfWork.CourseRepo.GetByIdIncld(id.Value);
+                if (course is null)
+                {
+                    return NotFound();
+                }
+                //var courseVM = _mapper.Map<CourseViewModel>(course);
+                return View(course/*VM*/);
             }
-            var course = unitOfWork.CourseRepo.GetById(id);
-            if (course == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                throw new Exception(ex.Message);
             }
-
-            return View(course);
-
         }
 
         [HttpGet]
-        public IActionResult Update(int? id) 
+        public IActionResult Update(int? id)
         {
-
-            if (id == null)
-            {
-                return BadRequest();
-            }
-            var course = unitOfWork.CourseRepo.GetById(id.Value);
-            if (course == null)
+            if (id is null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            var course = _unitOfWork.CourseRepo.GetById(id);
+            var courseVM = _mapper.Map<CourseViewModel>(course);
+            if (course is null)
+            {
+                return NotFound();
+            }
+            return View(courseVM);
         }
 
         [HttpPost]
-        public IActionResult Update(Course course, int? id)
+        public IActionResult Update(int id, CourseViewModel courseVM)
         {
-            course.CourseId = id.Value;
-            unitOfWork.CourseRepo.Update(course);
+            if (id != courseVM.CourseId)
+            {
+                return NotFound();
+            }
 
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var course = _mapper.Map<Course>(courseVM);
+                    _unitOfWork.CourseRepo.Update(course);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return View(courseVM);
         }
 
         public IActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-            var course = unitOfWork.CourseRepo.GetById(id.Value);
-            if (course == null)
+            if (id is null)
             {
                 return NotFound();
             }
-            unitOfWork.CourseRepo.Delete(course);
 
+            var course = _unitOfWork.CourseRepo.GetById(id);
+            if (course is null)
+            {
+                return NotFound();
+            }
+            var courseVM = _mapper.Map<CourseViewModel>(course);
+            _unitOfWork.CourseRepo.Delete(course);
             return RedirectToAction("Index");
         }
     }

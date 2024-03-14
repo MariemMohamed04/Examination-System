@@ -8,8 +8,6 @@
 
         public string DeptLoc { get; set; }
 
-
-
         public int BranchId { get; set; }
         public int InstructorId { get; set; }
     }

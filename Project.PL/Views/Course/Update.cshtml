@@ -1,53 +1,46 @@
-﻿@model Project.DAL.Entities.Course
-
-@{
-    ViewData["Title"] = "Update";
+﻿@{
+    ViewData["Title"] = "Update Course";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
 }
 
-<h1>Update</h1>
+<div id="content" class="p-4 p-md-5 pt-5">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
+                            <li class="breadcrumb-item active">update Course</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
 
-<h4>Course</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Update">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CourseId" class="control-label"></label>
-                <input asp-for="CourseId" class="form-control" />
-                <span asp-validation-for="CourseId" class="text-danger"></span>
+        <!-- Main content -->
+        <section class="content mb-3">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">update Course</h3>
+                </div>
+                <form asp-action="Create" asp-controller="Course" enctype="multipart/form-data">
+
+                    <partial name="PartialViews/CreateUpdatePartialView" />
+
+                    <div class="mt-5 mx-3 mb-3">
+                        <input type="submit" value="update" class="btn btn-primary" />
+                        <a class="btn btn-dark" asp-action="Index">Back To List</a>
+                    </div>
+                </form>
+                <!-- /.card-body -->
             </div>
-            <div class="form-group">
-                <label asp-for="CrsName" class="control-label"></label>
-                <input asp-for="CrsName" class="form-control" />
-                <span asp-validation-for="CrsName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExamId" class="control-label"></label>
-                <input asp-for="ExamId" class="form-control" />
-                <span asp-validation-for="ExamId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="QuestionId" class="control-label"></label>
-                <input asp-for="QuestionId" class="form-control" />
-                <span asp-validation-for="QuestionId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InstructorId" class="control-label"></label>
-                <input asp-for="InstructorId" class="form-control" />
-                <span asp-validation-for="InstructorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

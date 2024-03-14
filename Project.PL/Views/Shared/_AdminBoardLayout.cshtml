@@ -77,10 +77,11 @@
                         <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-book pr-3"></i>Course</a>
                         <ul class="collapse list-unstyled" id="courseSubmenu">
                             <li>
-                                <a href="#">All Courses</a>
+                                <a asp-area="" asp-controller="Course" asp-action="Index">All Courses</a>
+                               
                             </li>
                             <li>
-                                <a href="#">Add Course</a>
+                                <a asp-area="" asp-controller="Course" asp-action="Create">Add Courses</a>
                             </li>
                         </ul>
                     </li>
@@ -88,10 +89,11 @@
                         <a href="#topicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-note-sticky pr-3"></i>Topic</a>
                         <ul class="collapse list-unstyled" id="topicSubmenu">
                             <li>
-                                <a href="#">All Topics</a>
+                                <a asp-area="" asp-controller="Topic" asp-action="Index">All Topics</a>
+
                             </li>
                             <li>
-                                <a href="#">Add Topic</a>
+                                <a asp-area="" asp-controller="Topic" asp-action="Create">Add Topic</a>
                             </li>
                         </ul>
                     </li>

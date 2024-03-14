@@ -1,43 +1,46 @@
-﻿@model Project.DAL.Entities.Topic
-
-@{
-    ViewData["Title"] = "Update";
+﻿@{
+    ViewData["Title"] = "Update Topic";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
 }
 
-<h1>Update</h1>
+<div id="content" class="p-4 p-md-5 pt-5">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
+                            <li class="breadcrumb-item active">update Topic</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
 
-<h4>Topic</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Update">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TopicId" class="control-label"></label>
-                <input asp-for="TopicId" class="form-control" />
-                <span asp-validation-for="TopicId" class="text-danger"></span>
+        <!-- Main content -->
+        <section class="content mb-3">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">update Topic</h3>
+                </div>
+                <form asp-action="Update" asp-controller="Topic" enctype="multipart/form-data">
+
+                    <partial name="PartialViews/CreateUpdatePartialView" />
+
+                    <div class="mt-5 mx-3 mb-3">
+                        <input type="submit" value="update" class="btn btn-primary" />
+                        <a class="btn btn-dark" asp-action="Index">Back To List</a>
+                    </div>
+                </form>
+                <!-- /.card-body -->
             </div>
-            <div class="form-group">
-                <label asp-for="TopicName" class="control-label"></label>
-                <input asp-for="TopicName" class="form-control" />
-                <span asp-validation-for="TopicName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CourseId" class="control-label"></label>
-                <input asp-for="CourseId" class="form-control" />
-                <span asp-validation-for="CourseId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -9,6 +9,6 @@ namespace Project.BLL.Interfaces
 {
     public interface ICourseRepo : IGenericRepo<Course>
     {
-       
+        public Course GetByIdIncld(int id);
     }
 }
