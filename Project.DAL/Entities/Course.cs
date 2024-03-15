@@ -10,7 +10,7 @@ namespace Project.DAL.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CourseId { get; set; }
         public string CrsName { get; set; }
-        public int ExamId { get; set; }
+        //public int ExamId { get; set; }
 
 
        /* public int ExamId { get; set; }

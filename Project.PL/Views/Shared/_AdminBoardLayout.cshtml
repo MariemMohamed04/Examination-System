@@ -127,6 +127,28 @@
                                 <a asp-area="" asp-controller="Users" asp-action="Create">Add User</a>
                             </li>
                         </ul>
+                    </li>                    
+                    <li>
+                        <a href="#RolesSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Roles</a>
+                        <ul class="collapse list-unstyled" id="RolesSubMenu">
+                            <li>
+                                <a asp-area="" asp-controller="Roles" asp-action="Index">All Roles</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Roles" asp-action="Create">Add Roles</a>
+                            </li>
+                        </ul>
+                    </li>                   
+                    <li>
+                        <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>SignUp</a>
+                        <ul class="collapse list-unstyled" id="InsideSubMenu">
+                            <li>
+                                <a asp-area="" asp-controller="AddUsers" asp-action="Index">All Users</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="AddUsers" asp-action="Create">Add Roles</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 @if (signInManager.IsSignedIn(User))
@@ -149,6 +171,8 @@
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 <footer class="footer mt-auto py-3">
     <div class="container text-center">

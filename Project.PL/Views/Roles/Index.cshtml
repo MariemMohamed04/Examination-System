@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ApplicationUser>
+﻿@model IEnumerable<ApplicationRole>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Roles</li>
                         </ol>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Users</h3>
+                    <h3 class="card-title">Roles</h3>
                 </div>
                 <div class="card-body p-0">
                     @if (Model?.Count() > 0)
@@ -34,21 +34,20 @@
                         <table class="table table-striped projects">
                             <thead>
                                 <tr>
-                                    <th style="width: 30%">
+                                    <th style="width: 10%">
                                         @Html.DisplayNameFor(M => M.Id)
                                     </th>
-                                    <th style="width: 10%">
-                                        @Html.DisplayNameFor(M => M.UserName)
+                                    <th style="width: 20%">
+                                        @Html.DisplayNameFor(M => M.Name)
                                     </th>
                                     <th style="width: 30%">
-                                        @Html.DisplayNameFor(M => M.Email)
                                     </th>
                                     <th>
 
                                     </th>
-                                    <th style="width: 5%" class="text-center">
+                                    <th style="width: 8%" class="text-center">
                                     </th>
-                                    <th style="width: 30%">
+                                    <th style="width: 28%">
                                     </th>
                                 </tr>
                             </thead>
@@ -60,12 +59,16 @@
                                             @item.Id
                                         </td>
                                         <td>
-                                            @item.UserName
+                                            @item.Name
                                         </td>
                                         <td>
-                                            @item.Email
                                         </td>
                                         <td class="project_progress">
+                                            <a class="btn btn-secondary btn-sm" asp-action="AddOrRemove" asp-route-roleId="@item.Id">
+                                                <i class="fas fa-folder">
+                                                </i>
+                                                Add Role To User
+                                            </a>
                                         </td>
                                         <td class="project-state">
                                         </td>
@@ -94,7 +97,7 @@
                     else
                     {
                         <div class="alert alert-warning">
-                            <h4>No Users Found!!</h4>
+                            <h4>No Roles Found!!</h4>
                         </div>
                     }
                 </div>
@@ -104,7 +107,7 @@
         </section>
         <div class="row">
             <div class="col-12">
-                <a asp-action="AddUser" class="btn btn-success float-right">Create new Users</a>
+                <a asp-action="Create" class="btn btn-success float-right">Create new Role</a>
             </div>
         </div>
         <!-- /.content -->

@@ -32,7 +32,7 @@ namespace Project.PL
            
           
             #region Identity
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
+            builder.Services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
             {
                 #region Password
                 options.Password.RequireDigit = true;
