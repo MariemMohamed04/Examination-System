@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.Interfaces;
@@ -56,6 +57,13 @@ namespace Project.PL
             builder.Services.AddScoped<ITopicRepo,  TopicRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = new PathString("Account/SignIn");
+                    options.AccessDeniedPath = new PathString("/Home/Error");
+                });
+
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
 
             var app = builder.Build();
@@ -75,7 +83,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=SignUp}/{id?}");
+                pattern: "{controller=Account}/{action=SignIn}/{id?}");
 
             app.Run();
         }

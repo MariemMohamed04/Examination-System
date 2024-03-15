@@ -40,7 +40,7 @@ namespace Project.PL.Controllers
                 var result = await _userManager.CreateAsync(user, authViewModel.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("SignIn");
                 }
 
                 foreach (var error in result.Errors)
