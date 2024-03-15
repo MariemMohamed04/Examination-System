@@ -40,7 +40,7 @@ namespace Project.PL.Controllers
                 var result = await _userManager.CreateAsync(user, authViewModel.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("SignIn");
+                    return RedirectToAction("Login");
                 }
 
                 foreach (var error in result.Errors)
@@ -53,13 +53,13 @@ namespace Project.PL.Controllers
         #endregion
 
         #region SignIn
-        public IActionResult SignIn()
+        public IActionResult Login()
         {
             return View(new SignInViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(SignInViewModel signInViewModel)
+        public async Task<IActionResult> Login(SignInViewModel signInViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Project.PL.Controllers
         public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(SignIn));
+            return RedirectToAction(nameof(Login));
         }
         #endregion
 

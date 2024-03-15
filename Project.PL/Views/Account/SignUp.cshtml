@@ -7,7 +7,7 @@
 
 <form action="SignUp" class="row gx-3 w-75 bg-white border rounded-5 p-3">
     <div class="col-12 ">
-        <h4 class="text-center fw-bold">Sign Up Form</h4>
+        <h4 class="text-center fw-bold">Registeration Form</h4>
     </div>
     <div class="col-12">
         <input asp-for="@Model.Email" type="email" name="email" class="form-control text email" placeholder="Email Address" required="">
@@ -26,10 +26,10 @@
         <label class="form-check-label text-capitalize">i agree to the terms & conditions</label>
     </div>
     <div class="col-12 text-center mb-3">
-        <button type="submit" class="btn w-100 text-white fw-bold">Sign Up</button>
+        <button type="submit" class="btn w-100 text-white fw-bold">Register</button>
     </div>
     <div class="col-12">
-        <p>Have an Account? <a asp-action="SignIn"> Sigin Now!</a></p>
+        <p>Have an Account? <a asp-action="Login"> Login Now!</a></p>
     </div>
 </form>
 
