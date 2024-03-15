@@ -42,7 +42,7 @@
                                 <img src="~/img/avatar3.png" class="img-circle elevation-2 mr-3" alt="User Image">
                             </div>
                             <div class="info">
-                                <a href="#" class="d-block text-white">Alexander Pierce</a>
+                                <a href="#" class="d-block text-white">Welcome Admin</a>
                             </div>
                         </div>
                     </div>
@@ -114,6 +114,17 @@
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="Instructor" asp-action="Create">Add Instructor</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#UsersSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Users</a>
+                        <ul class="collapse list-unstyled" id="UsersSubMenu">
+                            <li>
+                                <a asp-area="" asp-controller="Users" asp-action="Index">All Users</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Users" asp-action="Create">Add User</a>
                             </li>
                         </ul>
                     </li>

@@ -83,7 +83,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=SignIn}/{id?}");
+                pattern: "{controller=Users}/{action=Index}/{id?}");
 
             app.Run();
         }
