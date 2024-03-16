@@ -18,6 +18,11 @@ namespace Project.BLL.Interfaces
         public IStudentRepo StudentRepo { get; set; }
         public IInstructorRepo InstructorRepo { get; set; }
         public ICrsStudentRepo CrsStudentRepo { get; set; }
+        public IExamQuestionRepo ExamQuestionRepo { get; set; }
+        public IQuestionRepo QuestionRepo { get; set; }
+        public IExamRepo ExamRepo { get; set; }
+        public IStudentExamQuestionRepo StudentExamQuestionRepo { get; set; }
+
 
 
     }

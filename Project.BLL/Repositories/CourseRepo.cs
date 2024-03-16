@@ -20,6 +20,7 @@ namespace Project.BLL.Repositories
         {
            return _context.Courses.Include(c=>c.Topics).SingleOrDefault(c=>c.CourseId==id);
 
+
         }
     }
 }

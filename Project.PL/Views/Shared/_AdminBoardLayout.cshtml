@@ -134,6 +134,31 @@
                             </li>
                         </ul>
                     </li>
+
+
+                    <li>
+                        <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Reports</a>
+                        <ul class="collapse list-unstyled" id="InsideSubMenu">
+                            <li>
+                                <a asp-area="" asp-controller="Reports" asp-action="GetStudentByDepartment">Report 01</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Reports" asp-action="GetStudentByGrade">Report 02</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Reports" asp-action="GetInstructorByCourse">Report 03</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Reports" asp-action="index!">Report 04</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Reports" asp-action="IndexQuestions">Report 05</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Reports" asp-action="IndexAnswers">Report 06</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 @if (signInManager.IsSignedIn(User))
                 {

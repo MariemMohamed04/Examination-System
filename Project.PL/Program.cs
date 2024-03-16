@@ -25,11 +25,6 @@ namespace Project.PL
             #endregion
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<ICourseRepo, CourseRepo>();
-            builder.Services.AddScoped<ITopicRepo, TopicRepo>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-           
-          
             #region Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
             {
@@ -54,6 +49,12 @@ namespace Project.PL
             builder.Services.AddScoped<IStudentRepo, StudentRepo>();
             builder.Services.AddScoped<ICourseRepo, CourseRepo>();
             builder.Services.AddScoped<ICrsStudentRepo, CrsStudentRepo>();
+            builder.Services.AddScoped<IStudentExamQuestionRepo, StudentExamQuestionRepo>();
+
+            builder.Services.AddScoped<IExamQuestionRepo,ExamQuestionRepo>();
+
+            builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
+            builder.Services.AddScoped<IExamRepo, ExamRepo>();
 
             builder.Services.AddScoped<ITopicRepo,  TopicRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

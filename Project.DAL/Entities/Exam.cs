@@ -4,7 +4,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Project.DAL.Entities
 {
-    public class Exam
+    public class Exam:BaseEntity
     {
 
         [Key]

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.DAL.Entities
 {
-    public class ExamQuestion
+    public class ExamQuestion:BaseEntity
     {
 
         public int ExamId { get; set; }
