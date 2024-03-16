@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewData["Title"] = "Choose Exam";
+    Layout = "~/Views/Shared/_StudentBoardLayout.cshtml";
+    var Courses = new SelectList(Model, "CourseId", "CrsName");
+}
+
+    <div class="col-8">
+        <div class="card mb-5">
+            <div class="card-header">
+                Choose a Course to Start your Exam
+            </div>
+            <div class="card-body">
+<form asp-action="StudentMain" asp-controller="StartExam" enctype="multipart/form-data">
+                <select class="form-select" aria-label="Default select example" data-bs-placeholder="Select Course Exam">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.CourseId">@item.CrsName</option>
+                    }
+                </select>
+<div class="col-8 mb-5">
+    <button class="btn bg-white ms-auto w-100 fw-bolder" type="submit">START YOUR EXAM</button>
+</div>
+    </form>
+    <input name="studentId" value="" hidden/>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  Font Awesome Icon Library  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--  Bootstrap Framework  -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <!--  Main Style sheet  -->
+    <link rel="stylesheet" href="~/css/student.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg shadow-lg position-relative">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bolder" href="#">Examination System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <button class="btn bg-white ms-auto" type="submit">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <section class="exam mt-5 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -25,7 +25,7 @@ namespace Project.PL.Controllers
 
 
 
-        public IActionResult Main()
+        public IActionResult StudentMain()
         {
 
             string name = User.Identity.Name;
@@ -50,7 +50,7 @@ namespace Project.PL.Controllers
 
 
         [HttpPost]
-        public IActionResult Main(int courseId)
+        public IActionResult StudentMain(int courseId)
         {
 
             return View();
