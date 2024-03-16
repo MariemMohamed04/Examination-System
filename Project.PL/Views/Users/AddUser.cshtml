@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
 }
 
-<form asp-controller="Account" asp-action="SignUp" class ="row gx-3 w-75 bg-white border rounded-5 p-3">
+<form asp-controller="Users" asp-action="AddUser" class ="row gx-3 w-75 bg-white border rounded-5 p-3">
     <div class="col-12 ">
         <h4 class="text-center fw-bold">Register Form</h4>
     </div>
@@ -21,7 +21,7 @@
         <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
     </div>
     <div class="col-12 text-center mb-3">
-        <input type="submit" value="Register" class="btn w-100 text-white fw-bold" />
+        <input type="submit" value="Register" class="btn w-100 text-dark fw-bold" />
     </div>
 </form>
 

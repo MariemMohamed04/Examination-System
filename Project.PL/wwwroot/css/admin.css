@@ -11597,8 +11597,10 @@ h1, h2, h3, h4, h5,
 }
 
     #sidebar .custom-menu .btn.btn-primary {
-        background: #880016;
-        border-color: #880016;
+        background: #780206; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #061161, #780206); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #061161, #780206); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        /*border-color: #880016;*/
     }
 
         #sidebar .custom-menu .btn.btn-primary:hover, #sidebar .custom-menu .btn.btn-primary:focus {
@@ -11748,5 +11750,7 @@ label {
 }
 
 footer {
-    background: #880016;
+    background: #780206; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #061161, #780206); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #061161, #780206); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

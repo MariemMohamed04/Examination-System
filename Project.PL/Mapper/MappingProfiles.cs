@@ -8,13 +8,11 @@ namespace Project.PL.Mapper
     {
         public MappingProfiles()
         {
-                CreateMap<BranchViewModel, Branch>().ReverseMap();
-                CreateMap<DepartmentViewModel, Department>().ReverseMap();
-                CreateMap<InstructorViewModel, Instructor>().ReverseMap();
-                CreateMap<StudentViewModel, Student>().ReverseMap();
-
-
-
+            CreateMap<BranchViewModel, Branch>().ReverseMap();
+            CreateMap<DepartmentViewModel, Department>().ReverseMap();
+            CreateMap<InstructorViewModel, Instructor>().ReverseMap();
+            CreateMap<StudentViewModel, Student>().ReverseMap();
+            CreateMap<ReportOneViewModel, Student>().ReverseMap();
         }
     }
 }
