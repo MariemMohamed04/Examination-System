@@ -1,4 +1,5 @@
-﻿using Project.BLL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
 using Project.DAL.Context;
 using Project.DAL.Entities;
 using System;
@@ -17,5 +18,6 @@ namespace Project.BLL.Repositories
         {
             _context = context;
         }
+
     }
 }

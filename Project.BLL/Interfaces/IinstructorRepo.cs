@@ -9,5 +9,6 @@ namespace Project.BLL.Interfaces
 {
     public interface IInstructorRepo : IGenericRepo<Instructor>
     {
+       
     }
 }

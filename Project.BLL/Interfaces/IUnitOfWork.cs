@@ -16,5 +16,6 @@ namespace Project.BLL.Interfaces
 
         public ICourseRepo CourseRepo { get; set; }
         public ITopicRepo TopicRepo { get; set; }
+        public IReportsRepo ReportsRepo { get; set; }
     }
 }
