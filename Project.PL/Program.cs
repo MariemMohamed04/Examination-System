@@ -53,6 +53,8 @@ namespace Project.PL
             builder.Services.AddScoped<IInstructorRepo, InstructorRepo>();
             builder.Services.AddScoped<IStudentRepo, StudentRepo>();
             builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+            builder.Services.AddScoped<ICrsStudentRepo, CrsStudentRepo>();
+
             builder.Services.AddScoped<ITopicRepo,  TopicRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

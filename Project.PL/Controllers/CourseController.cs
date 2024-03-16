@@ -53,13 +53,7 @@ namespace Project.PL.Controllers
                     _unitOfWork.CourseRepo.Add(course);
 
 
-                 //var  addedCourese = _unitOfWork.CourseRepo.GetById(course.CourseId);
-                 //   foreach (var id in topicsToAdd)
-                 //   {
-                 //       var topic = _unitOfWork.TopicRepo.GetById(id);
-
-                 //       addedCourese.Topics.Add(topic);
-                 //   }
+             
 
 
                     TempData["Message"] = "course Created Successfully!!";

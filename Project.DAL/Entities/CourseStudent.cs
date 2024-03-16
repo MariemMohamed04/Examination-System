@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.DAL.Entities
 {
-    public class CourseStudent
+    public class CourseStudent:BaseEntity
     {
 
         public int? CrsGrade {  get; set; }

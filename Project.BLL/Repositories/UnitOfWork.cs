@@ -16,8 +16,10 @@ namespace Project.BLL.Repositories
         public IInstructorRepo InstructorRepo { get; set; }
         public ICourseRepo CourseRepo { get; set; }
         public ITopicRepo TopicRepo { get; set; }
+        public ICrsStudentRepo CrsStudentRepo { get; set; }
 
-        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo)
+
+        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo, ICrsStudentRepo crsStudentRepo)
         {
             BranchRepo = branchRepo;
             DepartmentRepo = departmentRepo;
@@ -25,6 +27,7 @@ namespace Project.BLL.Repositories
             StudentRepo = studentRepo;
             CourseRepo = courseRepo;
             TopicRepo = topicRepo;
+            CrsStudentRepo = crsStudentRepo;
         }
     }
 }
