@@ -24,7 +24,7 @@ namespace Project.BLL.Repositories
         public IExamRepo ExamRepo { get; set; }
         public IReportsRepo ReportsRepo { get; set; }
 
-        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo, IReportsRepo reportsRepo, ICrsDeptRepo crsDeptRepo)
+        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo, IReportsRepo reportsRepo, ICrsDeptRepo crsDeptRepo, IExamRepo examRepo, IChoicesRepo choicesRepo, IQuestionRepo questionRepo)
         {
             CrsDeptRepo = crsDeptRepo;
             BranchRepo = branchRepo;
@@ -34,6 +34,9 @@ namespace Project.BLL.Repositories
             CourseRepo = courseRepo;
             TopicRepo = topicRepo;
             ReportsRepo = reportsRepo;
+            ExamRepo = examRepo;
+            ChoiceRepo = choicesRepo;
+            QuestionRepo = questionRepo;
         }
 
     }

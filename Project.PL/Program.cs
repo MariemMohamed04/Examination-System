@@ -49,7 +49,7 @@ namespace Project.PL
             builder.Services.AddScoped<IStudentRepo, StudentRepo>();
             builder.Services.AddScoped<ICourseRepo, CourseRepo>();
             builder.Services.AddScoped<ITopicRepo, TopicRepo>();
-
+            
             builder.Services.AddScoped<IReportsRepo, ReportsRepo>();
             builder.Services.AddScoped<ICrsDeptRepo, CrsDeptRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
