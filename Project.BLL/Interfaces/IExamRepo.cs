@@ -10,7 +10,9 @@ namespace Project.BLL.Interfaces
     public interface IExamRepo : IGenericRepo<Exam>
     {
 
-        public void generateExam(int examNo, int numOfTFQuestion, int numOfMCQQuestion, int courseId); 
+        public void generateExam(int examNo, int numOfTFQuestion, int numOfMCQQuestion, int courseId);
+
+        public Exam getAllExams(int courseId); 
 
     }
 }

@@ -9,5 +9,6 @@ namespace Project.BLL.Interfaces
 {
     public interface IStudentRepo : IGenericRepo<Student>
     {
+        public Student getStudentByUserId(string userId);   
     }
 }

@@ -17,5 +17,10 @@ namespace Project.BLL.Repositories
         {
             _context = context;
         }
+
+        public Student getStudentByUserId(string userId)
+        {
+            return _context.Students.FirstOrDefault(u => u.UserId == userId); 
+        }
     }
 }

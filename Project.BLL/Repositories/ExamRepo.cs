@@ -24,5 +24,10 @@ namespace Project.BLL.Repositories
             _context.Database.ExecuteSqlInterpolated($"GenerateAnExam  {examNo},{numOfTFQuestion},{numOfMCQQuestion},{courseId}");
 
         }
+
+        public Exam getAllExams(int courseId)
+        {
+            return _context.Exams.Include(c=>c.Course).FirstOrDefault(e=>e.CourseId == courseId);
+        }
     }
 }
