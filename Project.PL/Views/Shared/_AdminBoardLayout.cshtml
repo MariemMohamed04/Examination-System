@@ -117,6 +117,35 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#ExamSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Exam</a>
+                        <ul class="collapse list-unstyled" id="ExamSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="Exam" asp-action="Index">All Exams</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Exam" asp-action="Create">Add Exam</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#QuestionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Question</a>
+                        <ul class="collapse list-unstyled" id="QuestionSubmenu">
+                            <li>
+                                <a asp-area="" asp-controller="Question" asp-action="Index">All Questions</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Question" asp-action="AddQuestion">Add Question</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Question" asp-action="AddTFQuestion">Add Question TF</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
                 </ul>
                 @if (signInManager.IsSignedIn(User))
                 {
@@ -137,6 +166,7 @@
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="~/js/main.js"></script>
 </body>
 <footer class="footer mt-auto py-3">

@@ -1,0 +1,43 @@
+﻿@using Project.PL.ViewModel
+@model ExamViewModel
+@{
+    var Courses = new SelectList(ViewBag.Courses, "CourseId", "CrsName");
+
+}
+
+<div class="card-body p-0">
+    <div class="card card-primary">
+        <div class="card-body">
+          
+            <div class="form-group">
+                <label asp-for="@Model.Duration">Exam Duration</label>
+                <input type="text" asp-for="@Model.Duration" class="form-control">
+                <span asp-validation-for="@Model.Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Num_TF_Questions">Num Of TF Questions</label>
+                <textarea asp-for="@Model.Num_TF_Questions " class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.Num_TF_Questions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Num_MCQ_Questions">NumOfQuestions</label>
+                <textarea asp-for="@Model.Num_MCQ_Questions" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.Num_MCQ_Questions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ExamGrade">Exam Grade</label>
+                <textarea asp-for="@Model.ExamGrade" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.ExamGrade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CourseId">Course</label>
+                <select asp-for="@Model.CourseId" asp-items="Courses" class="form-control">
+                    <option>--- Select Course ---</option>
+                </select>
+                <span asp-validation-for="@Model.CourseId" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+

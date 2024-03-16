@@ -18,7 +18,8 @@ namespace Project.DAL.Entities
         public int InstructorId { get; set; }*/
 
 
-        public List<CourseQuestion> CourseQuestions { get; set; }
+        //public List<CourseQuestion> CourseQuestions { get; set; }
+        public List<Question> Questions { get; set; }
         public List<CourseInstructor> CourseInstructors { get; set; }
         public List<CourseStudent> StudentCourses { get; set; }
         public List<CourseDepartment> CourseDepartments { get; set; }

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "AddQuestion";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+}
+
+<h1>AddQuestion</h1>
+
+
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE-HEADER -->
+            <div class="page-header">
+
+            </div>
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-pay">
+                        <ul class="tabs-menu nav">
+                            <li class="" style="width: 50%;"><a href="#tab20" class="active" data-bs-toggle="tab">Multiple Choices</a></li>
+                            <!-- <li style="width: 50%;"><a href="#tab21" data-bs-toggle="tab" class="">  True & False</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="tab20">
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label class="form-label">Question Body: </label>
+                                        <input type="text" name="qBody" class="form-control" placeholder="   ">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label class="form-label">Choice 1:</label>
+                                                <input type="text" name="firstChoice" class="form-control" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Choice 2:</label>
+                                                <input type="text" name="secondChoice" class="form-control" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label class="form-label">Choice 3:</label>
+                                                <input type="text" name="thirdChoice" class="form-control" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label class="form-label">Choice 4:</label>
+                                                <input type="text" name="forthChoice" class="form-control" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label class="form-label">Model Answer: </label>
+                                                <select name="ModelAnswer" class="form-control form-select select2 " data-bs-placeholder="Select Correct Choice">
+
+                                                    <option value="0">1</option>
+                                                    <option value="1">2</option>
+                                                    <option value="2">3</option>
+                                                    <option value="3">4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Course Name: </label>
+                                        <select name="CourseId" class="form-control form-select select2 " data-bs-placeholder="Select Course">
+                                            @foreach (Course c in ViewBag.allcourses)
+                                            {
+                                                <option value="@c.CourseId">@c.CrsName</option>
+                                            }
+                                        </select>
+                                    </div>
+                              
+                                    <input type="submit" class="btn  btn-lg btn-primary" value="Confirm" style="margin: auto;">
+                                </form>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

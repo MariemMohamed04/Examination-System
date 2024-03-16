@@ -3,22 +3,27 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.DAL.Entities
 {
-    public class Question
+    public class Question : BaseEntity
     {
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public string QuestionType {  get; set; }
         public string QuestionText { get; set; }
         public string QuestionAnswer { get; set; }
         public int QDegree { get; set; }
 
-       /* public int CourseId { get; set; }
-        public int ExamId { get; set; }*/
+        /* public int CourseId { get; set; }
+         public int ExamId { get; set; }*/
+
+
+        public int CourseId { get; set; }
 
         public List<ExamQuestion> ExamQuestions { get; set; }
         public List<Choice> Choices { get; set; }
-        public List<CourseQuestion> CourseQuestions { get; set; }
+        //public List<CourseQuestion> CourseQuestions { get; set; }
+
+        public Course Course { get; set; }
 
 
     }

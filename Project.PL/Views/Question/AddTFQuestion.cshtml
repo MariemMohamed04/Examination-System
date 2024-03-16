@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "AddTFQuestion";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+}
+
+<h1>AddTFQuestion</h1>
+
+
+<div class="tab-pane" id="tab21">
+    <form method="post" action="/Question/AddTFQuestion">
+        <div class="form-group">
+            <label class="form-label">Question Body: </label>
+            <input type="text" name="qBody" class="form-control" placeholder="   ">
+        </div>
+        <div class="row">
+
+            <div class="form-group">
+                <label class="form-label">Model Answer: </label>
+                <select name="ModelAnswer" class="form-control form-select select2 " data-bs-placeholder="Select Country">
+                    <option value="0">True</option>
+                    <option value="1">False</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Course Name: </label>
+            <select name="CourseId" class="form-control form-select select2 " data-bs-placeholder="Select Country">
+                @foreach (Course c in ViewBag.allcourses)
+                {
+                    <option value="@c.CourseId">@c.CrsName</option>
+                }
+            </select>
+        </div>
+        <input type="submit" class="btn  btn-lg btn-primary" value="Confirm" style="margin: auto;">
+    </form>
+</div>

@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.DAL.Entities
 {
-    public class Choice
+    public class Choice:BaseEntity
     {
 
-        [Key , DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key , DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ChoiceId { get; set; }
 
         public string ChoiceTxt { get; set; }

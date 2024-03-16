@@ -16,6 +16,9 @@ namespace Project.BLL.Repositories
         public IInstructorRepo InstructorRepo { get; set; }
         public ICourseRepo CourseRepo { get; set; }
         public ITopicRepo TopicRepo { get; set; }
+        public IChoicesRepo ChoiceRepo { get ; set; }
+        public IQuestionRepo QuestionRepo { get; set; }
+        public IExamRepo ExamRepo { get ; set; }
 
         public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo)
         {
