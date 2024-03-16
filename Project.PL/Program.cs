@@ -43,6 +43,8 @@ namespace Project.PL
             }).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
             #endregion
 
+            builder.Services.AddControllersWithViews();
+
             builder.Services.AddScoped<IBranchRepo, BranchRepo>();
             builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
             builder.Services.AddScoped<IInstructorRepo, InstructorRepo>();
@@ -56,24 +58,20 @@ namespace Project.PL
             builder.Services.AddScoped<ICrsDeptRepo, CrsDeptRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-                {
-                    options.LoginPath = new PathString("Account/SignIn");
-                    options.AccessDeniedPath = new PathString("/Home/Error");
-                });
+           .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+           {
+               options.LoginPath = new PathString("/Account/Login");
+               options.AccessDeniedPath = new PathString("/Home/Error");
+           });
 
             builder.Services.AddAuthorization();
-            builder.Services.AddControllersWithViews();
+          
 
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
 
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-            {
-                options.LoginPath = new PathString("/Account/Login");
-                options.AccessDeniedPath = new PathString("/Home/Error");
-            });
+           
 
             var app = builder.Build();
 
@@ -93,7 +91,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=SignIn}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
 
             app.Run();
         }
