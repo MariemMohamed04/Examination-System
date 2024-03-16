@@ -22,5 +22,12 @@ namespace Project.BLL.Repositories
         {
             return _context.Students.Where(s => s.DepartmentId == deptId).ToList();
         }
+        public IEnumerable<int?> GetGradesByStudentId(int studentId)
+        {
+            return _context.CourseStudents
+                .Where(sc => sc.StudentId == studentId && sc.CrsGrade != null)
+                .Select(sc => sc.CrsGrade)
+                .ToList();
+        }
     }
 }

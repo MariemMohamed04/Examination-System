@@ -57,7 +57,7 @@ namespace Project.PL
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.LoginPath = new PathString("Account/SignIn");
+                    options.LoginPath = new PathString("Account/Login");
                     options.AccessDeniedPath = new PathString("/Home/Error");
                 });
 
@@ -65,13 +65,6 @@ namespace Project.PL
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
-
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-            {
-                options.LoginPath = new PathString("/Account/Login");
-                options.AccessDeniedPath = new PathString("/Home/Error");
-            });
 
             var app = builder.Build();
 

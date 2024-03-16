@@ -10,5 +10,6 @@ namespace Project.BLL.Interfaces
     public interface IReportsRepo
     {
         IEnumerable<Student> GetStudentsByDepartment(int deptId);
+        IEnumerable<int?> GetGradesByStudentId(int stdId);
     }
 }
