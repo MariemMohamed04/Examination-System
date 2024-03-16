@@ -50,10 +50,17 @@ namespace Project.PL.Controllers
             _unitOfWork.ChoiceRepo.Add(third);
             _unitOfWork.ChoiceRepo.Add(forth);
             int c = int.Parse(f["ModelAnswer"]);
+
             var ch = choices[c].ChoiceTxt;
-            Question newQuest = new() { Choices = choices.ToList(), QuestionText = f["qBody"], QuestionType = "MCQ", QuestionAnswer = ch };
+            Question newQuest = new() { Choices = choices.ToList(), QuestionText = f["qBody"], QuestionType = "MCQ", QuestionAnswer = ch , CourseId = int.Parse(f["CourseId"]) };
 
             _unitOfWork.QuestionRepo.Add(newQuest);
+
+            foreach(var choice in choices)
+            {
+                choice.QuestionId = newQuest.QuestionId;
+                _unitOfWork.ChoiceRepo.Update(choice);
+            }
 
             return View();
 
@@ -103,7 +110,13 @@ namespace Project.PL.Controllers
 
             _unitOfWork.QuestionRepo.Add(newQuest);
 
-            return RedirectToAction("AddQuestion");
+            foreach (var choice in choices)
+            {
+                choice.QuestionId = newQuest.QuestionId;
+                _unitOfWork.ChoiceRepo.Update(choice);
+            }
+
+            return RedirectToAction("AddTFQuestion");
         }
 
 

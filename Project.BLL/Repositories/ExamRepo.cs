@@ -19,9 +19,9 @@ namespace Project.BLL.Repositories
             _context = context;
         }
 
-        public void generateExam(int examNo , int numOfTFQuestion , int numOfMCQQuestion)
+        public void generateExam(int examNo , int numOfTFQuestion , int numOfMCQQuestion , int courseId)
         {
-            _context.Database.ExecuteSqlInterpolated($"GenerateAnExam  {examNo},{numOfTFQuestion},{numOfMCQQuestion}");
+            _context.Database.ExecuteSqlInterpolated($"GenerateAnExam  {examNo},{numOfTFQuestion},{numOfMCQQuestion},{courseId}");
 
         }
     }

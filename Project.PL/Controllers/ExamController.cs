@@ -46,7 +46,7 @@ namespace Project.PL.Controllers
             var exam = _mapper.Map<Exam>(examViewModel);
             _unitOfWork.ExamRepo.Add(exam);
 
-            _unitOfWork.ExamRepo.generateExam(exam.ExamId , exam.Num_TF_Questions , exam.Num_MCQ_Questions);
+            _unitOfWork.ExamRepo.generateExam(exam.ExamId , exam.Num_TF_Questions , exam.Num_MCQ_Questions , exam.CourseId);
 
             return RedirectToAction("Index");
         }
