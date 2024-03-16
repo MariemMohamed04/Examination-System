@@ -42,7 +42,7 @@
                                 <img src="~/img/avatar3.png" class="img-circle elevation-2 mr-3" alt="User Image">
                             </div>
                             <div class="info">
-                                <a href="#" class="d-block text-white">Welcome Admin</a>
+                                <a href="#" class="d-block text-white">Welcome User</a>
                             </div>
                         </div>
                     </div>
@@ -51,166 +51,173 @@
                     <li>
                         <a href="index.html"><i class="fa-solid fa-house pr-3"></i>Home</a>
                     </li>
-                    <li>
-                        <a href="#branchSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-building pr-3"></i>Branch</a>
-                        <ul class="collapse list-unstyled" id="branchSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Branch" asp-action="Index">All Branches</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Branch" asp-action="Create">Add Branch</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#departmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-days pr-3"></i>Department</a>
-                        <ul class="collapse list-unstyled" id="departmentSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Department" asp-action="Index">All Departments</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Department" asp-action="Create">Add Department</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#crsdepartmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-days pr-3"></i>Course Department</a>
-                        <ul class="collapse list-unstyled" id="crsdepartmentSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="CrsDept" asp-action="Index">All Course Department</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="CrsDept" asp-action="Create">Add Course Department</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-book pr-3"></i>Course</a>
-                        <ul class="collapse list-unstyled" id="courseSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Course" asp-action="Index">All Courses</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Course" asp-action="Create">Add Course</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#topicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-note-sticky pr-3"></i>Topic</a>
-                        <ul class="collapse list-unstyled" id="topicSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Topic" asp-action="Index">All Topics</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Topic" asp-action="Create">Add Topic</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#StudentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-pen pr-3"></i>Student</a>
-                        <ul class="collapse list-unstyled" id="StudentSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Student" asp-action="Index">All Student</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Student" asp-action="Create">Add Student</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#InstructorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Instructor</a>
-                        <ul class="collapse list-unstyled" id="InstructorSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Instructor" asp-action="Index">All Instructor</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Instructor" asp-action="Create">Add Instructor</a>
-                            </li>
-                        </ul>
-                    </li>
                     
-                    <li>
-                        <a href="#ExamSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Exam</a>
-                        <ul class="collapse list-unstyled" id="ExamSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Exam" asp-action="Index">All Exams</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Exam" asp-action="Create">Add Exam</a>
-                            </li>
-                        </ul>
-                    </li>
+                        @if (User.IsInRole("Instructor"))
+                    {
+                        <li>
+                            <a href="#ExamSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Exam</a>
+                            <ul class="collapse list-unstyled" id="ExamSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Exam" asp-action="Index">All Exams</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Exam" asp-action="Create">Add Exam</a>
+                                </li>
+                            </ul>
+                        </li>
 
-                    <li>
-                        <a href="#QuestionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Question</a>
-                        <ul class="collapse list-unstyled" id="QuestionSubmenu">
-                            <li>
-                                <a asp-area="" asp-controller="Question" asp-action="Index">All Questions</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Question" asp-action="AddQuestion">Add Question</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Question" asp-action="AddTFQuestion">Add Question TF</a>
-                            </li>
-                        </ul>
-                    </li>
-                                        <li>
-                        <a href="#UsersSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Users</a>
-                        <ul class="collapse list-unstyled" id="UsersSubMenu">
-                            <li>
-                                <a asp-area="" asp-controller="Users" asp-action="Index">All Users</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Users" asp-action="Create">Add User</a>
-                            </li>
-                        </ul>
-                    </li>                    
-                    <li>
-                        <a href="#RolesSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Roles</a>
-                        <ul class="collapse list-unstyled" id="RolesSubMenu">
-                            <li>
-                                <a asp-area="" asp-controller="Roles" asp-action="Index">All Roles</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Roles" asp-action="Create">Add Roles</a>
-                            </li>
-                        </ul>
-                    </li>                   
-                    <li>
-                        <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>SignUp</a>
-                        <ul class="collapse list-unstyled" id="InsideSubMenu">
-                            <li>
-                                <a asp-area="" asp-controller="Users" asp-action="AddUser">All Users</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Users" asp-action="AddUser">Add Users</a>
-                            </li>
-                        </ul>
-                    </li>                   
-                    <li>
-                        <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Reports</a>
-                        <ul class="collapse list-unstyled" id="InsideSubMenu">
-                            <li>
-                                <a asp-area="" asp-controller="Reports" asp-action="GetStudentByDepartment">Report 01</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Reports" asp-action="GetStudentByGrade">Report 02</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Reports" asp-action="GetInstructorByCourse">Report 03</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Reports" asp-action="GetCourseByTopic">Report 04</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Reports" asp-action="GetExamByQuestion">Report 05</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Reports" asp-action="GetExamByStudent">Report 06</a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="#QuestionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Question</a>
+                            <ul class="collapse list-unstyled" id="QuestionSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Question" asp-action="Index">All Questions</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Question" asp-action="AddQuestion">Add Question</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Question" asp-action="AddTFQuestion">Add Question TF</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#branchSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-building pr-3"></i>Branch</a>
+                            <ul class="collapse list-unstyled" id="branchSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Branch" asp-action="Index">All Branches</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Branch" asp-action="Create">Add Branch</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#departmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-days pr-3"></i>Department</a>
+                            <ul class="collapse list-unstyled" id="departmentSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Department" asp-action="Index">All Departments</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Department" asp-action="Create">Add Department</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#crsdepartmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-days pr-3"></i>Course Department</a>
+                            <ul class="collapse list-unstyled" id="crsdepartmentSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="CrsDept" asp-action="Index">All Course Department</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="CrsDept" asp-action="Create">Add Course Department</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-book pr-3"></i>Course</a>
+                            <ul class="collapse list-unstyled" id="courseSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Course" asp-action="Index">All Courses</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Course" asp-action="Create">Add Course</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#topicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-note-sticky pr-3"></i>Topic</a>
+                            <ul class="collapse list-unstyled" id="topicSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Topic" asp-action="Index">All Topics</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Topic" asp-action="Create">Add Topic</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#StudentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-pen pr-3"></i>Student</a>
+                            <ul class="collapse list-unstyled" id="StudentSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Student" asp-action="Index">All Student</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Student" asp-action="Create">Add Student</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#InstructorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Instructor</a>
+                            <ul class="collapse list-unstyled" id="InstructorSubmenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Instructor" asp-action="Index">All Instructor</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Instructor" asp-action="Create">Add Instructor</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#UsersSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Users</a>
+                            <ul class="collapse list-unstyled" id="UsersSubMenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Users" asp-action="Index">All Users</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Users" asp-action="Create">Add User</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#RolesSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Roles</a>
+                            <ul class="collapse list-unstyled" id="RolesSubMenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Roles" asp-action="Index">All Roles</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Roles" asp-action="Create">Add Roles</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>SignUp</a>
+                            <ul class="collapse list-unstyled" id="InsideSubMenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Users" asp-action="AddUser">All Users</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Users" asp-action="AddUser">Add Users</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Reports</a>
+                            <ul class="collapse list-unstyled" id="InsideSubMenu">
+                                <li>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetStudentByDepartment">Report 01</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetStudentByGrade">Report 02</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetInstructorByCourse">Report 03</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetCourseByTopic">Report 04</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetExamByQuestion">Report 05</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetExamByStudent">Report 06</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
                 </ul>
                 @if (signInManager.IsSignedIn(User))
                 {

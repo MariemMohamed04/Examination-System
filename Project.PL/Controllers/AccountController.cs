@@ -40,7 +40,7 @@ namespace Project.PL.Controllers
                 var result = await _userManager.CreateAsync(user, authViewModel.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Login");
+                    return RedirectToAction("SignIn");
                 }
 
                 foreach (var error in result.Errors)
@@ -49,17 +49,17 @@ namespace Project.PL.Controllers
                 }
             }
             return View(authViewModel);
-        } 
+        }
         #endregion
 
         #region SignIn
-        public IActionResult Login()
+        public IActionResult SignIn()
         {
             return View(new SignInViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(SignInViewModel signInViewModel)
+        public async Task<IActionResult> SignIn(SignInViewModel signInViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Project.PL.Controllers
         public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(SignIn));
         }
         #endregion
 
@@ -115,7 +115,7 @@ namespace Project.PL.Controllers
         //            var email = new EmailMessage
         //            {
         //                Title = "Reset Email",
-                        
+
         //            };
         //        }
         //    }
@@ -123,7 +123,6 @@ namespace Project.PL.Controllers
         //    return View();
         //}
         //#endregion
-
 
     }
 }

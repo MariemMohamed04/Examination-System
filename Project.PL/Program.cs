@@ -53,13 +53,16 @@ namespace Project.PL
             builder.Services.AddScoped<ITopicRepo, TopicRepo>();
             builder.Services.AddScoped<IReportsRepo, ReportsRepo>();
             builder.Services.AddScoped<ICrsDeptRepo, CrsDeptRepo>();
+            builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
+            builder.Services.AddScoped<IChoicesRepo, ChoicesRepo>();
+            builder.Services.AddScoped<IExamRepo, ExamRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
            {
-               options.LoginPath = new PathString("/Account/Login");
+               options.LoginPath = new PathString("Account/SignIn");
                options.AccessDeniedPath = new PathString("/Home/Error");
            });
 
@@ -88,7 +91,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Login}/{id?}");
+                pattern: "{controller=Account}/{action=SignIn}/{id?}");
 
             app.Run();
         }
