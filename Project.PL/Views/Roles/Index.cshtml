@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DepartmentViewModel>
+﻿@model IEnumerable<ApplicationRole>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
@@ -6,30 +6,19 @@
 
 <div id="content" class="p-4 p-md-5 pt-5">
     <div class="content-wrapper">
-        <!-- Content Header (Page header) ------>
+        <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
-                            <li class="breadcrumb-item active">Departments</li>
+                            <li class="breadcrumb-item active">Roles</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
-        <form class="my-3" asp-action="Index" asp-controller="Department">
-            <div class="row">
-                <div class="col-sm-8">
-                    <input placeholder="Search By Name" name="SearchValue" class="form-control" type="text"/>
-                </div>
-                <div class="col-sm-4">
-                    <input type="submit" value="Search" class="btn btn-success btn-block" />
-                </div>
-            </div>
-        </form>
 
         <!-- Main content -->
         <section class="content mb-3">
@@ -37,7 +26,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Departments</h3>
+                    <h3 class="card-title">Roles</h3>
                 </div>
                 <div class="card-body p-0">
                     @if (Model?.Count() > 0)
@@ -46,13 +35,12 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10%">
-                                        @Html.DisplayNameFor(M => M.DepartmentId)
+                                        @Html.DisplayNameFor(M => M.Id)
                                     </th>
                                     <th style="width: 20%">
-                                        @Html.DisplayNameFor(M => M.DeptName)
+                                        @Html.DisplayNameFor(M => M.Name)
                                     </th>
                                     <th style="width: 30%">
-                                        @Html.DisplayNameFor(M => M.DeptLoc)
                                     </th>
                                     <th>
 
@@ -68,30 +56,34 @@
                                 {
                                     <tr>
                                         <td>
-                                            @item.DepartmentId
+                                            @item.Id
                                         </td>
                                         <td>
-                                            @item.DeptName
+                                            @item.Name
                                         </td>
                                         <td>
-                                            @item.DeptLoc
                                         </td>
                                         <td class="project_progress">
+                                            <a class="btn btn-secondary btn-sm" asp-action="AddOrRemove" asp-route-roleId="@item.Id">
+                                                <i class="fas fa-folder">
+                                                </i>
+                                                Add Role To User
+                                            </a>
                                         </td>
                                         <td class="project-state">
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.DepartmentId">
+                                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
                                                 <i class="fas fa-folder">
                                                 </i>
                                                 View
                                             </a>
-                                            <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.DepartmentId">
+                                            <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.Id">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.DepartmentId">
+                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
@@ -105,7 +97,7 @@
                     else
                     {
                         <div class="alert alert-warning">
-                            <h4>No Departments Found!!</h4>
+                            <h4>No Roles Found!!</h4>
                         </div>
                     }
                 </div>
@@ -115,11 +107,10 @@
         </section>
         <div class="row">
             <div class="col-12">
-                <a asp-action="Create" class="btn btn-success float-right">Create new Department</a>
+                <a asp-action="Create" class="btn btn-success float-right">Create new Role</a>
             </div>
         </div>
         <!-- /.content -->
     </div>
 </div>
-
 

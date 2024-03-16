@@ -1,12 +1,12 @@
 ﻿@model AuthViewModel
 @{
-    ViewData["Title"] = "Registeration";
-    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
 }
 
-<form asp-controller="Account" asp-action="SignUp" class ="row gx-3 w-75 bg-white border rounded-5 p-3">
+<form asp-controller="Users" asp-action="AddUser" class ="row gx-3 w-75 bg-white border rounded-5 p-3">
     <div class="col-12 ">
-        <h4 class="text-center fw-bold">Registeration Form</h4>
+        <h4 class="text-center fw-bold">Register Form</h4>
     </div>
     <div class="col-12">
         <input asp-for="@Model.Email" type="email" name="email" class="form-control text email" placeholder="Email Address" required="">
@@ -20,20 +20,17 @@
         <input asp-for="@Model.ConfirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required="">
         <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
     </div>
-
-    <div class="col-12">
-        <input type="checkbox" asp-for="@Model.IsAgree" class="checkbox" required="">
-        <label class="form-check-label text-capitalize">i agree to the terms & conditions</label>
-    </div>
     <div class="col-12 text-center mb-3">
-        <input type="submit" value="Register" class="btn w-100 text-white fw-bold" />
-    </div>
-    <div class="col-12">
-        <p>Have an Account? <a asp-action="SignIn"> Login Now!</a></p>
+        <input type="submit" value="Register" class="btn w-100 text-dark fw-bold" />
     </div>
 </form>
 
 
 @section Scripts {
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
     <partial name="_ValidationScriptsPartial" />
 }
+

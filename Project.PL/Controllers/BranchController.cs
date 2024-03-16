@@ -18,6 +18,7 @@ namespace Project.PL.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+        [Authorize(Roles = "Admin")]
 
         public IActionResult Index()
         {
@@ -26,6 +27,7 @@ namespace Project.PL.Controllers
             return View(branchViewModels);
         }
 
+        [Authorize(Roles = "Instructor")]
         [HttpGet]
         public IActionResult Create()
         {

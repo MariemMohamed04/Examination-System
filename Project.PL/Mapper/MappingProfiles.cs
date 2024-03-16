@@ -12,8 +12,8 @@ namespace Project.PL.Mapper
                 CreateMap<DepartmentViewModel, Department>().ReverseMap();
                 CreateMap<InstructorViewModel, Instructor>().ReverseMap();
                 CreateMap<StudentViewModel, Student>().ReverseMap();
-                CreateMap<CrsDeptViewModel, CourseDepartment>().ReverseMap();
-
+            CreateMap<CrsDeptViewModel, CourseDepartment>().ReverseMap();
+            CreateMap<ReportOneViewModel, Student>().ReverseMap();
 
 
         }

@@ -94,35 +94,35 @@ namespace Project.PL.Controllers
         }
         #endregion
 
-        #region ForgetPassword
-        public IActionResult ForgetPassword()
-        {
-            return View();
-        }
+        //#region ForgetPassword
+        //public IActionResult ForgetPassword()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user != null)
-                {
-                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //[HttpPost]
+        //public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userManager.FindByEmailAsync(model.Email);
+        //        if (user != null)
+        //        {
+        //            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-                    var resetPasswordLink = Url.Action("ResetPassword", "Account", new { Email = model.Email, Token = token }, Request.Scheme);
+        //            var resetPasswordLink = Url.Action("ResetPassword", "Account", new { Email = model.Email, Token = token }, Request.Scheme);
 
-                    var email = new EmailMessage
-                    {
-                        Title = "Reset Email",
+        //            var email = new EmailMessage
+        //            {
+        //                Title = "Reset Email",
                         
-                    };
-                }
-            }
+        //            };
+        //        }
+        //    }
 
-            return View();
-        }
-        #endregion
+        //    return View();
+        //}
+        //#endregion
 
 
     }

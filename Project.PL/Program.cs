@@ -24,9 +24,7 @@ namespace Project.PL
 
 
             #endregion
-
-            builder.Services.AddControllersWithViews();
-                    
+                     
             #region Identity
             builder.Services.AddIdentity<ApplicationUser, ApplicationRole>( options =>
             {
@@ -51,8 +49,20 @@ namespace Project.PL
             builder.Services.AddScoped<IStudentRepo, StudentRepo>();
             builder.Services.AddScoped<ICourseRepo, CourseRepo>();
             builder.Services.AddScoped<ITopicRepo, TopicRepo>();
+
+            builder.Services.AddScoped<IReportsRepo, ReportsRepo>();
             builder.Services.AddScoped<ICrsDeptRepo, CrsDeptRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = new PathString("Account/SignIn");
+                    options.AccessDeniedPath = new PathString("/Home/Error");
+                });
+
+            builder.Services.AddAuthorization();
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
 
@@ -64,6 +74,7 @@ namespace Project.PL
             });
 
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -80,7 +91,7 @@ namespace Project.PL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Login}/{id?}");
+                pattern: "{controller=Account}/{action=SignIn}/{id?}");
 
             app.Run();
         }

@@ -9,7 +9,7 @@
         public string Street { get; set; }
         public string Gender { get; set; }
         public int Salary { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int BranchId { get; set; }
     }
 }

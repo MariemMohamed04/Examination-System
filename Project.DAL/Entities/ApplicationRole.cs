@@ -9,6 +9,6 @@ namespace Project.DAL.Entities
 {
     public class ApplicationRole : IdentityRole
     {
-        public string Email { get; set; }
+        //public string Email { get; set; }
     }
 }

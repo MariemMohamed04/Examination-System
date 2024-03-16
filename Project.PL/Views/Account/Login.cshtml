@@ -1,11 +1,12 @@
 ﻿@using Project.PL.ViewModel
 @model SignInViewModel
 @{
-    ViewData["Title"] = "SignIn";
+    ViewData["Title"] = "Login Page";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-<form action="SignIn" class="row gx-3 w-75 bg-white border rounded-5 p-3">
+<div asp-asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="SignIn" asp-controller="Account" class="row gx-3 w-75 bg-white border rounded-5 p-3">
     <div class="col-12 ">
         <h4 class="text-center fw-bold">Login Form</h4>
     </div>
