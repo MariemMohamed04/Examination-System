@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Project.BLL.Interfaces;
 using Project.DAL.Entities;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class CourseController : Controller
     {
         

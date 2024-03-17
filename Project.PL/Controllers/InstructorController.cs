@@ -5,9 +5,12 @@ using Project.PL.ViewModel;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class InstructorController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

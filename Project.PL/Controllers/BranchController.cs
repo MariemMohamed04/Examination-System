@@ -7,6 +7,7 @@ using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BranchController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
