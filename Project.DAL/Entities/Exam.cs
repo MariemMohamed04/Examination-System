@@ -8,7 +8,7 @@ namespace Project.DAL.Entities
     {
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ExamId { get; set; }
         public int Duration { get; set;}
         //public int NumOfQuestions {  get; set; }

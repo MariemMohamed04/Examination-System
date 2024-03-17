@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddingTables : Migration
+    public partial class newDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,11 +56,8 @@ namespace Project.DAL.Migrations
                 columns: table => new
                 {
                     BranchId = table.Column<int>(type: "int", nullable: false),
-                    BranchName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BranchLoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InstructorId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                    BranchName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BranchLoc = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,32 +68,13 @@ namespace Project.DAL.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    CrsName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExamId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
-                    InstructorId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CrsName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.CourseId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Questions",
-                columns: table => new
-                {
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
-                    QuestionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuestionAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QDegree = table.Column<int>(type: "int", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    ExamId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Questions", x => x.QuestionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,15 +187,11 @@ namespace Project.DAL.Migrations
                 name: "Instructors",
                 columns: table => new
                 {
-                    InstructorId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salary = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    BranchId = table.Column<int>(type: "int", nullable: false)
+                    InstructorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BranchId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -226,21 +200,20 @@ namespace Project.DAL.Migrations
                         name: "FK_Instructors_Branchs_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branchs",
-                        principalColumn: "BranchId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "BranchId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Exams",
                 columns: table => new
                 {
-                    ExamId = table.Column<int>(type: "int", nullable: false),
+                    ExamId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    NumOfQuestions = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Num_TF_Questions = table.Column<int>(type: "int", nullable: false),
+                    Num_MCQ_Questions = table.Column<int>(type: "int", nullable: false),
                     ExamGrade = table.Column<int>(type: "int", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,11 +227,35 @@ namespace Project.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    QuestionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuestionAnswer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuestionDegree = table.Column<int>(type: "int", nullable: true),
+                    CourseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.QuestionId);
+                    table.ForeignKey(
+                        name: "FK_Questions_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Topics",
                 columns: table => new
                 {
-                    TopicId = table.Column<int>(type: "int", nullable: false),
-                    TopicName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TopicId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TopicName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -270,50 +267,6 @@ namespace Project.DAL.Migrations
                         principalTable: "Courses",
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Choices",
-                columns: table => new
-                {
-                    ChoiceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ChoiceTxt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsCorrect = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Choices", x => x.ChoiceId);
-                    table.ForeignKey(
-                        name: "FK_Choices_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
-                        principalColumn: "QuestionId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CourseQuestions",
-                columns: table => new
-                {
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseQuestions", x => new { x.CourseId, x.QuestionId });
-                    table.ForeignKey(
-                        name: "FK_CourseQuestions_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_CourseQuestions_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
-                        principalColumn: "QuestionId",
-                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -331,25 +284,25 @@ namespace Project.DAL.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "CourseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_CourseInstructors_Instructors_InstructorId",
                         column: x => x.InstructorId,
                         principalTable: "Instructors",
                         principalColumn: "InstructorId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    DeptName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeptLoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BranchId = table.Column<int>(type: "int", nullable: false),
-                    InstructorId = table.Column<int>(type: "int", nullable: false),
-                    
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DeptName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeptLoc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BranchId = table.Column<int>(type: "int", nullable: true),
+                    InstructorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -358,14 +311,31 @@ namespace Project.DAL.Migrations
                         name: "FK_Departments_Branchs_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branchs",
-                        principalColumn: "BranchId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BranchId");
                     table.ForeignKey(
                         name: "FK_Departments_Instructors_InstructorId",
                         column: x => x.InstructorId,
                         principalTable: "Instructors",
-                        principalColumn: "InstructorId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "InstructorId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Choices",
+                columns: table => new
+                {
+                    ChoiceId = table.Column<string>(type: "int", nullable: false),
+                    ChoiceTxt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsCorrect = table.Column<int>(type: "int", nullable: true),
+                    QuestionId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Choices", x => x.ChoiceId);
+                    table.ForeignKey(
+                        name: "FK_Choices_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
+                        principalColumn: "QuestionId");
                 });
 
             migrationBuilder.CreateTable(
@@ -383,13 +353,13 @@ namespace Project.DAL.Migrations
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "ExamId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ExamQuestions_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "QuestionId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -407,28 +377,25 @@ namespace Project.DAL.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "CourseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_CourseDepartments_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    BranchId = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BranchId = table.Column<int>(type: "int", nullable: true),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -438,13 +405,13 @@ namespace Project.DAL.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branchs",
                         principalColumn: "BranchId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Students_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -463,13 +430,13 @@ namespace Project.DAL.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "CourseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_CourseStudents_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -488,13 +455,13 @@ namespace Project.DAL.Migrations
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "ExamId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ExamStudents_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -504,7 +471,7 @@ namespace Project.DAL.Migrations
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     ExamId = table.Column<int>(type: "int", nullable: false),
                     QuestionId = table.Column<int>(type: "int", nullable: false),
-                    StudentAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    StudentAnswer = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -584,11 +551,6 @@ namespace Project.DAL.Migrations
                 column: "InstructorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseQuestions_QuestionId",
-                table: "CourseQuestions",
-                column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CourseStudents_CourseId",
                 table: "CourseStudents",
                 column: "CourseId");
@@ -622,6 +584,11 @@ namespace Project.DAL.Migrations
                 name: "IX_Instructors_BranchId",
                 table: "Instructors",
                 column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_CourseId",
+                table: "Questions",
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentExamQuestions_ExamId",
@@ -675,9 +642,6 @@ namespace Project.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "CourseInstructors");
-
-            migrationBuilder.DropTable(
-                name: "CourseQuestions");
 
             migrationBuilder.DropTable(
                 name: "CourseStudents");

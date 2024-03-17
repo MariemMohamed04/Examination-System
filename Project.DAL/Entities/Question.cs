@@ -6,12 +6,12 @@ namespace Project.DAL.Entities
     public class Question : BaseEntity
     {
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       // [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public string QuestionType {  get; set; }
         public string QuestionText { get; set; }
         public string QuestionAnswer { get; set; }
-        public int QDegree { get; set; }
+        public int? QuestionDegree { get; set; }
 
         /* public int CourseId { get; set; }
          public int ExamId { get; set; }*/

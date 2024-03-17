@@ -27,7 +27,7 @@ namespace Project.BLL.Repositories
 
         public Choice getChoiceByValue(string value)
         {
-            return _context.Choices.FirstOrDefault(c => c.ChoiceTxt == "True");
+            return _context.Choices.FirstOrDefault(c => c.ChoiceTxt == value);
         }
 
     }

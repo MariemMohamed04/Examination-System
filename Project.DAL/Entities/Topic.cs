@@ -8,7 +8,7 @@ namespace Project.DAL.Entities
 
 
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+       // [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TopicId { get; set; }
 
         public string TopicName { get; set; }

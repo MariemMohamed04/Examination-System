@@ -22,5 +22,17 @@ namespace Project.BLL.Repositories
         {
             return _context.Students.FirstOrDefault(u => u.UserId == userId); 
         }
+
+
+        public void addStudentAnswers(StudentExamQuestion ans)
+        {
+            _context.StudentExamQuestions.Add(ans);
+            _context.SaveChanges();
+        }
+
+        public bool getStudentAnswers(int examId)
+        {
+           return _context.StudentExamQuestions.Any(e=>e.ExamId == examId);
+        }
     }
 }

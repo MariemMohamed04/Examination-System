@@ -20,7 +20,8 @@ namespace Project.PL.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var Questions = _unitOfWork.QuestionRepo.GetAll();
+            return View(Questions);
         }
 
    
@@ -38,7 +39,7 @@ namespace Project.PL.Controllers
         {
 
             ViewBag.allcourses = _unitOfWork.CourseRepo.GetAll().ToList();
-            Choice first = new() { ChoiceTxt = f["firstChoice"] };
+            Choice first = new() { ChoiceTxt = f["firstChoice"]  };
             Choice second = new() { ChoiceTxt = f["secondChoice"] };
             Choice third = new() { ChoiceTxt = f["thirdChoice"] };
             Choice forth = new() { ChoiceTxt = f["forthChoice"] };
@@ -106,7 +107,7 @@ namespace Project.PL.Controllers
 
             int c = int.Parse(f["ModelAnswer"]);
             var ch = choices[c].ChoiceTxt;
-            Question newQuest = new() { Choices = choices.ToList(), QuestionText = f["qBody"], QuestionType = "TF", QuestionAnswer = ch };
+            Question newQuest = new() { Choices = choices.ToList(), QuestionText = f["qBody"], QuestionType = "TF", QuestionAnswer = ch , CourseId = int.Parse(f["CourseId"] ) };
 
             _unitOfWork.QuestionRepo.Add(newQuest);
 

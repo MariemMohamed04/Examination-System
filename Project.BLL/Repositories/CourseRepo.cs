@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Project.BLL.Interfaces;
 using Project.DAL.Context;
 using Project.DAL.Entities;
@@ -22,5 +23,8 @@ namespace Project.BLL.Repositories
                 " where c.CourseId =cs.CourseId and s.StudentId =cs.StudentId" +
                 " and s.StudentId = {Id} ").ToList();
         }
+
+        
+
     }
 }

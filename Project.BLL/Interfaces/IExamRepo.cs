@@ -12,7 +12,10 @@ namespace Project.BLL.Interfaces
 
         public void generateExam(int examNo, int numOfTFQuestion, int numOfMCQQuestion, int courseId);
 
-        public Exam getAllExams(int courseId); 
+        public Exam getFirstExam(int courseId);
+
+        public List<Question> getExamQuestions(int examId);
+
 
     }
 }

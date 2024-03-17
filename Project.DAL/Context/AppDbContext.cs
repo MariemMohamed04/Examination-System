@@ -28,7 +28,7 @@ namespace Project.DAL.Context
             modelBuilder.Entity<CourseDepartment>().HasKey(c => new { c.CourseId, c.DepartmentId });
             modelBuilder.Entity<ExamQuestion>().HasKey(c => new { c.ExamId, c.QuestionId });
             modelBuilder.Entity<CourseInstructor>().HasKey(c => new { c.CourseId, c.InstructorId });
-            modelBuilder.Entity<CourseQuestion>().HasKey(c => new { c.CourseId, c.QuestionId });
+           // modelBuilder.Entity<CourseQuestion>().HasKey(c => new { c.CourseId, c.QuestionId });
 
             base.OnModelCreating(modelBuilder);
 
@@ -46,7 +46,7 @@ namespace Project.DAL.Context
         public DbSet<CourseStudent> CourseStudents { get; set; }
         public DbSet<CourseDepartment> CourseDepartments { get; set; }
         public DbSet<CourseInstructor> CourseInstructors { get; set; }
-        public DbSet<CourseQuestion> CourseQuestions { get; set; }
+       // public DbSet<CourseQuestion> CourseQuestions { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Instructor> Instructors { get; set; }

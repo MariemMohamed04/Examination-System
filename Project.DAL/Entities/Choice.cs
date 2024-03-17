@@ -6,15 +6,15 @@ namespace Project.DAL.Entities
     public class Choice:BaseEntity
     {
 
-        [Key , DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string ChoiceId { get; set; }
+     //   [Key , DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ChoiceId { get; set; }
 
         public string ChoiceTxt { get; set; }
 
-        public int IsCorrect { get; set; }
+        public int? IsCorrect { get; set; }
 
         //Foreign Keys
-        public int QuestionId { get; set; }
+        public int? QuestionId { get; set; }
 
         //Navigation Prop
         public Question Question { get; set; }
