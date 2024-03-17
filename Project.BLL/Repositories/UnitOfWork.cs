@@ -23,8 +23,27 @@ namespace Project.BLL.Repositories
         public IQuestionRepo QuestionRepo { get; set; }
         public IExamRepo ExamRepo { get; set; }
         public IReportsRepo ReportsRepo { get; set; }
+        public ICrsStudentRepo CrsStudentRepo { get; set; }
+        public IExamQuestionRepo ExamQuestionRepo { get; set; }
+        public IStudentExamQuestionRepo StudentExamQuestionRepo { get; set; }
+        public ICrsInstRepo CrsInstRepo { get; set; }
 
-        public UnitOfWork(IBranchRepo branchRepo, IDepartmentRepo departmentRepo, IInstructorRepo instructorRepo, IStudentRepo studentRepo, ITopicRepo topicRepo, ICourseRepo courseRepo, IReportsRepo reportsRepo, ICrsDeptRepo crsDeptRepo, IExamRepo examRepo, IChoicesRepo choicesRepo, IQuestionRepo questionRepo)
+        public UnitOfWork(IBranchRepo branchRepo, 
+            IDepartmentRepo departmentRepo, 
+            IInstructorRepo instructorRepo, 
+            IStudentRepo studentRepo, 
+            ITopicRepo topicRepo, 
+            ICourseRepo courseRepo, 
+            IReportsRepo reportsRepo, 
+            ICrsDeptRepo crsDeptRepo, 
+            IExamRepo examRepo, 
+            IChoicesRepo choicesRepo, 
+            IQuestionRepo questionRepo,
+            ICrsStudentRepo crsStudentRepo,
+            IExamQuestionRepo examQuestionRepo,
+            IStudentExamQuestionRepo studentExamQuestionRepo,
+            ICrsInstRepo crsInstRepo
+            )
         {
             CrsDeptRepo = crsDeptRepo;
             BranchRepo = branchRepo;
@@ -37,6 +56,10 @@ namespace Project.BLL.Repositories
             ExamRepo = examRepo;
             ChoiceRepo = choicesRepo;
             QuestionRepo = questionRepo;
+            CrsStudentRepo = crsStudentRepo;
+            ExamQuestionRepo = examQuestionRepo;
+            StudentExamQuestionRepo = studentExamQuestionRepo;
+            CrsInstRepo = crsInstRepo;
         }
 
     }

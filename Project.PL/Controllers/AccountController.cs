@@ -83,7 +83,14 @@ namespace Project.PL.Controllers
                         {
                             return RedirectToAction("StudentMain", "StartExam");
                         }
-                        return RedirectToAction("Index", "Home");
+                        else if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index", "AdminBoard");
+                        }
+                        else if (User.IsInRole("Instructor"))
+                        {
+                            return RedirectToAction("Index", "AdminBoard");
+                        }
                     }
                 }
             }

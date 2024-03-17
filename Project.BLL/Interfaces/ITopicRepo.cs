@@ -9,7 +9,7 @@ namespace Project.BLL.Interfaces
 {
 
     public interface ITopicRepo: IGenericRepo<Topic>
-
     {
+        public Topic GetByIdIncld(int id);
     }
 }

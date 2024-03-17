@@ -1,4 +1,5 @@
-﻿using Project.BLL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
 using Project.DAL.Context;
 using Project.DAL.Entities;
 using System;
@@ -17,18 +18,28 @@ namespace Project.BLL.Repositories
         {
             _context = context;
         }
-
-        public IEnumerable<Student> GetStudentsByDepartment(int deptId)
+        public List<Student> GetStudentsByDepartment(int deptId)
         {
-            return _context.Students.Where(s => s.DepartmentId == deptId).ToList();
+            return _context.Students.Where(d => d.DepartmentId == deptId).ToList();
+        }
+        public IEnumerable<CourseStudent> GetGradesByStudentId(int stdId)
+        {
+            return _context.CourseStudents.Where(sc => sc.StudentId == stdId).ToList();
         }
 
-        public IEnumerable<int?> GetGradesByStudentId(int studentId)
+        public IEnumerable<CourseInstructor> GetCourseByInstructorId(int instId)
         {
-            return _context.CourseStudents
-                .Where(sc => sc.StudentId == studentId && sc.CrsGrade != null)
-                .Select(sc => sc.CrsGrade)
-                .ToList();
+            return _context.CourseInstructors.Where(i => i.InstructorId == instId).ToList();
+        }
+
+        public List<CourseStudent> GetStudentByCourse(int crsId)
+        {
+            return _context.CourseStudents.Where(sc => sc.CourseId == crsId).ToList();
+        }
+
+        public List<Topic> GetTopicsByCourseId(int crsId)
+        {
+            return _context.Topics.Where(t => t.CourseId == crsId).ToList();
         }
     }
 }

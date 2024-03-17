@@ -8,27 +8,20 @@ namespace Project.BLL.Repositories
 {
     public class CourseRepo : GenericRepo<Course>, ICourseRepo
     {
-        AppDbContext _context;
+        private readonly AppDbContext _context;
         public CourseRepo(AppDbContext context) : base(context)
         {
-            _context=context;
-
+            _context = context;
         }
-
-        public IEnumerable<Course> getAllCourseStudent(int Id )
+        public Course GetByIdIncld(int id)
         {
-            var idParameter = new SqlParameter("Id", Id);
-            var courses = _context.Courses
-                .FromSqlRaw("SELECT c.* FROM Courses c, CourseStudents cs, Students s WHERE c.CourseId = cs.CourseId AND s.StudentId = cs.StudentId AND s.StudentId = @Id", idParameter)
-                .ToList();
-            return courses;
+            return _context.Courses.Include(c => c.Topics).SingleOrDefault(c => c.CourseId == id);
         }
-
-        public IEnumerable<CourseStudent> getAllCourseStudents() { 
-            return _context.CourseStudents.ToList();
+        public List<Course> getAllCourseStudent(int id)
+        {
+            return _context.Courses.FromSqlRaw("select c.* from Courses c , CourseStudent cs , Student s" +
+                " where c.CourseId =cs.CourseId and s.StudentId =cs.StudentId" +
+                " and s.StudentId = {Id} ").ToList();
         }
-
-        
-
     }
 }

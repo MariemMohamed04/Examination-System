@@ -4,9 +4,12 @@ using Project.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using AutoMapper;
 using Project.PL.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class StudentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

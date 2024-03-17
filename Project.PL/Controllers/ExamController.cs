@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.Interfaces;
@@ -7,6 +8,8 @@ using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Instructor")]
+
     public class ExamController : Controller
     {
 

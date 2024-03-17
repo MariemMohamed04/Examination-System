@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.BLL.Interfaces;
 using Project.DAL.Entities;
@@ -6,6 +7,8 @@ using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class CrsDeptController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "GetStudentByDepartment";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+}
+<div id="content" class="p-4 p-md-5 pt-5">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) ------>
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
+                            <li class="breadcrumb-item active">Report 01</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content mb-3">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Report 01</h3>
+                </div>
+                <div class="card-body p-0">
+                    <form asp-action="GetStudentByDepartment" asp-controller="Reports" method="post">
+
+                        <label for="Id">Enter Department Id </label>
+                        <input name="Id" class="form-control"><br><br>
+
+                        <input type="submit" value="Show Report 1" class="btn btn-success">
+                        <br><br>
+
+                    </form>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </section>
+
+        <!-- /.content -->
+    </div>
+</div>

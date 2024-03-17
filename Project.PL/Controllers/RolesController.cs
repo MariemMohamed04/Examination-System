@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.DAL.Entities;
@@ -6,6 +7,8 @@ using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class RolesController : Controller
     {
         private readonly RoleManager<ApplicationRole> _roleManager;

@@ -9,11 +9,8 @@ namespace Project.BLL.Interfaces
 {
     public interface ICourseRepo : IGenericRepo<Course>
     {
-
-
-        public IEnumerable<Course> getAllCourseStudent(int id );
-
-        public IEnumerable<CourseStudent> getAllCourseStudents(); 
-
+        public Course GetByIdIncld(int id);
+        public List<Course> getAllCourseStudent(int id);
+        //public IEnumerable<CourseStudent> getAllCourseStudents();
     }
 }

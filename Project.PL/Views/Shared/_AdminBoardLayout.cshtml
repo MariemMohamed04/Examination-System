@@ -49,7 +49,7 @@
                 </div>
                 <ul class="list-unstyled components mb-5 mt-3">
                     <li>
-                        <a href="index.html"><i class="fa-solid fa-house pr-3"></i>Home</a>
+                        <a asp-area="" asp-controller="AdminBoard" asp-action="Index"><i class="fa-solid fa-house pr-3"></i>Home</a>
                     </li>
                     
                         @if (User.IsInRole("Instructor"))
@@ -161,13 +161,13 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#UsersSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Users</a>
+                            <a href="#UsersSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-users pr-3"></i>Users</a>
                             <ul class="collapse list-unstyled" id="UsersSubMenu">
                                 <li>
                                     <a asp-area="" asp-controller="Users" asp-action="Index">All Users</a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Users" asp-action="Create">Add User</a>
+                                    <a asp-area="" asp-controller="Users" asp-action="AddUser">Add User</a>
                                 </li>
                             </ul>
                         </li>
@@ -183,36 +183,25 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>SignUp</a>
-                            <ul class="collapse list-unstyled" id="InsideSubMenu">
-                                <li>
-                                    <a asp-area="" asp-controller="Users" asp-action="AddUser">All Users</a>
-                                </li>
-                                <li>
-                                    <a asp-area="" asp-controller="Users" asp-action="AddUser">Add Users</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#InsideSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-tie pr-3"></i>Reports</a>
-                            <ul class="collapse list-unstyled" id="InsideSubMenu">
+                            <a href="#REportSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-folder-open pr-3"></i>Reports</a>
+                            <ul class="collapse list-unstyled" id="REportSubMenu">
                                 <li>
                                     <a asp-area="" asp-controller="Reports" asp-action="GetStudentByDepartment">Report 01</a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Reports" asp-action="GetStudentByGrade">Report 02</a>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetGradesByStudent">Report 02</a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Reports" asp-action="GetInstructorByCourse">Report 03</a>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetCourseByInstructor">Report 03</a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Reports" asp-action="GetCourseByTopic">Report 04</a>
+                                    <a asp-area="" asp-controller="Reports" asp-action="GetTopicsByCourse">Report 04</a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Reports" asp-action="GetExamByQuestion">Report 05</a>
+                                    <a asp-area="" asp-controller="Reports" asp-action="IndexQuestions">Report 05</a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Reports" asp-action="GetExamByStudent">Report 06</a>
+                                    <a asp-area="" asp-controller="Reports" asp-action="IndexAnswers">Report 06</a>
                                 </li>
                             </ul>
                         </li>
