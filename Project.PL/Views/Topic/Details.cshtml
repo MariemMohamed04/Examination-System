@@ -1,0 +1,73 @@
+﻿@model Topic
+@{
+    ViewData["Title"] = "topic Details";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+    
+    
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        <h3>@TempData["Message"]</h3>
+    </div>
+}
+
+<div id="content" class="p-4 p-md-5 pt-5">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
+                            <li class="breadcrumb-item active">topic Details</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content mb-3">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">topic Details</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.TopicId" class="col-form-label"></label>
+                                    <input asp-for="@Model.TopicId" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.TopicName" class="col-form-label"></label>
+                                    <input asp-for="@Model.TopicName" class="form-control" readonly />
+                                </div>
+                            </div>
+                         
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Course.CrsName">Branch</label>
+                                    <input asp-for="@Model.Course.CrsName" class="form-control" readonly />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>

@@ -9,7 +9,10 @@ namespace Project.BLL.Interfaces
 {
     public interface IReportsRepo
     {
-        IEnumerable<Student> GetStudentsByDepartment(int deptId);
-        IEnumerable<int?> GetGradesByStudentId(int stdId);
+        List<Student> GetStudentsByDepartment(int deptId);
+        IEnumerable<CourseStudent> GetGradesByStudentId(int stdId);
+        IEnumerable<CourseInstructor> GetCourseByInstructorId(int instId);
+        List<CourseStudent> GetStudentByCourse(int crsId);
+        List<Topic> GetTopicsByCourseId(int crsId);
     }
 }

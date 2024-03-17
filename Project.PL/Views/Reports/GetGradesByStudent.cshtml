@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ReportTwoViewModel>
+
+@{
+    ViewData["Title"] = "Report 2";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  Font Awesome Icon Library  -->
+    <!--  Font Awesome Icon Library  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+    <!--  Bootstrap Framework  -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--  Main Style sheet  -->
+    <link rel="stylesheet" href="~/css/Style.css" />
+</head>
+
+<body>
+
+    <section class="exam mt-5 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach (var m in Model)
+                {
+                    <div class="col-8">
+                        <div class="card mb-5">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Course: @m.Course.CrsName</li>
+                                <li class="list-group-item">Grade: @m.CrsGrade</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <div class="row">
+        <div class="col-12">
+            <a asp-action="GetGradesByStudent" asp-controller="Reports" class="btn btn-success float-right">Back To List</a>
+        </div>
+    </div>
+</body>
+
+</html>

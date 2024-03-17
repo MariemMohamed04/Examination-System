@@ -56,6 +56,10 @@ namespace Project.PL
             builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
             builder.Services.AddScoped<IChoicesRepo, ChoicesRepo>();
             builder.Services.AddScoped<IExamRepo, ExamRepo>();
+            builder.Services.AddScoped<ICrsStudentRepo, CrsStudentRepo>();
+            builder.Services.AddScoped<IStudentExamQuestionRepo, StudentExamQuestionRepo>();
+            builder.Services.AddScoped<IExamQuestionRepo, ExamQuestionRepo>();
+            builder.Services.AddScoped<ICrsInstRepo, CrsInstRepo>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
@@ -67,14 +71,8 @@ namespace Project.PL
            });
 
             builder.Services.AddAuthorization();
-          
-
             builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
-
-           
-
             var app = builder.Build();
-
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

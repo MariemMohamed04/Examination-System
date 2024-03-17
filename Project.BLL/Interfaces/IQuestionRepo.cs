@@ -9,5 +9,6 @@ namespace Project.BLL.Interfaces
 {
     public interface IQuestionRepo : IGenericRepo<Question>
     {
+        public Question questionChoices(int qId);
     }
 }

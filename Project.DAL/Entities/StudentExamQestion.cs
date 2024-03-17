@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.DAL.Entities
 {
-    public class StudentExamQuestion
+    public class StudentExamQuestion : BaseEntity
     {
         public string StudentAnswer { get; set; }
 

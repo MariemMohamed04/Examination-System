@@ -1,95 +1,69 @@
-﻿@model ReportOneViewModel
+﻿@model IEnumerable<Student>
+
 @{
-    ViewData["Title"] = "GetStudentByDepartment";
-    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
-    // var Departments = new 
+    ViewData["Title"] = "Report 1";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="content" class="p-4 p-md-5 pt-5">
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) ------>
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
-                            <li class="breadcrumb-item active">Departments</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  Font Awesome Icon Library  -->
+    <!--  Font Awesome Icon Library  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-        <form class="my-3" asp-action="Index" asp-controller="Departemt">
-            <div class="row">
-                <div class="col-sm-8">
-                    <input placeholder="Search By Name" name="SearchValue" class="form-control" />
-                </div>
-                <div class="col-sm-4">
-                    <input type="submit" value="Search" class="btn btn-success btn-block" />
-                </div>
-            </div>
-        </form>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/admin.css">
+    <!--  Bootstrap Framework  -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--  Main Style sheet  -->
+    <link rel="stylesheet" href="~/css/Style.css" />
+</head>
 
-        <!-- Main content -->
-        <section class="content mb-3">
+<body>
 
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Departments</h3>
-                </div>
-@*                 <div class="card-body p-0">
-                    @if (Model?.Count() > 0)
-                    {
-                        <table class="table table-striped projects">
-                            <thead>
-                                <tr>
-                                    <th>Student ID</th>
-                                    <th>Name</th>
-                                    <th>Age</th>
-                                    <th>City</th>
-                                    <th>Street</th>
-                                    <th>Gender</th>
-                                    <th>User ID</th>
-                                    <th>Department ID</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var student in Model)
-                                {
-                                    <tr>
-                                        <td>@student.StudentId</td>
-                                        <td>@student.Name</td>
-                                        <td>@student.Age</td>
-                                        <td>@student.City</td>
-                                        <td>@student.Street</td>
-                                        <td>@student.Gender</td>
-                                        <td>@student.UserId</td>
-                                        <td>@student.DepartmentId</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <div class="alert alert-warning">
-                            <h4>No Departments Found!!</h4>
+
+    <section class="exam mt-5 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach (var student in Model)
+                {
+                    <div class="col-8">
+                        <div class="card mb-5">
+                            <div class="card-header py-3 fs-5 fw-bold">
+                                Student ID: @student.StudentId
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Name: @student.Name</li>
+                                <li class="list-group-item">Age: @student.Age</li>
+                                <li class="list-group-item">City: @student.City</li>
+                                <li class="list-group-item">Street: @student.Street</li>
+                                <li class="list-group-item">Gender: @student.Gender</li>
+                                <li class="list-group-item">User ID: @student.UserId</li>
+                                <li class="list-group-item">Branch ID: @student.BranchId</li>
+                                <li class="list-group-item">Department ID: @student.DepartmentId</li>
+                            </ul>
                         </div>
-                    }
-                </div> *@
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </section>
-        <div class="row">
-            <div class="col-12">
-                <a asp-action="Create" class="btn btn-success float-right">Create new Department</a>
+                    </div>
+                }
             </div>
         </div>
-        <!-- /.content -->
+    </section>
+    <div class="row">
+        <div class="col-12">
+            <a asp-action="GetStudentByDepartment" asp-controller="Reports" class="btn btn-success float-right">Back To List</a>
+        </div>
     </div>
-</div>
+</body>
+
+</html>
+
+
+
 

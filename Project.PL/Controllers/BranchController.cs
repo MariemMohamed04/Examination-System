@@ -7,7 +7,6 @@ using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
-    [Authorize (Roles = "Admin")]
     public class BranchController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +17,6 @@ namespace Project.PL.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        [Authorize(Roles = "Admin")]
 
         public IActionResult Index()
         {
@@ -27,7 +25,6 @@ namespace Project.PL.Controllers
             return View(branchViewModels);
         }
 
-        [Authorize(Roles = "Instructor")]
         [HttpGet]
         public IActionResult Create()
         {

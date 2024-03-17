@@ -1,0 +1,67 @@
+﻿@model CrsStudentViewModel
+@{
+    ViewData["Title"] = "Course student Details";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+
+}
+
+
+
+<div id="content" class="p-4 p-md-5 pt-5">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
+                            <li class="breadcrumb-item active">Course student Details</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content mb-3">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Course student Details</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.StudentId" class="col-form-label"></label>
+                                    <input asp-for="@Model.StudentId" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.CourseId" class="col-form-label"></label>
+                                    <input asp-for="@Model.CourseId" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                        <div class="text-center mt-5 mb-3">
+
+                            <a asp-action="Delete" asp-route-InsId="@Model.StudentId" asp-route-crsId="@Model.CourseId" class="btn btn-sm btn-warning">Delete  Student course</a>
+                            <a class="btn btn-light" asp-action="Index">Back To List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
