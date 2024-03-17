@@ -15,7 +15,7 @@ namespace Project.BLL.Repositories
 
         }
 
-        public List<Course> getAllCourseStudent(int Id )
+        public IEnumerable<Course> getAllCourseStudent(int Id )
         {
             var idParameter = new SqlParameter("Id", Id);
             var courses = _context.Courses
@@ -23,5 +23,12 @@ namespace Project.BLL.Repositories
                 .ToList();
             return courses;
         }
+
+        public IEnumerable<CourseStudent> getAllCourseStudents() { 
+            return _context.CourseStudents.ToList();
+        }
+
+        
+
     }
 }

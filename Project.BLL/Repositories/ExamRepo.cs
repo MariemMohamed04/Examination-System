@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Project.BLL.Interfaces;
 using Project.DAL.Context;
 using Project.DAL.Entities;
@@ -25,7 +26,23 @@ namespace Project.BLL.Repositories
 
         }
 
-        public Exam getAllExams(int courseId)
+        public List<Question> getExamQuestions(int examId)
+        {
+            var examQuestions = _context.Questions
+                .FromSqlRaw("EXEC GetExamQuestions @ExamNumber", new SqlParameter("@ExamNumber", examId))
+                .ToList();
+                
+
+           // _context.Questions.Where(e=>e.CourseId == examId).ToList();
+
+            return examQuestions; 
+        }
+
+
+
+
+
+        public Exam getFirstExam(int courseId)
         {
             return _context.Exams.Include(c=>c.Course).FirstOrDefault(e=>e.CourseId == courseId);
         }

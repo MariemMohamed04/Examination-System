@@ -25,8 +25,8 @@ namespace Project.PL.Controllers
 
         public IActionResult Index()
         {
-
-            return View();
+            var exams = _unitOfWork.ExamRepo.GetAll();
+            return View(exams);
         }
 
 

@@ -11,7 +11,9 @@ namespace Project.BLL.Interfaces
     {
 
 
-        public List<Course> getAllCourseStudent(int id ); 
+        public IEnumerable<Course> getAllCourseStudent(int id );
+
+        public IEnumerable<CourseStudent> getAllCourseStudents(); 
 
     }
 }

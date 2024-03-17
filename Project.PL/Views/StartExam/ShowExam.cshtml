@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "ShowExam";
+    Layout = "~/Views/Shared/_StudentBoardLayout.cshtml";
+    int counter = 1;
+    List<Choice> choices = ViewBag.choices;
+    var studentId = ViewBag.studentId;
+    var examId = ViewBag.examId;
+}
+
+<h1 class="text-white" >Exam number @examId</h1>
+
+@model List<Question>
+
+
+    
+<form  asp-controller="StartExam" asp-action="ShowExam" method="post">
+    
+    <div class="space" style="height: 50px;"></div>
+
+    
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var q = Model[i];
+        <input hidden name="Answers[@i].QuestionId" value="@q.QuestionId" />
+        <input hidden name="Answers[@i].StudentId" value="@studentId" />
+        <input hidden name="Answers[@i].ExamId" value="@examId" />
+
+        List<Choice> choices2 = choices.Where(c=>c.QuestionId ==q.QuestionId).ToList() ; 
+        if (q.QuestionType == "TF")
+        {
+            <div class="col-xl-8 col-lg-12" style="margin: auto;margin-top: 20px; width:100%">
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h3 class="card-title">@counter - @q.QuestionText</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="custom-control custom-radio-md">
+                                <input type="radio" class="custom-control-input" id="True+@q.QuestionId" name="Answers[@i].StudentAnswer" value="True">
+                                <span class="custom-control-label">True</span>
+                            </label>
+                            <label class="custom-control custom-radio-md">
+                                <input type="radio" class="custom-control-input" id="False+@q.QuestionId" name="Answers[@i].StudentAnswer" value="False">
+                                <span class="custom-control-label">False</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-xl-8 col-lg-12" style="margin: auto;margin-top: 20px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@counter- @q.QuestionText</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="custom-control custom-radio-md" >
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt">
+                                <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md " >
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt">
+                                <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md" >
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt">
+                                <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md" >
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt">
+                                <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+         counter++;
+    }
+    <div class="col-xl-8 col-lg-12" style="margin: auto;margin-top: 20px;">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="form-group">
+                    <div class="container-login100-form-btn">
+                        <input value="Submit Answers" type="submit" class="login100-form-btn btn" style="background-color:#a1272d;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

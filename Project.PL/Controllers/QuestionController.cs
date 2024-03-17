@@ -20,7 +20,8 @@ namespace Project.PL.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var Questions = _unitOfWork.QuestionRepo.GetAll();
+            return View(Questions);
         }
 
    

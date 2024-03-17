@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "ShowResult";
+    Layout = "~/Views/Shared/_StudentBoardLayout.cshtml";
+
+    var grade = ViewBag.Studentgrade;
+    var correctAns = ViewBag.CorrectAns ;
+    var WrongAns = ViewBag.WrongAns ;
+}
+
+    
+<br />
+<h2 class="text-white">Result</h2>
+<br />
+<h3 class="text-white">Your grade @grade</h3>
+<br />
+<h3 class="text-white">Your correctAns @correctAns</h3>
+<br />
+<h3 class="text-white">Your wrongAns @WrongAns</h3>
+
+
+
+<a class="btn btn-secondary" asp-controller="StartExam" asp-action="StudentMain" > show other exams </a>
+
+
+
+
