@@ -9,18 +9,22 @@
 }
 
     
-<br />
-<h2 class="text-white">Result</h2>
-<br />
-<h3 class="text-white">Your grade @grade</h3>
-<br />
-<h3 class="text-white">Your correctAns @correctAns</h3>
-<br />
-<h3 class="text-white">Your wrongAns @WrongAns</h3>
+
+<div class="card mb-5 ">
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Your grade: @grade</li>
+        <li class="list-group-item">Your Correct Answer: @correctAns</li>
+        <li class="list-group-item">Your Wrong Answer: @WrongAns</li>
+    </ul>
+
+    <a class="btn btn-secondary" asp-controller="StartExam" asp-action="StudentMain" > show other exams </a>
+
+</div>
 
 
 
-<a class="btn btn-secondary" asp-controller="StartExam" asp-action="StudentMain" > show other exams </a>
+
 
 
 

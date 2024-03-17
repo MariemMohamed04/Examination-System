@@ -74,7 +74,7 @@ namespace Project.PL.Controllers
             List<Choice> allChoices = new List<Choice>(); 
             foreach (var question in questions)
             {
-              var allQChoices =   choices.Where(ch => ch.QuestionId == question.QuestionId && question.QuestionType == "MCQ");
+              var allQChoices = choices.Where(ch => ch.QuestionId == question.QuestionId && question.QuestionType == "MCQ"  );
 
                 foreach(var choice in allQChoices)
                 {

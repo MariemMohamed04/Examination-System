@@ -11,8 +11,8 @@
                 Choose a Course to Start your Exam
             </div>
             <div class="card-body">
-            <form asp-action="StudentMain" asp-controller="StartExam" method="post">
-                <select class="form-select" aria-label="Default select example" placeholder="Select Course Exam" name="CourseId">
+            <form class="d-flex flex-column align-items-center" asp-action="StudentMain" asp-controller="StartExam" method="post">
+                <select class="form-select col-12 py-2 mb-3" aria-label="Default select example" placeholder="Select Course Exam" name="CourseId">
                     @if (Model?.Count() == 0)
                     {
                         <option>You Done All Exams Succesfully</option>
@@ -22,8 +22,8 @@
                         <option  value="@item.CourseId">@item.CrsName</option>
                     } 
                 </select>
-            <div class="col-8 mb-5">
-                <button class="btn bg-white ms-auto w-100 fw-bolder" type="submit">START YOUR EXAM</button>
+            <div class="col-12 ">
+                <button class="btn bg-danger text-white ms-auto w-100 fw-bolder" type="submit">START YOUR EXAM</button>
             </div>
             <input name="StudentId" value="@ViewBag.StudentId" hidden/>
         </form>
