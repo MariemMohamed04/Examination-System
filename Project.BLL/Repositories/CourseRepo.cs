@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Project.BLL.Interfaces;
 using Project.DAL.Context;
 using Project.DAL.Entities;
@@ -14,11 +15,13 @@ namespace Project.BLL.Repositories
 
         }
 
-        public List<Course> getAllCourseStudent(int id )
+        public List<Course> getAllCourseStudent(int Id )
         {
-           return  _context.Courses.FromSqlRaw("select c.* from Courses c , CourseStudent cs , Student s" +
-               " where c.CourseId =cs.CourseId and s.StudentId =cs.StudentId" +
-               " and s.StudentId = {Id} ").ToList();
+            var idParameter = new SqlParameter("Id", Id);
+            var courses = _context.Courses
+                .FromSqlRaw("SELECT c.* FROM Courses c, CourseStudents cs, Students s WHERE c.CourseId = cs.CourseId AND s.StudentId = cs.StudentId AND s.StudentId = @Id", idParameter)
+                .ToList();
+            return courses;
         }
     }
 }

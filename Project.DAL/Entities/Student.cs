@@ -6,14 +6,17 @@ namespace Project.DAL.Entities
     public class Student : BaseEntity
     {
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+      //  [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StudentId { get; set; }
         public string Name { get; set; }
-        public string Age { get; set; }
+        
+
+/*        public string Age { get; set; }
 
         public string City {  get; set; }
         public string Street { get; set; }
-        public string Gender { get; set; }
+        public string Gender { get; set; }*/
+
         public string UserId { get; set; }
 
 

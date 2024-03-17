@@ -38,12 +38,12 @@ namespace Project.PL.Controllers
 
             ViewBag.Courses = courses;
 
-            foreach (var course in courses)
+          /*  foreach (var course in courses)
             {
                 var exam = _unitOfWork.ExamRepo.getAllExams(course.CourseId);
                 exams.Add(exam);
             }
-
+*/
 
             return View(courses);
         }

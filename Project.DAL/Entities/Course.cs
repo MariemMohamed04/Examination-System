@@ -7,7 +7,7 @@ namespace Project.DAL.Entities
     public class Course: BaseEntity
 
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+       // [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseId { get; set; }
         public string CrsName { get; set; }
        /* public int ExamId { get; set; }

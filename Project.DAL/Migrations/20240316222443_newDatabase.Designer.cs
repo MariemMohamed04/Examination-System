@@ -12,8 +12,8 @@ using Project.DAL.Context;
 namespace Project.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240315150545_AddingChanges")]
-    partial class AddingChanges
+    [Migration("20240316222443_newDatabase")]
+    partial class newDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -140,9 +140,6 @@ namespace Project.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -253,10 +250,10 @@ namespace Project.DAL.Migrations
                     b.Property<string>("ChoiceTxt")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IsCorrect")
+                    b.Property<int?>("IsCorrect")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("ChoiceId");
@@ -269,7 +266,10 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Course", b =>
                 {
                     b.Property<int>("CourseId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
                     b.Property<string>("CrsName")
                         .HasColumnType("nvarchar(max)");
@@ -309,21 +309,6 @@ namespace Project.DAL.Migrations
                     b.ToTable("CourseInstructors");
                 });
 
-            modelBuilder.Entity("Project.DAL.Entities.CourseQuestion", b =>
-                {
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CourseId", "QuestionId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("CourseQuestions");
-                });
-
             modelBuilder.Entity("Project.DAL.Entities.CourseStudent", b =>
                 {
                     b.Property<int>("StudentId")
@@ -345,9 +330,12 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Department", b =>
                 {
                     b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("BranchId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
+
+                    b.Property<int?>("BranchId")
                         .HasColumnType("int");
 
                     b.Property<string>("DeptLoc")
@@ -356,7 +344,7 @@ namespace Project.DAL.Migrations
                     b.Property<string>("DeptName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InstructorId")
+                    b.Property<int?>("InstructorId")
                         .HasColumnType("int");
 
                     b.HasKey("DepartmentId");
@@ -371,13 +359,13 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Exam", b =>
                 {
                     b.Property<int>("ExamId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamId"));
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
@@ -385,7 +373,10 @@ namespace Project.DAL.Migrations
                     b.Property<int>("ExamGrade")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumOfQuestions")
+                    b.Property<int>("Num_MCQ_Questions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Num_TF_Questions")
                         .HasColumnType("int");
 
                     b.HasKey("ExamId");
@@ -431,31 +422,19 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Instructor", b =>
                 {
                     b.Property<int>("InstructorId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Age")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstructorId"));
+
+                    b.Property<int?>("BranchId")
                         .HasColumnType("int");
-
-                    b.Property<int>("BranchId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Salary")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Street")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("InstructorId");
 
@@ -467,13 +446,19 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Question", b =>
                 {
                     b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("QDegree")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"));
+
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("QuestionAnswer")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("QuestionDegree")
+                        .HasColumnType("int");
 
                     b.Property<string>("QuestionText")
                         .HasColumnType("nvarchar(max)");
@@ -483,37 +468,30 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("QuestionId");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Student", b =>
                 {
                     b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Age")
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
 
                     b.Property<int>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Street")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("StudentId");
 
@@ -550,7 +528,10 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Topic", b =>
                 {
                     b.Property<int>("TopicId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TopicId"));
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -620,9 +601,7 @@ namespace Project.DAL.Migrations
                 {
                     b.HasOne("Project.DAL.Entities.Question", "Question")
                         .WithMany("Choices")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("QuestionId");
 
                     b.Navigation("Question");
                 });
@@ -657,21 +636,6 @@ namespace Project.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Project.DAL.Entities.CourseQuestion", b =>
-                {
-                    b.HasOne("Project.DAL.Entities.Course", null)
-                        .WithMany("CourseQuestions")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project.DAL.Entities.Question", null)
-                        .WithMany("CourseQuestions")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Project.DAL.Entities.CourseStudent", b =>
                 {
                     b.HasOne("Project.DAL.Entities.Course", "Course")
@@ -695,15 +659,11 @@ namespace Project.DAL.Migrations
                 {
                     b.HasOne("Project.DAL.Entities.Branch", "Branch")
                         .WithMany("Departments")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BranchId");
 
                     b.HasOne("Project.DAL.Entities.Instructor", "Instructor")
                         .WithMany()
-                        .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InstructorId");
 
                     b.Navigation("Branch");
 
@@ -759,11 +719,20 @@ namespace Project.DAL.Migrations
                 {
                     b.HasOne("Project.DAL.Entities.Branch", "Branch")
                         .WithMany("Instructors")
-                        .HasForeignKey("BranchId")
+                        .HasForeignKey("BranchId");
+
+                    b.Navigation("Branch");
+                });
+
+            modelBuilder.Entity("Project.DAL.Entities.Question", b =>
+                {
+                    b.HasOne("Project.DAL.Entities.Course", "Course")
+                        .WithMany("Questions")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Branch");
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Project.DAL.Entities.Student", b =>
@@ -838,9 +807,9 @@ namespace Project.DAL.Migrations
 
                     b.Navigation("CourseInstructors");
 
-                    b.Navigation("CourseQuestions");
-
                     b.Navigation("Exams");
+
+                    b.Navigation("Questions");
 
                     b.Navigation("StudentCourses");
 
@@ -869,8 +838,6 @@ namespace Project.DAL.Migrations
             modelBuilder.Entity("Project.DAL.Entities.Question", b =>
                 {
                     b.Navigation("Choices");
-
-                    b.Navigation("CourseQuestions");
 
                     b.Navigation("ExamQuestions");
                 });

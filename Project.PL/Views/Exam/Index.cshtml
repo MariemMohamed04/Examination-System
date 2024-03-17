@@ -28,7 +28,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Branches</h3>
+                    <h3 class="card-title">Exams</h3>
                 </div>
                 <div class="card-body p-0">
                     @if (Model?.Count() > 0)
@@ -110,11 +110,11 @@
             </div>
             <!-- /.card -->
         </section>
-        <div class="row">
+      @*   <div class="row">
             <div class="col-12">
-                <a asp-action="Create" class="btn btn-success float-right">Create new Branch</a>
+                <a asp-controller="Exam" asp-action="Create" class="btn btn-success float-right">Create new Exam</a>
             </div>
-        </div>
+        </div> *@
         <!-- /.content -->
     </div>
 </div>
