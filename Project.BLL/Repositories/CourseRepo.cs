@@ -17,11 +17,11 @@ namespace Project.BLL.Repositories
         {
             return _context.Courses.Include(c => c.Topics).SingleOrDefault(c => c.CourseId == id);
         }
+
         public List<Course> getAllCourseStudent(int id)
         {
-            return _context.Courses.FromSqlRaw("select c.* from Courses c , CourseStudent cs , Student s" +
-                " where c.CourseId =cs.CourseId and s.StudentId =cs.StudentId" +
-                " and s.StudentId = {Id} ").ToList();
+            var idParameter = new SqlParameter("Id", id); 
+            return _context.Courses.FromSqlRaw("select c.* from Courses c , CourseStudents cs , Students s where c.CourseId =cs.CourseId and s.StudentId =cs.StudentId and s.StudentId = @Id " , idParameter).ToList();
         }
     }
 }
