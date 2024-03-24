@@ -13,8 +13,8 @@ namespace Project.DAL.Entities
         public string QuestionAnswer { get; set; }
         public int QDegree { get; set; }
 
-        public int CourseId { get; set; }
-        public int ExamId { get; set; }
+       /* public int CourseId { get; set; }
+        public int ExamId { get; set; }*/
 
         public List<ExamQuestion> ExamQuestions { get; set; }
         public List<Choice> Choices { get; set; }

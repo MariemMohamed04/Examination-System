@@ -5,8 +5,6 @@ namespace Project.DAL.Entities
 {
     public class StudentExamQuestion
     {
-
-        
         public string StudentAnswer { get; set; }
 
         [ForeignKey("Student")]

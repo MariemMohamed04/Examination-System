@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.DAL.Entities
 {
-    public class Instructor
+    public class Instructor : BaseEntity
     {
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -17,8 +17,8 @@ namespace Project.DAL.Entities
         public int UserId { get; set; }
 
 
-        public int BrandId { get; set; }
-        public int CourseId { get; set; }
+        public int BranchId { get; set; }
+       // public int CourseId { get; set; }
 
         public List<CourseInstructor> CourseInstructor { get; set; }
         public Branch Branch { get; set; }

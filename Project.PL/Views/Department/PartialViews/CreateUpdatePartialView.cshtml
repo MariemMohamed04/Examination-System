@@ -1,0 +1,46 @@
+﻿@model DepartmentViewModel
+@{
+    var Branches = new SelectList(ViewBag.Branches, "BranchId", "BranchName");
+    var Instructors = new SelectList(ViewBag.Instructors, "InstructorId", "Name");
+}
+
+<div class="card-body p-0">
+    <div class="card card-primary">
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="@Model.DepartmentId">Department ID</label>
+                <input type="text" asp-for="@Model.DepartmentId" class="form-control">
+                <span asp-validation-for="@Model.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.DeptName">Department Name</label>
+                <input type="text" asp-for="@Model.DeptName" class="form-control">
+                <span asp-validation-for="@Model.DeptName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.DeptLoc">Department Location</label>
+                <textarea asp-for="@Model.DeptLoc" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="@Model.DeptLoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.BranchId">Branch</label>
+                <select asp-for="@Model.BranchId" asp-items="Branches" class="form-control">
+                    <option>--- Select Branch ---</option>
+                </select>
+                <span asp-validation-for="@Model.BranchId" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <label asp-for="@Model.InstructorId">Manager</label>
+                <select asp-for="@Model.InstructorId" asp-items="Instructors" class="form-control">
+                    <option>--- Select Manager ---</option>
+                </select>
+                <span asp-validation-for="@Model.InstructorId" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

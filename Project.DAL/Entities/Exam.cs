@@ -17,8 +17,8 @@ namespace Project.DAL.Entities
 
 
         public int CourseId { get; set; }
-        public int QuestionId { get; set; }
-
+/*        public int QuestionId { get; set; }
+*/
         //Navigation Props
         public Course Course { get; set; }
         public List<ExamStudent> ExamStudents { get; set; }

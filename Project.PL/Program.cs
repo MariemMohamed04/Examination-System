@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Project.BLL.Interfaces;
+using Project.BLL.Repositories;
 using Project.DAL.Context;
 using Project.DAL.Entities;
+using Project.PL.Mapper;
 
 namespace Project.PL
 {
@@ -22,7 +25,11 @@ namespace Project.PL
             #endregion
 
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+            builder.Services.AddScoped<ITopicRepo, TopicRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+           
+          
             #region Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options =>
             {
@@ -41,6 +48,17 @@ namespace Project.PL
             }).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
             #endregion
 
+            builder.Services.AddScoped<IBranchRepo, BranchRepo>();
+            builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
+            builder.Services.AddScoped<IInstructorRepo, InstructorRepo>();
+            builder.Services.AddScoped<IStudentRepo, StudentRepo>();
+            builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+            builder.Services.AddScoped<ITopicRepo,  TopicRepo>();
+            builder.Services.AddScoped<ICrsInstRepo, CrsInstRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.AddAutoMapper(map => map.AddProfile(new MappingProfiles()));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -52,11 +70,13 @@ namespace Project.PL
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=SignUp}/{id?}");
+                pattern: "{controller=Instructor}/{action=Create}/{id?}");
 
             app.Run();
         }
