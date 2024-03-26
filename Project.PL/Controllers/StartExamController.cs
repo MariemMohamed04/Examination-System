@@ -37,19 +37,24 @@ namespace Project.PL.Controllers
             string id =  User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value; 
 
             var student = _unitOfWork.StudentRepo.getStudentByUserId(id);
-
-            var courses = _unitOfWork.CourseRepo.getAllCourseStudent(student.StudentId);
+            var deptCourses = _unitOfWork.CourseRepo.getCoursesByDeptId(student.DepartmentId);
+            //var courses = _unitOfWork.CourseRepo.getAllCourseStudent(student.StudentId);
             var exams = _unitOfWork.ExamRepo.GetAll();
 
          
-            foreach(var course in courses)
+            foreach(var course in deptCourses)
             {
-                var exam = exams.FirstOrDefault(e => e.CourseId == course.CourseId) ;
-                
-                if ( exam!=null)
+                var studentexams = exams.Where(e => e.CourseId == course.CourseId) ;
+                if (studentexams != null)
                 {
-                    if(!_unitOfWork.StudentRepo.getStudentAnswers(exam.ExamId))
-                         examCourses.Add(course);
+                    foreach(var exam in studentexams)
+                    {
+                        if ( exam!=null)
+                        {
+                            if(!_unitOfWork.StudentRepo.getStudentAnswers(exam.ExamId , student.StudentId))
+                                 examCourses.Add(course);
+                        }
+                    }    
                 }
             }  
 
@@ -64,36 +69,38 @@ namespace Project.PL.Controllers
         [HttpPost]
         public IActionResult StudentMain(int CourseId , int StudentId)
         {
-             
-            var exam = _unitOfWork.ExamRepo.getFirstExam(CourseId);
-            
-            var questions = _unitOfWork.ExamRepo.getExamQuestions(exam.ExamId);
-            var  mappedQuestions = _mapper.Map<List<QuestionViewModel>>(questions);
-
-            var choices = _unitOfWork.ChoiceRepo.GetAll();
-            List<Choice> allChoices = new List<Choice>(); 
-            foreach (var question in questions)
+            var exam = _unitOfWork.ExamRepo.getFirstExam(CourseId , StudentId);
+            if (exam != null)
             {
-              var allQChoices = choices.Where(ch => ch.QuestionId == question.QuestionId && question.QuestionType == "MCQ"  );
+                var questions = _unitOfWork.ExamRepo.getExamQuestions(exam.ExamId);
+                var mappedQuestions = _mapper.Map<List<QuestionViewModel>>(questions);
 
-                foreach(var choice in allQChoices)
+                var choices = _unitOfWork.ChoiceRepo.GetAll();
+                List<Choice> allChoices = new List<Choice>();
+                foreach (var question in questions)
                 {
-                   
-                    allChoices.Add(choice);
-                    
-                }     
+                    var allQChoices = choices.Where(ch => ch.QuestionId == question.QuestionId && question.QuestionType == "MCQ");
 
+                    foreach (var choice in allQChoices)
+                    {
+
+                        allChoices.Add(choice);
+
+                    }
+
+                }
+
+                var mappedChoices = _mapper.Map<List<ChoiceViewModel>>(allChoices);
+
+                string json = JsonConvert.SerializeObject(mappedQuestions);
+                string json2 = JsonConvert.SerializeObject(mappedChoices);
+                TempData["QuestionList"] = json;
+                TempData["allChoices"] = json2;
+
+                //ViewBag.AllChoices = allChoices;
+                return RedirectToAction("ShowExam", "StartExam", new { studentId = StudentId, examId = exam.ExamId });
             }
-
-            var mappedChoices= _mapper.Map<List<ChoiceViewModel>>(allChoices);
-
-            string json = JsonConvert.SerializeObject(mappedQuestions);
-            string json2 = JsonConvert.SerializeObject(mappedChoices);
-            TempData["QuestionList"] = json;
-            TempData["allChoices"] = json2;
-
-            //ViewBag.AllChoices = allChoices;
-            return RedirectToAction("ShowExam" , "StartExam", new {  studentId = StudentId , examId = exam.ExamId });
+            return View();
         }
 
 
@@ -125,19 +132,18 @@ namespace Project.PL.Controllers
                 _unitOfWork.StudentRepo.addStudentAnswers(ans);
             }
 
-          /*  var StudentExam = Answers[0].ExamId;
+            var StudentExam = Answers[0].ExamId;
             var StudentId = Answers[0].StudentId;
             var allExams = _unitOfWork.ExamRepo.GetAll();
-            var studentExamCourseId = allExams.FirstOrDefault(c => c.ExamId == StudentExam).CourseId; */
+            var studentExamCourseId = allExams.FirstOrDefault(c => c.ExamId == StudentExam).CourseId;
 
-           /* var course = _unitOfWork.CourseRepo.GetAll().FirstOrDefault(c=>c.CourseId == studentExamCourseId);*/
-            
-          //  var courseStudentGrade = _unitOfWork.CourseRepo.getAllCourseStudents().FirstOrDefault(cs=>cs.CourseId == studentExamCourseId && cs.StudentId ==StudentId);
-             
-            
-            
+            var course = _unitOfWork.CourseRepo.GetAll().FirstOrDefault(c => c.CourseId == studentExamCourseId);
 
-            int correctAns = 0;
+            var courseStudentGrade = _unitOfWork.CrsStudentRepo.GetAll().FirstOrDefault(cs => cs.CourseId == course.CourseId && cs.StudentId == StudentId);
+
+
+
+             int correctAns = 0;
             for(int i= 0 ; i < Answers.Count; i++ )
             {
                 var ans = Answers[i]; 
@@ -153,22 +159,38 @@ namespace Project.PL.Controllers
             double grade = (correctAns*100.0)/Answers.Count;
 
             int wrongAns = Answers.Count - correctAns;
-
-            //courseStudentGrade.CrsGrade = (int)grade;
+            if(courseStudentGrade != null)
+            {
+                courseStudentGrade.CrsGrade = (int)grade;
+                _unitOfWork.CrsStudentRepo.Update(courseStudentGrade);
+            }
             
 
-            return RedirectToAction("ShowResult" , "StartExam" , new {Studentgrade = grade , CorrectAns = correctAns , WrongAns = wrongAns } );
+            return RedirectToAction("ShowResult" , "StartExam" , new {Studentgrade = grade , CorrectAns = correctAns , WrongAns = wrongAns ,exam= StudentExam } );
         }
 
 
 
-        public IActionResult ShowResult(double Studentgrade, int CorrectAns , int WrongAns) { 
+        public IActionResult ShowResult(double Studentgrade, int CorrectAns , int WrongAns , int exam) { 
         
             ViewBag.Studentgrade = Studentgrade;    
             ViewBag.CorrectAns = CorrectAns;    
-            ViewBag.WrongAns = WrongAns;   
-       
-            return View(); 
+            ViewBag.WrongAns = WrongAns;
+
+            var studentAnswers = _unitOfWork.StudentExamQuestionRepo.GetAll().Where(e=>e.ExamId==exam).ToList();
+            var allQuestions = _unitOfWork.QuestionRepo.getAllQuestionsWithChoices(); 
+            List<Question> questions  =new List<Question>();
+            foreach (var studentAnswer in studentAnswers ) {
+                var question = allQuestions.FirstOrDefault(q => q.QuestionId == studentAnswer.QuestionId); 
+                if(question != null )
+                {
+                    questions.Add(question);
+                }
+            }
+
+            ViewBag.studentAnswers = studentAnswers; 
+
+            return View(questions); 
         }
 
 

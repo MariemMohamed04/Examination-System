@@ -24,6 +24,13 @@ namespace Project.PL.Controllers
             _logger = logger;
         }
 
+
+        public void sendBranchesAndInstructors()
+        {
+            ViewBag.Branches = _unitOfWork.BranchRepo.GetAll();
+            ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll();
+        }
+
         public IActionResult Index(string SearchValue = "")
         {
             IEnumerable<Department> departments;
@@ -43,8 +50,7 @@ namespace Project.PL.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Branches = _unitOfWork.BranchRepo.GetAll();
-            ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll();
+            sendBranchesAndInstructors();
             return View(new DepartmentViewModel());
         }
 
@@ -82,8 +88,7 @@ namespace Project.PL.Controllers
                 }
 
             }
-            ViewBag.Branches = _unitOfWork.BranchRepo.GetAll();
-            ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll();
+            sendBranchesAndInstructors();
             return View(departmentVM);
         }
         public IActionResult Details(int? id)
@@ -95,7 +100,7 @@ namespace Project.PL.Controllers
                 var department = _unitOfWork.DepartmentRepo.GetById(id);
                 if (department is null)
                     return NotFound();
-
+                sendBranchesAndInstructors();
                 var departmentVM = _mapper.Map<DepartmentViewModel>(department);
                 return View(departmentVM);
             }
@@ -141,8 +146,7 @@ namespace Project.PL.Controllers
                     throw new Exception(ex.Message);
                 }
             }
-            ViewBag.Branches = _unitOfWork.BranchRepo.GetAll();
-            ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll();
+            sendBranchesAndInstructors();
 
             return View(departmentVM);
         }

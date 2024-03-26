@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Report 2";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+    SelectList studentLst = new SelectList(ViewBag.Students, "StudentId", "Name");
+
 }
 <div id="content" class="p-4 p-md-5 pt-5">
     <div class="content-wrapper">
@@ -24,15 +26,18 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Report 02</h3>
+                    <h3 class="card-title">Report 02 <p class="h4">(Select a student to see all his courses and grades)</p> </h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-1">
                     <form asp-action="GetGradesByStudent" asp-controller="Reports" method="post">
 
-                        <label for="Id">Enter Student Id </label>
-                        <input name="Id" class="form-control"><br><br>
+                        @* <label for="Id">Enter Student Id </label>
+                        <input name="Id" class="form-control"><br><br> *@
 
-                        <input type="submit" value="Show Report 2" class="btn btn-success">
+                        <select name="Id" asp-items="studentLst" class="form-control">
+                            <option>--- Select Student ---</option>
+                        </select>
+                        <input type="submit" value="Show Report 2" class="btn btn-success m-1">
                         <br><br>
 
                     </form>

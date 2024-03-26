@@ -11,5 +11,7 @@ namespace Project.BLL.Interfaces
     {
         IEnumerable<Department> GetDepartmentsByBranch(int branchId);
         IEnumerable<Department> SearchByName(string Name);
+
+        Department getDepartmentByInsId(int insId);
     }
 }

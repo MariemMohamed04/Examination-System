@@ -10,6 +10,7 @@ namespace Project.BLL.Interfaces
     public interface IChoicesRepo : IGenericRepo<Choice>
     {
         public int getChoicesValue(string value);
-        public Choice getChoiceByValue(string value); 
+        public Choice getChoiceByValue(string value);
+        public int deleteQuestionChoices(int id ); 
     }
 }

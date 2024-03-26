@@ -20,7 +20,7 @@ namespace Project.BLL.Repositories
         }
         public List<Student> GetStudentsByDepartment(int deptId)
         {
-            return _context.Students.Where(d => d.DepartmentId == deptId).ToList();
+            return _context.Students.Include(s=>s.Department).Where(d => d.DepartmentId == deptId).ToList();
         }
         public IEnumerable<CourseStudent> GetGradesByStudentId(int stdId)
         {
@@ -39,7 +39,7 @@ namespace Project.BLL.Repositories
 
         public List<Topic> GetTopicsByCourseId(int crsId)
         {
-            return _context.Topics.Where(t => t.CourseId == crsId).ToList();
+            return _context.Topics.Include(c=>c.Course).Where(t => t.CourseId == crsId).ToList();
         }
     }
 }

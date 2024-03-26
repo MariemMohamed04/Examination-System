@@ -40,11 +40,14 @@ namespace Project.PL.Controllers
                 try
                 {
                     var CrsInst = _mapper.Map<CourseInstructor>(CrsInstVM);
+                    var exist = _unitOfWork.CrsInstRepo.GetAll().Any(c => c.CourseId == CrsInstVM.CourseId && c.InstructorId == CrsInstVM.InstructorId);
+                    if(!exist)
+                    {
+                        _unitOfWork.CrsInstRepo.Add(CrsInst);
+                        TempData["Message"] = "CrsInst Created Successfully!!";
+                    }
 
-
-                    _unitOfWork.CrsInstRepo.Add(CrsInst);
-                    TempData["Message"] = "CrsInst Created Successfully!!";
-                    return RedirectToAction("Index");
+                       return RedirectToAction("Index"); 
                 }
                 catch (Exception ex)
                 {
@@ -55,6 +58,7 @@ namespace Project.PL.Controllers
             ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll();
             return View(CrsInstVM);
         }
+
         public IActionResult Delete(int crsId, int InsId)
         {
             var crsIns = _unitOfWork.CrsInstRepo.GetByIds(crsId, InsId);
@@ -67,6 +71,7 @@ namespace Project.PL.Controllers
             _unitOfWork.CrsInstRepo.Delete(crsIns);
             return RedirectToAction("Index");
         }
+
         public IActionResult Details(int crsId, int InsId)
         {
             var crsIns = _unitOfWork.CrsInstRepo.GetByIds(crsId, InsId);

@@ -30,5 +30,14 @@ namespace Project.BLL.Repositories
             return _context.Choices.FirstOrDefault(c => c.ChoiceTxt == value);
         }
 
+        public int deleteQuestionChoices(int id )
+        {
+            var choices =  _context.Choices.Where(ch => ch.QuestionId == id);
+            foreach (var item in choices)
+            {
+                _context.Choices.Remove(item);
+            }
+            return _context.SaveChanges(); ;
+        }
     }
 }

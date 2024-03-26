@@ -13,6 +13,6 @@ namespace Project.BLL.Interfaces
 
         public void addStudentAnswers(StudentExamQuestion ans);
 
-        public bool getStudentAnswers(int examId);
+        public bool getStudentAnswers(int examId , int id );
     }
 }

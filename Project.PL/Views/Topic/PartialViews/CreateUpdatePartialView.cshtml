@@ -1,17 +1,21 @@
 ﻿@model TopicViewModel
 @{
-    var Courses = new SelectList(ViewBag.Courses, "CourseId", "CrsName");
-    
+    SelectList Courses ;
+    if (Model != null)
+    {
+        Courses = new SelectList(ViewBag.Courses, "CourseId", "CrsName", Model.CourseId);
+    }
+    else{
+        Courses = new SelectList(ViewBag.Courses, "CourseId", "CrsName");
+    }
+
 }
 
 <div class="card-body p-0">
     <div class="card card-primary">
         <div class="card-body">
-            <div class="form-group">
-                <label asp-for="@Model.TopicId">Topic ID</label>
-                <input type="text" asp-for="@Model.TopicId" class="form-control">
-                <span asp-validation-for="@Model.TopicId" class="text-danger"></span>
-            </div>
+            <input hidden type="text" asp-for="@Model.TopicId" />
+
             <div class="form-group">
                 <label asp-for="@Model.TopicName">Topic Name</label>
                 <input type="text" asp-for="@Model.TopicName" class="form-control">

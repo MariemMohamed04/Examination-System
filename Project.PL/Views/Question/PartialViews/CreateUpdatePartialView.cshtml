@@ -1,0 +1,84 @@
+﻿@using Project.PL.ViewModel
+@model QuestionViewModel
+
+@{
+    List<Choice> choices = ViewBag.Choices;
+    var courses = ViewBag.Courses;
+    SelectList coursLst;
+    if(Model !=null && Model.CourseId != null && courses!=null)
+    {
+         coursLst = new SelectList(courses, "CourseId", "CrsName", Model.CourseId);
+
+    }
+    else
+    {
+         coursLst = new SelectList(courses, "CourseId", "CrsName");
+    }
+
+}
+
+
+<div class="card-body p-0">
+    <div class="card card-primary">
+        <div class="card-body">
+
+            <div class="form-group">
+                <label asp-for="@Model.QuestionText" class="form-label">Question Body: </label>
+                <input type="text" name="qBody" class="form-control" placeholder="   " asp-for="@Model.QuestionText">
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group ">
+                        <label asp-for="@choices[0].ChoiceTxt" class="form-label">Choice 1:</label>
+                        <input type="text" name="firstChoice"  class="form-control" required="" asp-for="@choices[0].ChoiceTxt">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@choices[1].ChoiceTxt" class="form-label">Choice 2:</label>
+                        <input type="text" name="secondChoice" class="form-control" required="" asp-for="@choices[1].ChoiceTxt">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group ">
+                        <label class="form-label" asp-for="@choices[2].ChoiceTxt">Choice 3:</label>
+                        <input type="text" name="thirdChoice" class="form-control" required="" asp-for="@choices[2].ChoiceTxt">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group ">
+                        <label asp-for="@choices[3].ChoiceTxt" class="form-label">Choice 4:</label>
+                        <input type="text" name="forthChoice" class="form-control" required="" asp-for="@choices[3].ChoiceTxt">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group ">
+                        <label class="form-label">Model Answer: </label>
+                        <select  name="ModelAnswer" class="form-control form-select select2 " data-bs-placeholder="Select Correct Choice">
+
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Course Name: </label>
+                <select name="CourseId" asp-for="CourseId" asp-items="coursLst" class="form-control form-select select2 ">
+                   @*  @foreach (Course c in ViewBag.Courses)
+                    {
+                        <option value="@c.CourseId">@c.CrsName</option>
+                    } *@
+                </select>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

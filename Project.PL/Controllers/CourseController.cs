@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.BLL.Interfaces;
+using Project.BLL.Repositories;
 using Project.DAL.Entities;
+using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
@@ -10,25 +13,48 @@ namespace Project.PL.Controllers
     public class CourseController : Controller
     {
         
-            private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper _mapper;
 
-            public CourseController(IUnitOfWork _unitOfWork)
+
+        public CourseController(IUnitOfWork _unitOfWork , IMapper mapper)
+        {
+            unitOfWork = _unitOfWork;
+            _mapper = mapper;
+        }
+
+
+/*        public IActionResult Index()
+        {
+            var courses=unitOfWork.CourseRepo.GetAll();
+            var mappedCourses = _mapper.Map<IEnumerable<CourseViewModel>>(courses);
+            return View(mappedCourses);
+        }
+*/
+
+        public IActionResult Index(string SearchValue = "")
+        {
+            IEnumerable<Course> courses;
+            IEnumerable<CourseViewModel> mappedCourses;
+            if (string.IsNullOrEmpty(SearchValue))
             {
-                unitOfWork = _unitOfWork;
+                courses = unitOfWork.CourseRepo.GetAll();
+                mappedCourses = _mapper.Map<IEnumerable<CourseViewModel>>(courses);
             }
-
-            public IActionResult Index()
+            else
             {
-                var courses=unitOfWork.CourseRepo.GetAll();
-
-                return View(courses);
+                courses = unitOfWork.CourseRepo.SearchByName(SearchValue);
+                mappedCourses = _mapper.Map<IEnumerable<CourseViewModel>>(courses);
             }
+            return View(mappedCourses);
+        }
+
 
         [HttpGet]
         public IActionResult Create()
         {
 
-            return View(new Course());
+            return View(new CourseViewModel());
         }
 
         [HttpPost]
@@ -51,7 +77,7 @@ namespace Project.PL.Controllers
             {
                 return BadRequest();
             }
-            var course = unitOfWork.CourseRepo.GetById(id.Value);
+            var course = unitOfWork.CourseRepo.getCourseWithTopics(id);
             if (course == null)
             {
                 return NotFound();
@@ -74,8 +100,8 @@ namespace Project.PL.Controllers
             {
                 return NotFound();
             }
-
-            return View(course);
+            var mappedCourse = _mapper.Map<CourseViewModel>(course);
+            return View(mappedCourse);
         }
 
         [HttpPost]

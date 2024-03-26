@@ -1,4 +1,7 @@
 ﻿
+
+@model List<Question> 
+
 @{
     ViewData["Title"] = "ShowResult";
     Layout = "~/Views/Shared/_StudentBoardLayout.cshtml";
@@ -6,22 +9,473 @@
     var grade = ViewBag.Studentgrade;
     var correctAns = ViewBag.CorrectAns ;
     var WrongAns = ViewBag.WrongAns ;
+    List<StudentExamQuestion> answers =  ViewBag.studentAnswers ; 
+    int counter = 1;
 }
 
-    
 
-<div class="card mb-5 ">
+<div class=" col-10  text-center" style="margin: auto;margin-top: 20px;">
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-flush d-flex justify-content-center mb-1">
+                <li class="list-group-item text-center">Your grade: @grade</li>
+                <li class="list-group-item text-center">Your Correct Answer: @correctAns</li>
+                <li class="list-group-item text-center">Your Wrong Answer: @WrongAns</li>
+            </ul>
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Your grade: @grade</li>
-        <li class="list-group-item">Your Correct Answer: @correctAns</li>
-        <li class="list-group-item">Your Wrong Answer: @WrongAns</li>
+            <a class="btn btn-secondary" asp-controller="StartExam" asp-action="StudentMain"> show other exams </a>
+            <div class="form-group  d-flex justify-content-center">
+                <div class="container text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* 
+<div class="card mb-2 col-8 text-center ">
+
+    <ul class="list-group list-group-flush d-flex justify-content-center">
+        <li class="list-group-item text-center">Your grade: @grade</li>
+        <li class="list-group-item text-center">Your Correct Answer: @correctAns</li>
+        <li class="list-group-item text-center">Your Wrong Answer: @WrongAns</li>
     </ul>
 
     <a class="btn btn-secondary" asp-controller="StartExam" asp-action="StudentMain" > show other exams </a>
 
-</div>
+</div> *@
 
+
+<div class="space" style="height: 50px;"></div>
+
+
+
+<div>
+    
+    <div class="space" style="height: 50px;"></div>
+
+    
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    var q = Model[i];
+    List<Choice> choices2 = Model[i].Choices;
+
+    if (q.QuestionType == "TF")
+    {
+            <div class="col-10" style="margin: auto; margin-top: 20px;">
+            <div class="card">
+                <div class="card-header">
+
+                    <h3 class="card-title">@counter - @q.QuestionText</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @if (answers[i].StudentAnswer == q.QuestionAnswer && answers[i].StudentAnswer == "True")
+                        {
+                            <label class="custom-control custom-radio-md bg-success">
+                                <input type="radio" class="custom-control-input" id="True+@q.QuestionId" name="Answers[@i].StudentAnswer" value="True" checked disabled>
+                                 <span class="custom-control-label ">True</span>
+                            </label>
+                            <label class="custom-control custom-radio-md ">
+                                 <input type="radio" class="custom-control-input" id="False+@q.QuestionId" name="Answers[@i].StudentAnswer" value="False" disabled >
+                                 <span class="custom-control-label">False</span>
+                            </label>
+                        }
+                        else if (answers[i].StudentAnswer == q.QuestionAnswer && answers[i].StudentAnswer == "False")
+                        {
+                            <label class="custom-control custom-radio-md ">
+                                <input type="radio" class="custom-control-input" id="True+@q.QuestionId" name="Answers[@i].StudentAnswer" value="True" disabled>
+                                <span class="custom-control-label">True</span>
+                            </label>
+                                <label class="custom-control custom-radio-md bg-success " >
+                                    <input type="radio" class="custom-control-input" id="False+@q.QuestionId" name="Answers[@i].StudentAnswer" value="False" disabled checked>
+                                <span class="custom-control-label">False</span>
+                            </label>
+                        }
+                        else
+                        {
+                            if (answers[i].StudentAnswer == "False")
+                            {
+                                    <label class="custom-control custom-radio-md bg-danger" >
+                                    <input type="radio" class="custom-control-input" id="False+@q.QuestionId" name="Answers[@i].StudentAnswer" value="False" checked disabled>
+                                    <span class="custom-control-label">False</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" id="True+@q.QuestionId" name="Answers[@i].StudentAnswer" value="True" disabled>
+                                    <span class="custom-control-label">True</span>
+                                </label>
+                            }
+                            else
+                            {
+                                    <label class="custom-control custom-radio-md bg-success" >
+                                    <input type="radio" class="custom-control-input" id="False+@q.QuestionId" name="Answers[@i].StudentAnswer" value="False" disabled>
+                                    <span class="custom-control-label">False</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-danger">
+                                        <input type="radio" class="custom-control-input" id="True+@q.QuestionId" name="Answers[@i].StudentAnswer" value="True" disabled checked>
+                                    <span class="custom-control-label">True</span>
+                                </label>
+                            }
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        
+        <div class=" col-10" style="margin: auto;margin-top: 20px;">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@counter- @q.QuestionText</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+
+                        @if (choices2[0].IsCorrect == 1 && answers[i].StudentAnswer == choices2[0].ChoiceTxt)
+                        {
+                            <label class="custom-control custom-radio-md bg-success "  >
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt" checked disabled>
+                                <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt" disabled>
+                                <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt" disabled>
+                                <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt" disabled>
+                                <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                            </label>
+
+                        }
+                        else if (choices2[0].IsCorrect != 1 &&answers[i].StudentAnswer == choices2[0].ChoiceTxt)
+                        {
+                            <label class="custom-control custom-radio-md bg-danger">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt" disabled checked>
+                                <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                            </label>
+                            @if (choices2[1].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md bg-success ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt" disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt" disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt" disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }else if (choices2[2].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md  ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled >
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="custom-control custom-radio-md  ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                        }
+
+
+                        @if (choices2[1].IsCorrect == 1 && answers[i].StudentAnswer == choices2[1].ChoiceTxt)
+                        {
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt" disabled>
+                                <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                            </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled checked>
+                                <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                            </label>
+                        }
+                        else if (choices2[1].IsCorrect != 1 && answers[i].StudentAnswer == choices2[1].ChoiceTxt)
+                        {
+                          
+                            @if (choices2[0].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md bg-success ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                    </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                            else if (choices2[2].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                    </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                    </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                        }
+
+
+                        @if (choices2[2].IsCorrect == 1 && answers[i].StudentAnswer == choices2[2].ChoiceTxt)
+                        {
+                            <label class="custom-control custom-radio-md ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md bg-success ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled checked>
+                                <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                            </label>
+                        }
+                        else if (choices2[2].IsCorrect != 1 && answers[i].StudentAnswer == choices2[2].ChoiceTxt)
+                        {
+                            
+                            @if (choices2[0].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md bg-success ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                    </label>
+                                    <label class="custom-control custom-radio-md ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                        <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                    </label>
+                                }
+                            else if (choices2[1].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                    </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                    </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                </label>
+                            }
+                        }
+
+
+
+                        @if (choices2[3].IsCorrect == 1 && answers[i].StudentAnswer == choices2[3].ChoiceTxt)
+                        {
+                            <label class="custom-control custom-radio-md ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md  ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md ">
+                                <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                            </label>
+                            <label class="custom-control custom-radio-md bg-success  ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled checked>
+                                <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                            </label>
+                        }
+                        else if (choices2[3].IsCorrect != 1 && answers[i].StudentAnswer == choices2[3].ChoiceTxt)
+                        {
+                           
+                            @if (choices2[0].IsCorrect == 1)
+                            {
+                                <label class="custom-control custom-radio-md bg-success ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                    </label>
+                            }
+                            else if (choices2[1].IsCorrect == 1)
+                            {
+                                  <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                </label>
+                                <label class="custom-control custom-radio-md ">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                    </label>
+                            }
+                            else
+                            {
+                                    <label class="custom-control custom-radio-md ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[0].ChoiceTxt"disabled>
+                                        <span class="custom-control-label">@choices2[0].ChoiceTxt</span>
+                                    </label>
+                                    <label class="custom-control custom-radio-md ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[1].ChoiceTxt"disabled>
+                                        <span class="custom-control-label">@choices2[1].ChoiceTxt</span>
+                                    </label>
+                                <label class="custom-control custom-radio-md bg-success">
+                                    <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[2].ChoiceTxt"disabled>
+                                    <span class="custom-control-label">@choices2[2].ChoiceTxt</span>
+                                </label>
+                                    <label class="custom-control custom-radio-md bg-danger ">
+                                        <input type="radio" class="custom-control-input" name="Answers[@i].StudentAnswer" id="MCQ+@q.QuestionId" value="@choices2[3].ChoiceTxt"disabled checked>
+                                        <span class="custom-control-label">@choices2[3].ChoiceTxt</span>
+                                    </label>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    counter++;
+}
+    <div class="col-xl-10 col-lg-10  text-center" style="margin: auto;margin-top: 20px;">
+    <div class="card">
+        <div class="card-body">
+
+                <div class="form-group  d-flex justify-content-center">
+                    <div class="container text-center">
+                        <a class="btn btn-secondary text-white" asp-controller="StartExam" asp-action="StudentMain"> show other exams </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 
 

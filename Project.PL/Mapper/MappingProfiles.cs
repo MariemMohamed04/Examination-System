@@ -23,6 +23,7 @@ namespace Project.PL.Mapper
             CreateMap<CourseViewModel, Course>().ReverseMap();
             CreateMap<TopicViewModel, Topic>().ReverseMap();
             CreateMap<CrsInstViewModel, CourseInstructor>().ReverseMap();
+            CreateMap<CrsStudentViewModel, CourseStudent>().ReverseMap();
         }
     }
 }

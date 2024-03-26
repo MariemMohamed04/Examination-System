@@ -56,7 +56,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label >Topics</label>
-                                    @if (Model.Topics.Count > 0)
+                                    @if (Model.Topics !=null && Model.Topics.Count > 0)
                                     {
                                         @foreach (var topic in Model.Topics)
                                         {

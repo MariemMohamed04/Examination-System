@@ -25,12 +25,21 @@ namespace Project.PL.Controllers
         {
             var students = _unitOfWork.StudentRepo.GetAll();
             var studentVM = _mapper.Map<IEnumerable<StudentViewModel>>(students);
+           /* List<StudentViewModel> studentViewModels = new List<StudentViewModel>();
+            foreach(var student in students)
+            {
+                var studentVM = _mapper.Map<StudentViewModel>(student);
+                if(studentVM != null)
+                studentViewModels.Add(studentVM);
+
+            }*/
             return View(studentVM);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll().ToList();
             return View(new StudentViewModel());
         }
 
@@ -97,6 +106,7 @@ namespace Project.PL.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll().ToList();
             return View(studentVM);
         }
 

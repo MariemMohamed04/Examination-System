@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.BLL.Interfaces;
 using Project.DAL.Entities;
+using Project.PL.ViewModel;
 
 namespace Project.PL.Controllers
 {
@@ -10,24 +12,26 @@ namespace Project.PL.Controllers
     public class TopicController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper _mapper;
 
-        public TopicController(IUnitOfWork _unitOfWork)
+        public TopicController(IUnitOfWork _unitOfWork, IMapper mapper)
         {
             unitOfWork = _unitOfWork;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
             var topics = unitOfWork.TopicRepo.GetAll();
-
-            return View(topics);
+            var mappedTopics = _mapper.Map<IEnumerable<TopicViewModel>>(topics);
+            return View(mappedTopics);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-
-            return View(new Course());
+            ViewBag.Courses = unitOfWork.CourseRepo.GetAll();
+            return View(new TopicViewModel());
         }
 
         [HttpPost]
@@ -73,8 +77,10 @@ namespace Project.PL.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Courses = unitOfWork.CourseRepo.GetAll();
+            var mappedTopic = _mapper.Map<TopicViewModel>(topic);
 
-            return View(topic);
+            return View(mappedTopic);
         }
 
         [HttpPost]

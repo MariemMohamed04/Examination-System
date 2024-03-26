@@ -9,12 +9,14 @@
     <title>@ViewData["Title"]</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+@*           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+ *@          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" href="~/css/admin.css">
 </head>
 
@@ -147,6 +149,12 @@
                                 <li>
                                     <a asp-area="" asp-controller="Student" asp-action="Create">Add Student</a>
                                 </li>
+                                <li>
+                                    <a asp-area="" asp-controller="CourseStudent" asp-action="Index">All Students Courses</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="CourseStudent" asp-action="Create">Add Course To Student</a>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -158,8 +166,15 @@
                                 <li>
                                     <a asp-area="" asp-controller="Instructor" asp-action="Create">Add Instructor</a>
                                 </li>
+                                <li>
+                                    <a asp-area="" asp-controller="CrsInst" asp-action="Index">All Instructor Courses</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="CrsInst" asp-action="Create">Add Course To Instructor</a>
+                                </li>
                             </ul>
                         </li>
+
                         <li>
                             <a href="#UsersSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-users pr-3"></i>Users</a>
                             <ul class="collapse list-unstyled" id="UsersSubMenu">
@@ -224,12 +239,12 @@
 
     </div>
 
-    <script src="~/js/jquery.min.js"></script>
+    
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="~/js/main.js"></script>
-
+    <script src="~/js/jquery.min.js" ></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 <footer class="footer mt-auto py-3">

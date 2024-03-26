@@ -10,5 +10,7 @@ namespace Project.BLL.Interfaces
     public interface IQuestionRepo : IGenericRepo<Question>
     {
         public Question questionChoices(int qId);
+        public List<Question> getAllQuestionsWithCourses();
+        public List<Question> getAllQuestionsWithChoices();
     }
 }

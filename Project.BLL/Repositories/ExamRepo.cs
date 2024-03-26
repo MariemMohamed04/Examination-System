@@ -21,7 +21,7 @@ namespace Project.BLL.Repositories
         }
 
         public void generateExam(int examNo , int numOfTFQuestion , int numOfMCQQuestion , int courseId)
-        {
+        {   
             _context.Database.ExecuteSqlInterpolated($"GenerateAnExam  {examNo},{numOfTFQuestion},{numOfMCQQuestion},{courseId}");
 
         }
@@ -38,13 +38,30 @@ namespace Project.BLL.Repositories
             return examQuestions; 
         }
 
-
-
-
-
-        public Exam getFirstExam(int courseId)
+        public List<Exam> getExamsCoursesByInstructor(List<Course> courses)
         {
-            return _context.Exams.Include(c=>c.Course).FirstOrDefault(e=>e.CourseId == courseId);
+            List<Exam> exams = new List<Exam>();
+            foreach (var course in courses)
+            {
+                var examsCourses = _context.Exams.Where(e => e.CourseId == course.CourseId).ToList();
+                if (examsCourses != null)
+                {
+                    foreach(var exam in examsCourses)
+                    {
+                        if(exam!=null)
+                        exams.Add(exam);
+                        
+                    }
+                }
+            }
+            return exams;
+        }
+
+        public Exam getFirstExam(int courseId , int StudentId)
+        {
+            var exam = _context.Exams.Include(c=>c.Course).FirstOrDefault(e=>e.CourseId == courseId 
+            && !_context.StudentExamQuestions.Any(seq => seq.ExamId == e.ExamId && seq.StudentId == StudentId));
+            return exam;
         }
     }
 }

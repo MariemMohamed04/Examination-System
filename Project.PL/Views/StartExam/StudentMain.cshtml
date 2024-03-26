@@ -2,10 +2,13 @@
 @{
     ViewData["Title"] = "Choose Exam";
     Layout = "~/Views/Shared/_StudentBoardLayout.cshtml";
-    var Courses = new SelectList(Model, "CourseId", "CrsName");
+    if(Model != null)
+    {
+        var Courses = new SelectList(Model, "CourseId", "CrsName");
+    }
 }
 
-    <div class="col-8">
+    <div class="col-12">
         <div class="card mb-5">
             <div class="card-header">
                 Choose a Course to Start your Exam
@@ -13,14 +16,20 @@
             <div class="card-body">
             <form class="d-flex flex-column align-items-center" asp-action="StudentMain" asp-controller="StartExam" method="post">
                 <select class="form-select col-12 py-2 mb-3" aria-label="Default select example" placeholder="Select Course Exam" name="CourseId">
-                    @if (Model?.Count() == 0)
+                    @if(Model != null)
                     {
-                        <option>You Done All Exams Succesfully</option>
+                        @if (Model?.Count() == 0)
+                        {
+                            <option>You Done All Exams Succesfully</option>
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CourseId">@item.CrsName</option>
+                        }
+                    }else{
+                        <option>Wait For New Exam</option>
                     }
-                    @foreach (var item in Model)
-                    {
-                        <option  value="@item.CourseId">@item.CrsName</option>
-                    } 
+                    
                 </select>
             <div class="col-12 ">
                 <button class="btn bg-danger text-white ms-auto w-100 fw-bolder" type="submit">START YOUR EXAM</button>

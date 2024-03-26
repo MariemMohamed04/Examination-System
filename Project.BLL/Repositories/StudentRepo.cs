@@ -30,9 +30,9 @@ namespace Project.BLL.Repositories
             _context.SaveChanges();
         }
 
-        public bool getStudentAnswers(int examId)
+        public bool getStudentAnswers(int examId , int studId )
         {
-           return _context.StudentExamQuestions.Any(e=>e.ExamId == examId);
+           return _context.StudentExamQuestions.Any(e=>e.ExamId == examId && e.StudentId ==studId);
         }
     }
 }

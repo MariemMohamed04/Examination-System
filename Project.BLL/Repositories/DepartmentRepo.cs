@@ -18,6 +18,11 @@ namespace Project.BLL.Repositories
             _context = context;
         }
 
+        public Department getDepartmentByInsId(int insId)
+        {
+            return _context.Departments.FirstOrDefault(d => d.InstructorId == insId); 
+        }
+
         public IEnumerable<Department> GetDepartmentsByBranch(int branchId)
         {
             return _context.Departments.Where(e => e.BranchId == branchId).ToList();

@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Report 04";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+    SelectList coursesLst = new SelectList(ViewBag.Courses, "CourseId", "CrsName");
+
 }
 
 <div id="content" class="p-4 p-md-5 pt-5">
@@ -26,15 +28,18 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Report 04</h3>
+                    <h3 class="card-title">Report 04 <p class="h5">(select Course to See its Topics </p> </h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-1">
                     <form asp-action="GetTopicsByCourse" asp-controller="Reports" method="post">
 
-                        <label for="Id">Enter Course Id </label>
-                        <input name="Id" class="form-control"><br><br>
+                        @* <label for="Id">Enter Course Id </label>
+                        <input name="Id" class="form-control"><br><br> *@
+                        <select name="Id" asp-items="coursesLst" class="form-control">
+                            <option>--- Select Course ---</option>
+                        </select>
 
-                        <input type="submit" value="Show Report 4" class="btn btn-success">
+                        <input type="submit" value="Show Report 4" class="btn btn-success m-1">
                         <br><br>
 
                     </form>

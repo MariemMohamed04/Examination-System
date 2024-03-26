@@ -11,6 +11,10 @@ namespace Project.BLL.Interfaces
     {
         public Course GetByIdIncld(int id);
         public List<Course> getAllCourseStudent(int id);
+        public List<Course> getCoursesByInsId(int? id);
+        public Course getCourseWithTopics(int? id);
+        public IEnumerable<Course> SearchByName(string Name);
+        public List<Course> getCoursesByDeptId(int? id);
         //public IEnumerable<CourseStudent> getAllCourseStudents();
     }
 }

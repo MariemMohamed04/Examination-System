@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Report 06";
     Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+    SelectList examLst = new SelectList(ViewBag.Exams, "ExamId", "ExamId");
+    SelectList studentLst = new SelectList(ViewBag.Students, "StudentId", "Name");
+
+
 }
 
 <div id="content" class="p-4 p-md-5 pt-5">
@@ -32,16 +36,26 @@
                 <div class="card-header">
                     <h3 class="card-title">Report 06</h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-1">
                     <form asp-action="GetExamByStudent" asp-controller="Reports" method="post">
 
-                        <label for="ExamId"> enter exam id </label>
-                        <input name="ExamId" class="form-control">
+                        @* <label for="ExamId"> enter exam id </label>
+                        <input name="ExamId" class="form-control"> *@
+                        @* <label for="StudentId"> enter student id </label>
+                        <input name="StudentId" class="form-control"><br><br> *@
 
-                        <label for="StudentId"> enter student id </label>
-                        <input name="StudentId" class="form-control"><br><br>
+                        <select name="ExamId" asp-items="examLst" class="form-control">
+                            <option>--- Select Exam ---</option>
+                        </select>
 
-                        <input type="submit" value="show report 6" class="btn btn-success">
+                        <div class="space" style="height: 20px;"></div>
+
+
+                        <select name="StudentId" asp-items="studentLst" class="form-control">
+                            <option>--- Select Student ---</option>
+                        </select>
+
+                        <input type="submit" value="show report 6" class="btn btn-success m-1">
                         <br><br>
 
                     </form>
@@ -50,11 +64,7 @@
             </div>
             <!-- /.card -->
         </section>
-        <div class="row">
-            <div class="col-12">
-                <a asp-action="GetExamByStudent" asp-controller="Reports" class="btn btn-success float-right">Back To List</a>
-            </div>
-        </div>
+    
         <!-- /.content -->
     </div>
 </div>

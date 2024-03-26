@@ -61,6 +61,16 @@
                     </div>
                     i++;
                 }
+
+                @if (Model.Count() <= 0)
+                {
+                    <h2 class="text-white" >This Student doesn't do this exam </h2>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a asp-action="IndexAnswers" asp-controller="Reports" class="btn btn-success float-right">Back To List</a>
             </div>
         </div>
     </section>

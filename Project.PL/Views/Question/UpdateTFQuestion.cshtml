@@ -1,0 +1,52 @@
+﻿
+
+@model Question
+
+@{
+    ViewData["Title"] = "UpdateTFQuestion";
+    Layout = "~/Views/Shared/_AdminBoardLayout.cshtml";
+    SelectList courses = new SelectList(ViewBag.allcourses, "CourseId", "CrsName" , Model.CourseId);
+    var items = new List<SelectListItem>
+    {
+    new SelectListItem { Value = "0", Text = "True" },
+    new SelectListItem { Value = "1", Text = "False" },
+    };
+    SelectList choices = new SelectList(items, "Value", "Text" , Model.QuestionAnswer=="True"?"0":"1");
+   
+}
+
+<h1>UpdateTFQuestion</h1>
+
+<div class="tab-pane" id="tab21">
+    <form asp-action="UpdateTFQuestion" asp-controller="Question">
+        <div class="form-group">
+            <label class="form-label">Question Body: </label>
+            <input type="text" name="qBody" class="form-control" value="@Model.QuestionText">
+        </div>
+        <div class="row">
+
+            <div class="form-group">
+                <label class="form-label">Model Answer: </label>
+                <select name="ModelAnswer" class="form-control form-select select2" asp-items="choices" >
+                   @*  <option value="0">True</option>
+                    <option value="1">False</option> *@
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Course Name: </label>
+            <select name="CourseId" class="form-control form-select select2 " asp-items="courses" asp-for="CourseId">
+              @*   @foreach (Course c in ViewBag.allcourses)
+                {
+                    <option value="@c.CourseId">@c.CrsName</option>
+                } *@
+            </select>
+        </div>
+        <div class="mt-5 mx-3 mb-3">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a class="btn btn-dark" asp-action="Index">Back To List</a>
+        </div>
+        @*         <input type="submit" class="btn  btn-lg btn-primary" value="Confirm" style="margin: auto;">
+        *@
+    </form>
+</div>

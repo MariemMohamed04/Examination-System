@@ -22,6 +22,7 @@ namespace Project.PL.Controllers
         #region Report 01
         public IActionResult GetStudentByDepartment()
         {
+            ViewBag.Departments = _unitOfWork.DepartmentRepo.GetAll().ToList();
             return View("IndexGetStudentByDepartment");
         }
 
@@ -36,6 +37,7 @@ namespace Project.PL.Controllers
         #region Report 02
         public IActionResult GetGradesByStudent()
         {
+            ViewBag.Students = _unitOfWork.StudentRepo.GetAll().ToList();
             return View("IndexGetGradesByStudent");
         }
 
@@ -58,6 +60,7 @@ namespace Project.PL.Controllers
         #region Report 03
         public IActionResult GetCourseByInstructor()
         {
+            ViewBag.Instructors = _unitOfWork.InstructorRepo.GetAll().ToList();
             return View("IndexGetCourseByInstructor");
         }
 
@@ -80,6 +83,7 @@ namespace Project.PL.Controllers
         #region Report 04
         public IActionResult GetTopicsByCourse()
         {
+            ViewBag.Courses = _unitOfWork.CourseRepo.GetAll().ToList();
             return View("IndexGetTopicsByCourse");
         }
 
@@ -87,6 +91,11 @@ namespace Project.PL.Controllers
         public IActionResult GetTopicsByCourse(int Id)
         {
             var topics = _unitOfWork.ReportsRepo.GetTopicsByCourseId(Id);
+            if ( topics.Count>0 && topics != null )
+            {
+             ViewBag.Course = topics[0].Course;
+
+            }
             return View(topics);
         }
         #endregion
@@ -94,6 +103,7 @@ namespace Project.PL.Controllers
         #region Report 05
         public IActionResult IndexQuestions()
         {
+            ViewBag.Exams = _unitOfWork.ExamRepo.GetAll().ToList(); 
             return View("IndexQuestions");
         }
 
@@ -109,8 +119,8 @@ namespace Project.PL.Controllers
             foreach (var q in examQues)
             {
                 var question = _unitOfWork.QuestionRepo.questionChoices(q.QuestionId);
-
-                questions.Add(question);
+                if(question != null)
+                    questions.Add(question);
             }
             return View(questions);
         }
@@ -119,6 +129,8 @@ namespace Project.PL.Controllers
         #region Report 06
         public IActionResult IndexAnswers()
         {
+            ViewBag.Students = _unitOfWork.StudentRepo.GetAll().ToList();
+            ViewBag.Exams = _unitOfWork.ExamRepo.GetAll().ToList();
             return View("IndexAnswers");
         }
 
@@ -127,13 +139,20 @@ namespace Project.PL.Controllers
         {
             var examQues = _unitOfWork.ExamQuestionRepo.ExamQuestions(ExamId);
             var questionsAnswers = new List<AnswerQuestionsViewModel>();
-
-            foreach (var q in examQues)
+            if (_unitOfWork.StudentExamQuestionRepo.isStudentDoExam(ExamId , StudentId) )
             {
-                var questionsAnswer = new AnswerQuestionsViewModel();
-                questionsAnswer.Question = _unitOfWork.QuestionRepo.GetById(q.QuestionId);
-                questionsAnswer.Answer = _unitOfWork.StudentExamQuestionRepo.getByIds(ExamId, StudentId, q.QuestionId).StudentAnswer;
-                questionsAnswers.Add(questionsAnswer);
+                foreach (var q in examQues)
+                {
+                    var questionsAnswer = new AnswerQuestionsViewModel();
+                    var ques = _unitOfWork.QuestionRepo.GetById(q.QuestionId);
+                    if (ques != null)
+                    {
+                        questionsAnswer.Question = ques;
+                        questionsAnswer.Answer = _unitOfWork.StudentExamQuestionRepo.getByIds(ExamId, StudentId, q.QuestionId).StudentAnswer;
+                        questionsAnswers.Add(questionsAnswer);
+                    }
+                }
+
             }
             return View(questionsAnswers);
         } 

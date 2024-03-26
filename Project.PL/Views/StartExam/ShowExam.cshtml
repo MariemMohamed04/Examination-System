@@ -8,7 +8,9 @@
     var examId = ViewBag.examId;
 }
 
-<h1 class="text-white" >Exam number @examId</h1>
+<div class="col-12 text-center">
+    <h1 class="text-white m-2">Exam number @examId</h1>
+</div>
 
 @model List<Question>
 
@@ -30,7 +32,7 @@
          
         if (q.QuestionType == "TF")
         {
-            <div class=" col-12" style="margin: auto; margin-top: 20px;">
+            <div class=" col-10" style="margin: auto; margin-top: 20px;">
                 <div class="card">
                     <div class="card-header">
                         
@@ -54,7 +56,7 @@
         else
         {
             List<Choice> choices2 = choices.Where(c => c.QuestionId == q.QuestionId).ToList();
-            <div class=" col-12" style="margin: auto;margin-top: 20px;">
+            <div class=" col-10" style="margin: auto;margin-top: 20px;">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">@counter- @q.QuestionText</h3>
@@ -85,13 +87,13 @@
         
          counter++;
     }
-    <div class="col-xl-8 col-lg-12" style="margin: auto;margin-top: 20px;">
+    <div class="col-xl-10 col-lg-10  text-center" style="margin: auto;margin-top: 20px;">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body ">
 
-                <div class="form-group">
-                    <div class="container-login100-form-btn">
-                        <input value="Submit Answers" type="submit" class="login100-form-btn btn" style="background-color:#a1272d;">
+                <div class="form-group d-flex justify-content-center">
+                    <div class="container-login100-form-btn text-center">
+                        <input value="Submit Answers" type="submit" class="login100-form-btn btn text-white" style="background-color:#a1272d;">
 
                     </div>
                 </div>

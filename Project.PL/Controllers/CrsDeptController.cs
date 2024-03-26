@@ -43,9 +43,15 @@ namespace Project.PL.Controllers
                 try
                 {
                     var crsDept = _mapper.Map<CourseDepartment>(crsDeptVM);
-                    _unitOfWork.CrsDeptRepo.Add(crsDept);
-                    TempData["Message"] = "CourseDepartment Created Successfully!!";
-                    return RedirectToAction("Index");
+                    var exist =  _unitOfWork.CrsDeptRepo.GetAll().Any(c=>c.CourseId == crsDeptVM.CourseId && c.DepartmentId==crsDeptVM.DepartmentId);
+                    if (!exist)
+                    {
+                        _unitOfWork.CrsDeptRepo.Add(crsDept);
+                        TempData["Message"] = "CourseDepartment Created Successfully!!";
+                    }
+  
+                        return RedirectToAction("Index");
+                    
                 }
                 catch (Exception)
                 {

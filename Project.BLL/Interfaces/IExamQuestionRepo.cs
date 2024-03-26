@@ -10,5 +10,7 @@ namespace Project.BLL.Interfaces
     public interface IExamQuestionRepo
     {
         public List<ExamQuestion> ExamQuestions(int examId);
+        public int deleteQuestionFromExam(int quesId);
+        public int deleteExamQuestions(int examId); 
     }
 }

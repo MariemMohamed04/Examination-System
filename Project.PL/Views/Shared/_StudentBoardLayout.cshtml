@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Project.DAL.Entities
+@inject SignInManager<ApplicationUser> signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,12 +28,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <button class="btn bg-white ms-auto" type="submit">Logout</button>
+                 @if (signInManager.IsSignedIn(User))
+                {
+                    <a class="btn bg-white ms-auto"  asp-controller="Account" asp-action="SignOut">Logout</a>
+                }
             </div>
         </div>
     </nav>
     <section class="exam mt-5 d-flex flex-column justify-content-center align-items-center">
-        <div class="container col-lg-8">
+        <div class="container col-lg-12">
             <div class="row ">
                 @RenderBody()
             </div>

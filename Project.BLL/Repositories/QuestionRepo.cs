@@ -23,5 +23,14 @@ namespace Project.BLL.Repositories
         {
             return _context.Questions.Include(q => q.Choices).SingleOrDefault(q => q.QuestionId == qId);
         }
+
+        public List<Question> getAllQuestionsWithCourses() { 
+            return _context.Questions.Include(q=>q.Course).ToList();
+        }
+
+        public List<Question> getAllQuestionsWithChoices()
+        {
+            return _context.Questions.Include(q => q.Choices).ToList();
+        }
     }
 }

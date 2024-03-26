@@ -20,11 +20,33 @@ namespace Project.PL.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index(int searchID=0)
         {
-            var CrsStudent = _unitOfWork.CrsStudentRepo.GetAll();
-            var CrsStudentVM = _mapper.Map<IEnumerable<CrsStudentViewModel>>(CrsStudent);
+           
+            List<String>coursesNames = new List<String>();
+            List<String>studentNames = new List<String>();
+            IEnumerable<CourseStudent> CrsStudents; 
+            if (searchID == 0)
+            {
+                 CrsStudents = _unitOfWork.CrsStudentRepo.GetAll();
+           
+            }
+            else
+            {
+                 CrsStudents = _unitOfWork.CrsStudentRepo.GetAll().Where(c=>c.StudentId == searchID);
+            }
+            var CrsStudentVM = _mapper.Map<IEnumerable<CrsStudentViewModel>>(CrsStudents);
+            foreach (var crsStudent in CrsStudentVM)
+            {
+                var courseName = _unitOfWork.CourseRepo.GetById(crsStudent.CourseId).CrsName;
+                var studentName = _unitOfWork.StudentRepo.GetById(crsStudent.StudentId).Name;
+                coursesNames.Add(courseName);
+                studentNames.Add(studentName);
+            }
+            ViewBag.studentNames = studentNames;
+            ViewBag.coursesNames = coursesNames;
             return View(CrsStudentVM);
+
         }
 
 
@@ -45,9 +67,14 @@ namespace Project.PL.Controllers
                 {
                     var CrsStudent = _mapper.Map<CourseStudent>(CrsStudentVM);
 
+                    var exist = _unitOfWork.CrsStudentRepo.GetAll().Any(c => c.CourseId == CrsStudentVM.CourseId && c.StudentId == CrsStudentVM.StudentId);
 
-                    _unitOfWork.CrsStudentRepo.Add(CrsStudent);
-                    TempData["Message"] = "CrsInst Created Successfully!!";
+                    if (!exist)
+                    {
+                        _unitOfWork.CrsStudentRepo.Add(CrsStudent);
+                        TempData["Message"] = "CrsInst Created Successfully!!";
+                    }
+
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
