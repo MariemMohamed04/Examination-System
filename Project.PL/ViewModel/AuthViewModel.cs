@@ -8,11 +8,11 @@ namespace Project.PL.ViewModel
         [EmailAddress(ErrorMessage = "Invalid Email")]
         public string Email { get; set;}
         [Required]
-        [StringLength(6, MinimumLength = 6)]
+        //[StringLength(6, MinimumLength = 6)]
         public string Password { get; set;}
 
         [Required]
-        [StringLength(6, MinimumLength = 6)]
+        //[StringLength(6, MinimumLength = 6)]
         [Compare(nameof(Password), ErrorMessage = "Password Mismatch")]
         public string ConfirmPassword { get; set; }
         [Required]

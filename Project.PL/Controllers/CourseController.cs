@@ -64,7 +64,7 @@ namespace Project.PL.Controllers
             {
 
                 unitOfWork.CourseRepo.Add(course);
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Topice");
             }
             else
                 return View(course);

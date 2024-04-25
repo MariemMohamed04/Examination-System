@@ -7,7 +7,7 @@
     SelectList coursLst;
     if(Model !=null && Model.CourseId != null && courses!=null)
     {
-         coursLst = new SelectList(courses, "CourseId", "CrsName", Model.CourseId);
+        coursLst = new SelectList(courses, "CourseId", "CrsName");//, Model.CourseId);
 
     }
     else
@@ -67,10 +67,10 @@
             <div class="form-group">
                 <label class="form-label">Course Name: </label>
                 <select name="CourseId" asp-for="CourseId" asp-items="coursLst" class="form-control form-select select2 ">
-                   @*  @foreach (Course c in ViewBag.Courses)
+                    @foreach (Course c in ViewBag.Courses)
                     {
                         <option value="@c.CourseId">@c.CrsName</option>
-                    } *@
+                    }
                 </select>
             </div>
 
