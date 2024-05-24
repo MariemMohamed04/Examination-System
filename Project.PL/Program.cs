@@ -41,6 +41,8 @@ namespace Project.PL
             }).AddEntityFrameworkStores<AppDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
             #endregion
 
+            //
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
